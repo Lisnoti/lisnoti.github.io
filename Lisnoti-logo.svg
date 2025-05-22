@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+    width="100"
+    height="100"
+    >
+    <!-- 
+        View box:
+    <rect x="0" y="0" width="100" height="100" fill="none" stroke="red" stroke-width="1"/>
+    -->
+
+    <rect x="0" y="0" width="100" height="100" fill="#e9eaeb"/>
+    <rect x="5" y="5" width="90" height="90" fill="#fff"/>
+
+    <path 
+        fill="#e9eaeb"
+        d="
+            M40 45h20v7.5h-20
+            z
+            M40 55h20v7.5h-20
+            z
+            M52.5 37.5h6l-10 32.5h-6
+            z
+            " 
+    />
+
+    <path 
+        fill="#ff6c11"
+        stroke-width="50"
+        stroke="#ff6c11"
+        transform="translate(0 88) scale(0.1 -0.1)"
+        d="
+            M350 -10q-79 0 -115 42.5t-36 117.5v610h88v-613q0 -49 21 -66.5t53 -17.5q20 0 35.5 3t30.5 7v-71q-13 -5 -32 -8.5t-45 -3.5
+            z
+            M870 0h-258v52l84 19v571l-84 20v52h258v-52l-84 -20v-571l84 -19v-52
+            z
+            " 
+    />
+
+</svg>
