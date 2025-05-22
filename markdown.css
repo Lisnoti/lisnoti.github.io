@@ -1,0 +1,26 @@
+
+.github-markdown-body {
+    font-family: "Lisnoti";
+}
+
+.github-markdown-body code {
+    /*
+    padding: .2em .4em;
+    margin: 0;
+    font-size: 85%;
+    white-space: break-spaces;
+    background-color: rgba(175,184,193,0.2);
+    border-radius: 6px;
+    */
+    font-family: "Lisnoti";
+    font-size: 0.95em;
+    color: #C00;
+    padding: .1em;
+    border-radius: 4px;
+    background-color:#F8F8F8;
+}
+
+.github-markdown-body pre {
+    font-size: 0.9em;
+    background-color:#F8F8F8;
+}

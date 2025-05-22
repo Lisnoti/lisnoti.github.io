@@ -1,0 +1,6 @@
+{
+    "markdown.styles": [
+        "markdown.css"
+    ],
+    "svg.preview.background": "transparent",
+}
