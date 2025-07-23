@@ -13,12 +13,12 @@
 |<span style="background-color:#FF8;">**Always** set current directory</span>|`cd C:\Users\Tim Gordon\source\repos\Lisnoti\Lisnoti-site\`|
 |Deploy|`firebase deploy --only hosting`|
 
-## Setup
+## Running
 
-1. Install the *standalone* Firebase CLI binary for Windows from [here](https://firebase.google.com/docs/cli). Notes:
+1. [Only on a new computer setup] Install the *standalone* Firebase CLI binary for Windows from [here](https://firebase.google.com/docs/cli). Notes:
 
     - Windows Defender didn't like the exe.
-    - I moved `firebase-tools-instant-win.exe` to the `C:\Program Files\Firebase\` folder and added a link to the Taskbar.
+    - I moved `firebase-tools-instant-win.exe` to the `C:\Program Files\Firebase\` folder and added a link to the Taskbar (which looks like a green hexagon).
 
 1. Use `firebase login` if you are not already logged in.
 
