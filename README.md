@@ -32,4 +32,16 @@
     - For general management, use [this link](https://console.cloud.google.com/cloud-resource-manage)
     - To restore a deleted project use [this link](https://console.firebase.google.com/iam-admin/projects).
 
+## The font files and stylesheets
 
+The site is the Lisnoti font delivery service: other sites link `https://lisnoti.com/lisnoti.css`.
+The font files and both stylesheets are written from the distribution repository next door by
+
+    python update-fonts.py
+
+which copies the released WOFF2 files into `fonts/<version>/` at the repository root, which is what GitHub Pages serves, and writes `lisnoti.css` (the sliced
+service stylesheet) and `lisnoti-full.css` (one file a style). The version is in the path so that
+a font file, once fetched, is never fetched again; a new release gets a new folder. Run it after
+every release of the font. It needs `fontTools` (`pip install fonttools`).
+
+Since 2.000 (21 September 2026) the site serves WOFF2 only: no WOFF 1 and no TTF on the web.
