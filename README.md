@@ -1,47 +1,48 @@
-# Lisnoti.com README
+# lisnoti.com
 
-## Important info:
+This repository is the website [lisnoti.com](https://lisnoti.com), served by GitHub Pages
+from the root of `main`. The font itself, its files for installing and its documentation are
+in [Lisnoti/Lisnoti](https://github.com/Lisnoti/Lisnoti).
 
-|Item|Info|
+The site is also the Lisnoti font delivery service. Any website can use Lisnoti by linking
+one stylesheet:
+
+```html
+<link rel="stylesheet" href="https://lisnoti.com/lisnoti.css">
+```
+
+and then naming Lisnoti in its styles, for example `font-family: Lisnoti, system-ui, sans-serif;`.
+The home page explains the options.
+
+## What is here
+
+| file | what it is |
 |:--|:--|
-|Firebase project id|`lisnoti`|
+| `index.html` | the home page |
+| `lisnoti.css` | the service stylesheet, which serves each style in 13 subsets so that a page fetches only the pieces it uses |
+| `lisnoti-full.css` | the alternative stylesheet, one whole-font file a style |
+| `fonts/<version>/` | the WOFF2 files both stylesheets name |
+| `update-fonts.py` | writes the three items above from a release of the font |
+| `test.html` | a one-line check that the service stylesheet loads |
 
-## Firebase CLI
+## Updating the fonts
 
-|Action|Command|
-|:--|:--|
-|<span style="background-color:#FF8;">**Always** set current directory</span>|`cd C:\Users\Tim Gordon\source\repos\Lisnoti\Lisnoti-site\`|
-|Deploy|`firebase deploy --only hosting`|
-
-## Running
-
-1. [Only on a new computer setup] Install the *standalone* Firebase CLI binary for Windows from [here](https://firebase.google.com/docs/cli). Notes:
-
-    - Windows Defender didn't like the exe.
-    - I moved `firebase-tools-instant-win.exe` to the `C:\Program Files\Firebase\` folder and added a link to the Taskbar (which looks like a green hexagon).
-
-1. Use `firebase login` if you are not already logged in.
-
-1. Only when starting from scratch (because this will overwrite settings for an existing folder):
-
-    - `firebase init` creates a new project in a project folder *you've already created*.
-    - Select `Hosting: Configure files for Firebase Hosting ...`.
-
-1. General info
-
-    - For general management, use [this link](https://console.cloud.google.com/cloud-resource-manage)
-    - To restore a deleted project use [this link](https://console.firebase.google.com/iam-admin/projects).
-
-## The font files and stylesheets
-
-The site is the Lisnoti font delivery service: other sites link `https://lisnoti.com/lisnoti.css`.
-The font files and both stylesheets are written from the distribution repository next door by
+After each release of the font, with [Lisnoti/Lisnoti](https://github.com/Lisnoti/Lisnoti)
+checked out beside this repository, run
 
     python update-fonts.py
 
-which copies the released WOFF2 files into `fonts/<version>/` at the repository root, which is what GitHub Pages serves, and writes `lisnoti.css` (the sliced
-service stylesheet) and `lisnoti-full.css` (one file a style). The version is in the path so that
-a font file, once fetched, is never fetched again; a new release gets a new folder. Run it after
-every release of the font. It needs `fontTools` (`pip install fonttools`).
+It needs `fontTools` (`pip install fonttools`). It copies the released WOFF2 files into
+`fonts/<version>/` and rewrites both stylesheets to point there.
 
-Since 2.000 (21 September 2026) the site serves WOFF2 only: no WOFF 1 and no TTF on the web.
+The version is in the path because GitHub Pages gives every file a ten-minute cache lifetime
+and cannot be configured to give a longer one. A new release therefore gets a new folder and
+a new stylesheet, and never new bytes at an old URL. Leave an old version folder in place
+until nothing links it: other sites may hold a cached copy of the old stylesheet.
+
+The site serves WOFF2 only. Every browser in use reads it.
+
+## Licences
+
+The font files in `fonts/` are under the [SIL Open Font License 1.1](https://openfontlicense.org).
+Everything else here is under the MIT licence in `LICENSE`.

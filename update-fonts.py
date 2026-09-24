@@ -2,8 +2,8 @@
 
 The Lisnoti font delivery service is a stylesheet at the root of lisnoti.com that other
 sites link, plus the WOFF2 files it names. This writes both from the distribution
-repository next door -- `Lisnoti-woff2-fonts/` for the slices and `lisnoti.css`,
-`Lisnoti-woff2-monolithic-fonts/` for the whole-font files and `lisnoti-full.css` -- so
+repository next door -- `Lisnoti-woff2/` for the slices and `lisnoti.css`,
+`Lisnoti-woff2-monolithic/` for the whole-font files and `lisnoti-full.css` -- so
 the site never carries a font that was not released:
 
     <site>/fonts/<version>/Lisnoti-<style>-<slice>.woff2   the 13 slices a style, 52 files
@@ -41,8 +41,8 @@ from fontTools.ttLib import TTFont
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 RELEASE = os.path.normpath(os.path.join(HERE, "..", "Lisnoti"))
-SLICED = os.path.join(RELEASE, "Lisnoti-woff2-fonts")
-WHOLE = os.path.join(RELEASE, "Lisnoti-woff2-monolithic-fonts")
+SLICED = os.path.join(RELEASE, "Lisnoti-woff2")
+WHOLE = os.path.join(RELEASE, "Lisnoti-woff2-monolithic")
 STYLES = ("Regular", "Italic", "Bold", "BoldItalic")
 
 
@@ -79,13 +79,13 @@ def main(site):
         css = css.replace("src: url(Lisnoti-", "src: url(%sLisnoti-" % prefix)
         css = css.replace(" * To use: upload every .woff2 beside this file and link it, then set",
                           " * To use from any site: link https://lisnoti.com/lisnoti.css, then set")
-        css = css.replace(" * should load the whole-file WOFF2 in dist/ instead of these slices.",
+        css = css.replace(" * should load the whole-file WOFF2 in dist/ instead of these subsets.",
                           " * should link https://lisnoti.com/lisnoti-full.css instead of this file.")
-        css = css.replace(" * The whole font in each style, about 400 KB a style. The sliced set in\n"
-                          " * Lisnoti-woff2-fonts serves the same font in pieces and is the\n"
+        css = css.replace(" * The whole font in each style, about 425 KB a style. The subset files\n"
+                          " * in Lisnoti-woff2 serve the same font in pieces and are the\n"
                           " * better choice for most pages; use this one",
-                          " * The whole font in each style, about 400 KB a style. lisnoti.css on\n"
-                          " * this site serves the same font in slices and is the better choice\n"
+                          " * The whole font in each style, about 425 KB a style. lisnoti.css on\n"
+                          " * this site serves the same font in subsets and is the better choice\n"
                           " * for most pages; link this one")
         with open(os.path.join(site, name), "w", encoding="utf-8", newline="\n") as fh:
             fh.write(css)

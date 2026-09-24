@@ -103,7 +103,7 @@
 
 		pre {
 			margin-top: 0;
-			margin-bottom: 0;
+			margin-bottom: 1rem;
 			word-wrap: normal;
 			padding: 1rem;
 			overflow: auto;
@@ -150,6 +150,56 @@
 				width: 225px;
 			}
 		}
+
+		/* Callouts in the style of GitHub's NOTE and TIP, so the page reads like the readme. */
+		.callout {
+			margin: 0 0 1rem;
+			padding: .5rem 1rem;
+			border-left: .25em solid #0969da;
+		}
+
+		.callout > :last-child {
+			margin-bottom: 0;
+		}
+
+		.callout-title {
+			margin-bottom: .25rem;
+			font-weight: 600;
+			color: #0969da;
+		}
+
+		.callout.tip {
+			border-left-color: #1a7f37;
+		}
+
+		.callout.tip .callout-title {
+			color: #1a7f37;
+		}
+
+		.footnotes {
+			margin-top: 3rem;
+			padding-top: 1rem;
+			border-top: 1px solid #3d444db3;
+			font-size: .875rem;
+		}
+
+		@media (prefers-color-scheme: dark) {
+			.callout {
+				border-left-color: #4493f8;
+			}
+			.callout-title {
+				color: #4493f8;
+			}
+			.callout.tip {
+				border-left-color: #3fb950;
+			}
+			.callout.tip .callout-title {
+				color: #3fb950;
+			}
+			.footnotes {
+				border-top-color: #e2e4e9d1;
+			}
+		}
 </style>
 </head>
 <body>
@@ -160,148 +210,262 @@
 		<img class="image-right" src="LisnotiCard.svg" alt="Card providing examples of the Lisnoti typeface"/>
 	</a>
 	<p>
-		Lisnoti (/lɪzˈnəʊtiː/) is a proportional sans serif font designed for general use 
-		but with consideration also given to making it work
+		Lisnoti (/lɪzˈnəʊtiː/) is a proportional sans serif font designed for general use
+		but with particular consideration given to making it work
 	</p>
 	<ul>
-		<li>in maths, science and actuarial contexts, and</li>
+		<li>in maths, science and actuarial contexts (including equations in LuaLaTeX and Word), and</li>
 		<li>for writing computer code.</li>
 	</ul>
 	<p>
-		Lisnoti is available in regular, italic, bold and bold-italic variants in 
-		OpenType (.ttf) and web (.woff2) formats under the 
+		Lisnoti is available in regular, italic, bold and bold-italic variants in
+		OpenType (<code>.ttf</code>) and web (<code>.woff2</code>) formats under the
 		<a href="https://openfontlicense.org/">SIL Open Font Licence (OFL)</a>.
+		The current release is <strong>version&nbsp;2.001</strong> (24&nbsp;September 2026).
 	</p>
 	<p>
-		If you’re interested in why Lisnoti exists, please see 
-		<a href="https://timgord.com/2024-01/lisnoti-a-proportional-font-that-works-for-coding-too/" target="_blank" rel="noopener noreferrer">this article</a>.</p>
-	<p>
+		If you’re interested in why Lisnoti exists, please see
+		<a href="https://timgord.com/2024-01/lisnoti-a-proportional-font-that-works-for-coding-too/">this article</a>.
+	</p>
 </div>
 
-<h2>Installing Lisnoti</h2>
+<h2>Getting Lisnoti</h2>
 
-<h3>Using Lisnoti locally</h3>
-<p>
-	If you want to install Lisnoti on machines for local use 
-	then the OpenType font files are 
-	<a href="https://github.com/Lisnoti/Lisnoti/raw/refs/heads/main/Lisnoti-ttf-fonts.zip">here</a>.
-<p>
+<p>There are three ways to use Lisnoti.</p>
 
-<h3 id="using-lisnoti-for-websites">Using Lisnoti for websites</h3>
+<h3>1. Install it</h3>
 <p>
-	The first option is to host the font files yourself 
-	(i.e. store them with the rest of your website), 
-	in which case the sliced web fonts and their style sheet are 
-	<a href="https://github.com/Lisnoti/Lisnoti/raw/refs/heads/main/Lisnoti-woff2-fonts.zip">here</a>,
-	and the whole-font versions, one file per style, are
-	<a href="https://github.com/Lisnoti/Lisnoti/raw/refs/heads/main/Lisnoti-woff2-monolithic-fonts.zip">here</a>.
-<p>
-<p>
-	The second option is to use the Lisnoti font delivery service,
-	which simply amounts to referencing the style sheet on this site.
-	(Background reading: 
-	<a href="https://fonts.google.com/knowledge/using_type/using_web_fonts_from_a_font_delivery_service/">Google’s 
-	guidance on its font delivery service</a>.)
-<p>
-<p>
+	To get Lisnoti to work on your computer, download
+	<a href="https://github.com/Lisnoti/Lisnoti/raw/refs/heads/main/Lisnoti-ttf.zip">Lisnoti-ttf.zip</a>,
+	unzip it and install the four <code>.ttf</code> files in the usual way for your operating system:
 </p>
-<p>In essence, you want</p>
 <ul>
-	<li>to reference the lisnoti.css file at the root of this website, either with a link in your pages or with one line at the top of your own style sheet, and then</li>
-	<li>to specify Lisnoti as a font in your styles (just like any other font).</li>
+	<li>Windows: select the font files, right-click and choose <em>Install</em>.</li>
+	<li>Mac: open the font files in Font Book.</li>
 </ul>
-<p>
-	The stylesheet serves the font in slices, so a page fetches only the pieces it uses:
-	a page of English text fetches about 27&nbsp;KB for each weight it sets, and the
-	maths, Greek, Cyrillic and symbol slices only when a character calls for them.
-	If you would rather have one file per style (about 400&nbsp;KB each), or your page
-	sets decomposed phonetic text, link
-	<a href="https://lisnoti.com/lisnoti-full.css">lisnoti-full.css</a> instead.
-</p>
-<p>Here’s a skeleton example:</p>
-<pre><code>&lt;head>
-&lt;link rel="stylesheet" href="https://lisnoti.com/lisnoti.css">
-&lt;style>
-body {
-  font-family: "Lisnoti", sans-serif;
-}
-&lt;/style>
-&lt;/head>
-</code></pre>
 
+<h3 id="using-lisnoti-for-websites">2. Website &ndash; served by the website</h3>
 <p>
-	If you would rather not put a link in every page, reference the style sheet from
-	the top of your own style sheet instead, which is what this page does:
+	Download
+	<a href="https://github.com/Lisnoti/Lisnoti/raw/refs/heads/main/Lisnoti-woff2.zip">Lisnoti-woff2.zip</a>,
+	copy the folder into your site, link its stylesheet, and name the font in your CSS:
 </p>
+<pre><code>&lt;link rel="stylesheet" href="/Lisnoti-woff2/lisnoti.css">
+</code></pre>
+<pre><code>body { font-family: Lisnoti, sans-serif; }
+</code></pre>
+<p>
+	If you would rather not have a <code>&lt;link></code> in your pages, put this line at the
+	top of your own stylesheet instead and drop the
+	<code>&lt;link></code>.<sup><a href="#fn-import" id="ref-import">1</a></sup>
+</p>
+<pre><code>@import url("/Lisnoti-woff2/lisnoti.css");
+</code></pre>
+<p>
+	Either way, leave <code>lisnoti.css</code> in the folder with its font
+	files.<sup><a href="#fn-paths" id="ref-paths">3</a></sup>
+</p>
+<p>
+	<code>lisnoti.css</code> serves the font by subset: Latin letters plus common characters,
+	Greek, Cyrillic, maths symbols and so on are separate files, and a page fetches only the
+	subsets for the characters it uses. A page of English text fetches about 27&nbsp;KB for
+	each font weight, and the maths and symbol subsets only as and when needed.
+</p>
+<div class="callout">
+	<p class="callout-title">Note</p>
+	<p>
+		If you would rather have one file per style (about 425&nbsp;KB each), or your page sets
+		decomposed phonetic text (a base letter followed by a combining mark, which needs both
+		to come from one file), use
+		<a href="https://github.com/Lisnoti/Lisnoti/raw/refs/heads/main/Lisnoti-woff2-monolithic.zip">Lisnoti-woff2-monolithic.zip</a>
+		instead and link its <code>lisnoti-full.css</code>.
+	</p>
+</div>
+
+<h3>3. Website &ndash; served by lisnoti.com</h3>
+<p>
+	You don’t need to host anything if you don’t want to. Simply point at the stylesheet on
+	lisnoti.com instead, either from your web pages (which means they all require this link in
+	their <code>&lt;head></code> section)
+</p>
+<pre><code>&lt;link rel="stylesheet" href="https://lisnoti.com/lisnoti.css">
+</code></pre>
+<p>or from the top of your own stylesheet (which is what lisnoti.com itself does)</p>
 <pre><code>@import url("https://lisnoti.com/lisnoti.css");
 </code></pre>
+<p>
+	The above links deliver the font by subset (which is usually the optimal approach for web
+	pages). If instead you want the monolithic version use
+	<code><a href="https://lisnoti.com/lisnoti-full.css">https://lisnoti.com/lisnoti-full.css</a></code>.
+</p>
 
 <h2>Feedback</h2>
 <p>
-	If you have comments on Lisnoti, please use 
+	If you have comments on Lisnoti, please use
 	<a href="https://github.com/Lisnoti/Lisnoti/discussions">the GitHub repo discussions page</a>.
-	</p>
+</p>
 <p>Please bear in mind that I am not a typography expert, just a frustrated user.</p>
 
 <h2 id="key-features">Key features</h2>
 <p>
-	Lisnoti is derived from 
-	<a href="https://fonts.google.com/noto/">Noto's sans serif fonts</a>,
+	Lisnoti is derived from
+	<a href="https://fonts.google.com/noto">Noto's sans serif fonts</a>,
 	but with the following adaptions:
 </p>
 <ol>
 	<li>
-		Reliable distinction of upper case <span class="type">I</span> vs lower case <span class="type">l</span>, 
-		and upper case <span class="type">O</span> vs zero <span class="type">0</span>.
+		<p>
+			Reliable distinction of upper case <code>I</code>, lower case <code>l</code> and one
+			<code>1</code>, and of upper case <code>O</code> and zero <code>0</code>, in every style:
+		</p>
+		<p><span class="type">Il1 O0&ensp;<i>Il1 O0</i>&ensp;<b>Il1 O0</b>&ensp;<b><i>Il1 O0</i></b></span></p>
 	</li>
 	<li>
-			Consistent arithmetic, comparison, logic, set, <i>n</i>-ary and 
-			other maths operators, e.g. 
-			<ul>
-				<li>arithmetic: <span class="type">− × ÷ ± ∓ ∞</span> (<em>NB Noto Sans gets the minus sign wrong</em>)</li>
-				<li>comparison: <span class="type">≤ ≠ ≥ ≈ ≡ ≢ ∝</span></li>
-				<li>logic: <span class="type">¬ ∧ ∨ ⊻ ⊤ ⊥ ⊦</span></li>
-				<li>set: <span class="type">∩ ∪ ∈ ∉ ⊂ ⊃ ⊆ ⊇ ∅</span></li>
-				<li><i>n</i>-ary: <span class="type">∑ ∏ ⋀ ⋁  ⋂ ⋃</span></li>
-				<li>other: <span class="type">∫ ∂ √ Δ ∇ ∀ ∃</span></li>
-			</ul>
-	</li>
-	<li>Greek and Cyrillic letters – maths and logic make frequent use of Greek letters and occasionally Cyrillic ones too.</li>
-	<li>
-			Consistently formatted digit and – if available – Roman letter sub and superscripts:
- 
-			<ul>
-				<li>superscript: <span class="type">⁰¹²³⁴⁵⁶⁷⁸⁹⁽⁾⁺⁻ᵃᵇᶜᵈᵉᶠᵍʰⁱʲᵏˡᵐⁿᵒᵖ𐞥ʳˢᵗᵘᵛʷˣʸᶻᴬᴮꟲᴰᴱꟳᴳᴴᴵᴶᴷᴸᴹᴺᴼᴾꟴᴿᵀᵁⱽᵂ𐞲</span></li>
-				<li>subscript: <span class="type">₀₁₂₃₄₅₆₇₈₉₍₎₊₋ₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤᵥ₝ₓ₞₟</span></li>
-			</ul>
+		<p>
+			Consistent arithmetic, comparison, logic, set, <i>n</i>-ary and other maths operators,
+			all sitting on one maths axis, e.g.
+		</p>
+		<ul>
+			<li>arithmetic: <span class="type">− × ÷ ± ∓ ∞</span></li>
+			<li>comparison: <span class="type">≤ ≠ ≥ ≈ ≡ ≢ ∝</span></li>
+			<li>logic: <span class="type">¬ ∧ ∨ ⊻ ⊤ ⊥ ⊦</span></li>
+			<li>set: <span class="type">∩ ∪ ∈ ∉ ⊂ ⊃ ⊆ ⊇ ∅</span></li>
+			<li><i>n</i>-ary: <span class="type">∑ ∏ ∐ ⋀ ⋁ ⋂ ⋃ ⨀ ⨁ ⨂</span></li>
+			<li>other: <span class="type">∫ ∂ √ Δ ∇ ∀ ∃</span></li>
+		</ul>
 	</li>
 	<li>
-			A reasonable selection of symbols, including 
-			<ul>
-				<li>squares, diamonds, rectangles, triangles, circles and stars: <span class="type">■□▪▫▬▭▮▯▰▱▲△▴▵▶▷▸▹►▻▼▽▾▿◀◁◂◃◄◅◆◇◊○◌●◦◯◻◼◽◾⚪⚫⚬★☆</span></li>
-				<li>arrows: <span class="type">←↑→↓↔↕ ↖↗↘↙ ⇄ ⇅ ⇵ ⇆ ⇋⇌ ⇐ ⇒⇔ ⇦⇧⇨⇩  ￩￪￫￬</span></li>
-				<li>ticks and crosses: <span class="type">☐☑☒ ✓✔✕✖✗✘</span></li>
-				<li>box drawing: <span class="type">─│┌┐└┘├┤┬┴┼╭╮╯╰╱╲╳╴╵╶╷</span></li>
-				<li>game characters: <span class="type">♔♕♖♗♘♙♚♛♜♝♞♟ ♠♡♢♣♤♥♦♧</span></li>
-				<li>misc but useful: <span class="type">⌂☸ ♩♪♫♬♭♮♯ ♀♂⚢⚣⚤⚥⚦⚧⚨⚩⚭⚮⚯⚲ ⌘ ␣ ☉ ♿ 円圓</span></li>
-			</ul>
+		<p>
+			An OpenType <code>MATH</code> table, so Lisnoti can be chosen as the equation font in
+			Word and loaded by <code>unicode-math</code> in LuaLaTeX: fractions, radicals, big
+			operators with limits, stretchy brackets and accents are all set from the font's own data.
+		</p>
 	</li>
 	<li>
-		All the operators <a href="https://github.com/JuliaLang/julia/blob/master/src/julia-parser.scm">parsed by Julia</a>
-		(which is itself a good test of a technical font).
+		<p>
+			Greek and Cyrillic letters &ndash; maths and logic make frequent use of Greek letters
+			and occasionally Cyrillic ones too.
+		</p>
 	</li>
 	<li>
-		<a href="https://en.wikipedia.org/wiki/Mathematical_Alphanumeric_Symbols">Unicode mathematical alphanumeric symbols</a>, 
-		e.g. <span class="type">𝐀𝐴𝑨 𝒜𝒲𝓐 𝔄 𝔸 𝕬 𝖠𝗔𝘈𝘼 𝙰</span>.
+		<p>
+			Consistently formatted digit and &ndash; if available &ndash; Roman letter sub and
+			superscripts:
+		</p>
+		<ul>
+			<li>examples: <span class="type">x² + y² = r²&emsp;f⁽ⁿ⁾(x)&emsp;aᵢⱼ&emsp;H₂O&emsp;xₙ₊₁</span></li>
+			<li>superscript: <span class="type">x⁰¹²³⁴⁵⁶⁷⁸⁹⁽⁾⁺⁻ᵃᵇᶜᵈᵉᶠᵍʰⁱʲᵏˡᵐⁿᵒᵖ𐞥ʳˢᵗᵘᵛʷˣʸᶻᴬᴮꟲᴰᴱꟳᴳᴴᴵᴶᴷᴸᴹᴺᴼᴾꟴᴿᵀᵁⱽᵂx</span></li>
+			<li>subscript: <span class="type">x₀₁₂₃₄₅₆₇₈₉₍₎₊₋ₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤᵥ₝ₓ₞₟x</span></li>
+		</ul>
+	</li>
+	<li>
+		<p>A reasonable selection of symbols, including</p>
+		<ul>
+			<li>squares, diamonds, rectangles, triangles, circles and stars: <span class="type">■□▪▫▬▭▮▯▰▱▲△▴▵▶▷▸▹►▻▼▽▾▿◀◁◂◃◄◅◆◇◊○◌●◦◯◻◼◽◾⚪⚫⚬★☆</span></li>
+			<li>lots of arrows: <span class="type">←↑→↓↔↕ ↖↗↘↙ ⇄ ⇅ ⇵ ⇆ ⇋⇌ ⇐ ⇒⇔ ⇦⇧⇨⇩ ￩￪￫￬</span></li>
+			<li>ticks and crosses: <span class="type">☐☑☒ ✓✔✕✖✗✘</span></li>
+			<li>box drawing: <span class="type">─│┌┐└┘├┤┬┴┼╭╮╯╰╱╲╳╴╵╶╷</span></li>
+			<li>game characters: <span class="type">♔♕♖♗♘♙♚♛♜♝♞♟ ♠♡♢♣♤♥♦♧</span></li>
+			<li>currency, the whole Unicode currency block U+20A0 to U+20C1 among them: <span class="type">$ £ € ¥ ₹ ₽ ₩ ৳ ฿ ⃁ ₿</span></li>
+			<li>misc but useful: <span class="type">⌂☸ ♩♪♫♬♭♮♯ ♀♂⚢⚣⚤⚥⚦⚧⚨⚩⚭⚮⚯⚲ ⌘ ␣ ☉ ♿ 円圓</span></li>
+		</ul>
+	</li>
+	<li>
+		<p>
+			All the operators
+			<a href="https://github.com/JuliaLang/julia/blob/master/src/julia-parser.scm">parsed by Julia</a>
+			(which is itself a good test of a technical font).
+		</p>
+	</li>
+	<li>
+		<p>
+			<a href="https://en.wikipedia.org/wiki/Mathematical_Alphanumeric_Symbols">Unicode mathematical alphanumeric symbols</a>:
+		</p>
+		<p><span class="type">𝐀𝐴𝑨 𝒜𝒲𝓐 𝔄 𝔸 𝕬 𝖠𝗔𝘈𝘼 𝙰</span></p>
+		<p>
+			The script capitals come in both roundhand (the default, <code>\mathscr</code>) and
+			chancery (<code>\mathcal</code>) styles:
+		</p>
+		<p><span class="type">𝒜ℬ𝒞𝒟ℰℱ𝒢ℋℐ𝒥𝒦ℒℳ𝒩𝒪𝒫𝒬ℛ𝒮𝒯𝒰𝒱𝒲𝒳𝒴𝒵</span></p>
+		<p><span class="type">𝒜&#xFE00;ℬ&#xFE00;𝒞&#xFE00;𝒟&#xFE00;ℰ&#xFE00;ℱ&#xFE00;𝒢&#xFE00;ℋ&#xFE00;ℐ&#xFE00;𝒥&#xFE00;𝒦&#xFE00;ℒ&#xFE00;ℳ&#xFE00;𝒩&#xFE00;𝒪&#xFE00;𝒫&#xFE00;𝒬&#xFE00;ℛ&#xFE00;𝒮&#xFE00;𝒯&#xFE00;𝒰&#xFE00;𝒱&#xFE00;𝒲&#xFE00;𝒳&#xFE00;𝒴&#xFE00;𝒵&#xFE00;</span></p>
+		<p>
+			The chancery forms are reached by Unicode's variation sequence (the capital followed
+			by U+FE00) or by the <code>ss01</code> feature, which is what <code>unicode-math</code>
+			uses: <code>\setmathfont{Lisnoti}[range=\mathcal, StylisticSet=1]</code>.
+		</p>
+	</li>
+	<li>
+		<p>
+			Other standardised variation sequences of maths blocks, each shown here after its base:
+			cups and caps with serifs, circled operators with a white rim, subsets with the stroke
+			through both lower members, relations with a slanted equals, empty set and zero with
+			a slash: <span class="type">∩∩&#xFE00; ∪∪&#xFE00; ⊓⊓&#xFE00; ⊔⊔&#xFE00; ⊕⊕&#xFE00; ⊗⊗&#xFE00; ⊜⊜&#xFE00; ⊊⊊&#xFE00; ⊋⊋&#xFE00; ≨≨&#xFE00; ⪬⪬&#xFE00; ∅∅&#xFE00; 00&#xFE00;</span>
+		</p>
 	</li>
 </ol>
-<p>(If you want all the above but with a monospaced font, then take a look at <a href="https://juliamono.netlify.app/">Julia Mono</a>.)</p>
+<div class="callout tip">
+	<p class="callout-title">Tip</p>
+	<p>
+		If you want the above but with a monospaced font, then take a look at
+		<a href="https://juliamono.netlify.app/">Julia Mono</a>.
+	</p>
+</div>
 
-<h2>Construction</h2>
+<h2 id="equations-in-microsoft-word-on-windows">Equations in Microsoft Word on Windows</h2>
 <p>
-	Lisnoti is built from Noto’s sans serif fonts. What it changes, and why, is set out in the 
-	<a href="https://github.com/Lisnoti/Lisnoti/?tab=readme-ov-file#key-features">Lisnoti GitHub repo</a>.
+	Lisnoti can now be used for equations in Word, but there are two potential gotchas that
+	it's worth being aware of:
 </p>
+<ol>
+	<li>
+		<p>
+			<strong>Always select 'Lisnoti', <em>not</em> '@Lisnoti'</strong>. Windows provides the
+			'@Lisnoti' option because of how it handles fonts that include East Asian characters,
+			but this is not what you want.
+		</p>
+	</li>
+	<li>
+		<p>
+			If <strong>Lisnoti is not shown as a font option for equations</strong> and you have
+			previously installed Lisnoti v1 then try closing all Office programs, and then the
+			following in a command prompt:
+		</p>
+		<pre><code>reg delete "HKCU\Software\Microsoft\Office\16.0\Common\MathFonts" /v Lisnoti /f
+</code></pre>
+	</li>
+</ol>
+
+<section class="footnotes">
+	<ol>
+		<li id="fn-import">
+			<p>
+				<code>@import</code> has to be the first rule in the stylesheet, before anything
+				else, or browsers ignore it. It also costs a little speed: the browser has to fetch
+				your stylesheet and read its first line before it discovers <code>lisnoti.css</code>,
+				where a <code>&lt;link></code> in the head is found and fetched straight
+				away.<sup><a href="#fn-link" id="ref-link">2</a></sup>
+				<a href="#ref-import" aria-label="Back to the text">↩</a>
+			</p>
+		</li>
+		<li id="fn-link">
+			<p>
+				A <code>&lt;link></code> is usually one edit, not one per page: most sites put it in
+				a template, a layout or a shared header. Where that is so, the <code>&lt;link></code>
+				is both the tidier and the faster of the two.
+				<a href="#ref-link" aria-label="Back to the text">↩</a>
+			</p>
+		</li>
+		<li id="fn-paths">
+			<p>
+				The font file names inside <code>lisnoti.css</code> are relative to that file, so the
+				fonts are found wherever your own CSS lives. Pasting the <code>@font-face</code> rules
+				into your own stylesheet also works, and saves a request, but then the names are
+				relative to <em>your</em> file and have to be repointed at the folder.
+				<a href="#ref-paths" aria-label="Back to the text">↩</a>
+			</p>
+		</li>
+	</ol>
+</section>
 
 </body>
 </html>
