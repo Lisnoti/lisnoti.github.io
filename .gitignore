@@ -3,3 +3,8 @@ __pycache__/
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# Local notes and settings for Claude Code, kept out of the public repo
+CLAUDE.md
+CLAUDE.local.md
+.claude/
