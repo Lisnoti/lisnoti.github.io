@@ -79,8 +79,6 @@ def main(site):
         css = css.replace("src: url(Lisnoti-", "src: url(%sLisnoti-" % prefix)
         css = css.replace(" * To use: upload every .woff2 beside this file and link it, then set",
                           " * To use from any site: link https://lisnoti.com/lisnoti.css, then set")
-        css = css.replace(" * should load the whole-file WOFF2 in dist/ instead of these subsets.",
-                          " * should link https://lisnoti.com/lisnoti-full.css instead of this file.")
         css = css.replace(" * The whole font in each style, about 425 KB a style. The subset files\n"
                           " * in Lisnoti-woff2 serve the same font in pieces and are the\n"
                           " * better choice for most pages; use this one",
