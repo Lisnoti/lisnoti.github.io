@@ -2,8 +2,8 @@
 
 The Lisnoti font delivery service is a stylesheet at the root of lisnoti.com that other
 sites link, plus the WOFF2 files it names. This writes both from the distribution
-repository next door -- `Lisnoti-woff2/` for the slices and `lisnoti.css`,
-`Lisnoti-woff2-monolithic/` for the whole-font files and `lisnoti-full.css` -- so
+repository next door -- `font-Lisnoti/Lisnoti-woff2/` for the slices and `lisnoti.css`,
+`font-Lisnoti/Lisnoti-woff2-monolithic/` for the whole-font files and `lisnoti-full.css` -- so
 the site never carries a font that was not released:
 
     <site>/fonts/<version>/Lisnoti-<style>-<slice>.woff2   the 13 slices a style, 52 files
@@ -41,8 +41,8 @@ from fontTools.ttLib import TTFont
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 RELEASE = os.path.normpath(os.path.join(HERE, "..", "Lisnoti"))
-SLICED = os.path.join(RELEASE, "Lisnoti-woff2")
-WHOLE = os.path.join(RELEASE, "Lisnoti-woff2-monolithic")
+SLICED = os.path.join(RELEASE, "font-Lisnoti", "Lisnoti-woff2")
+WHOLE = os.path.join(RELEASE, "font-Lisnoti", "Lisnoti-woff2-monolithic")
 STYLES = ("Regular", "Italic", "Bold", "BoldItalic")
 
 
