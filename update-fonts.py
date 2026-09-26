@@ -3,16 +3,19 @@
 The Lisnoti font delivery service is a stylesheet at the root of lisnoti.com that other
 sites link, plus the WOFF2 files it names. This writes both from the distribution
 repository next door -- `font-Lisnoti/Lisnoti-woff2/` for the slices and `lisnoti.css`,
-`font-Lisnoti/Lisnoti-woff2-monolithic/` for the whole-font files and `lisnoti-full.css` -- so
-the site never carries a font that was not released:
+`font-Lisnoti/Lisnoti-woff2-monolithic/` for the whole-font files and `lisnoti-monolithic.css`
+-- so the site never carries a font that was not released:
 
     <site>/fonts/<version>/Lisnoti-<style>-<slice>.woff2   the 13 slices a style, 52 files
     <site>/fonts/<version>/Lisnoti-<style>.woff2           the whole font, one file a style
     <site>/lisnoti.css        the sliced service stylesheet: a page fetches only the slices
                               for the characters it uses (a Latin page, about 27 KB a style)
-    <site>/lisnoti-full.css   the whole-font stylesheet, for anyone who wants one file a
+    <site>/lisnoti-monolithic.css
+                              the whole-font stylesheet, for anyone who wants one file a
                               style, or who sets decomposed phonetics, where mark attachment
                               cannot cross two slice files
+    <site>/lisnoti-full.css   the same stylesheet under its name before 26 September 2026,
+                              kept so that sites which link it keep working
 
 The two stylesheets are the release's own with the font URLs pointed at the versioned
 folder. The version is in the path so that a font file, once a browser has it, is never
@@ -55,7 +58,8 @@ def version_of(path):
 
 
 def main(site):
-    sources = {"lisnoti.css": SLICED, "lisnoti-full.css": WHOLE}
+    sources = {"lisnoti.css": SLICED, "lisnoti-monolithic.css": WHOLE}
+    old_names = {"lisnoti-monolithic.css": "lisnoti-full.css"}
     for name, source in sources.items():
         if not os.path.exists(os.path.join(source, name)):
             raise SystemExit("no %s in %s; release the font first" % (name, source))
@@ -85,10 +89,12 @@ def main(site):
                           " * The whole font in each style, about 425 KB a style. lisnoti.css on\n"
                           " * this site serves the same font in subsets and is the better choice\n"
                           " * for most pages; link this one")
-        with open(os.path.join(site, name), "w", encoding="utf-8", newline="\n") as fh:
-            fh.write(css)
-    print("Lisnoti %s: %d font files in %s, lisnoti.css and lisnoti-full.css written in %s"
-          % (version, copied, folder, site))
+        for written in (name, old_names.get(name)):
+            if written:
+                with open(os.path.join(site, written), "w", encoding="utf-8", newline="\n") as fh:
+                    fh.write(css)
+    print("Lisnoti %s: %d font files in %s, lisnoti.css, lisnoti-monolithic.css and "
+          "lisnoti-full.css written in %s" % (version, copied, folder, site))
 
 
 if __name__ == "__main__":

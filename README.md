@@ -20,9 +20,10 @@ The home page explains the options.
 |:--|:--|
 | `index.html` | the home page |
 | `lisnoti.css` | the service stylesheet, which serves each style in 13 subsets so that a page fetches only the pieces it uses |
-| `lisnoti-full.css` | the alternative stylesheet, one whole-font file a style |
-| `fonts/<version>/` | the WOFF2 files both stylesheets name |
-| `update-fonts.py` | writes the three items above from a release of the font |
+| `lisnoti-monolithic.css` | the alternative stylesheet, one whole-font file a style |
+| `lisnoti-full.css` | the same stylesheet under its old name, kept so that existing links keep working |
+| `fonts/<version>/` | the WOFF2 files the stylesheets name |
+| `update-fonts.py` | writes the stylesheets and font files above from a release of the font |
 | `test.html` | a one-line check that the service stylesheet loads |
 
 ## Updating the fonts
