@@ -831,7 +831,7 @@ math .mathscr, mo.tml-prime { font-family: inherit; }
 
 /* The LuaLaTeX set-up under the LaTeX box: its heading matches 'Try your own LaTeX', and its
    text the small note on Temml below it. */
-.latex-tip { margin-bottom: 1.5rem; }
+.latex-tip { margin: 2rem 0 1.5rem; }   /* 32 px above (it overlaps the note's spacing): a new topic */
 .latex-tip h3 { font-size: var(--fs-body); margin: 0 0 .5rem; }
 .latex-tip .small { margin-bottom: .75rem; }
 
