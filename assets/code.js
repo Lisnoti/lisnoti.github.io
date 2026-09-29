@@ -366,7 +366,7 @@ function render(text, langName) {
 				document.fonts.load('italic 14px ' + f, text),
 			]));
 		} catch (e) { /* measure with whatever loaded */ }
-		if (run !== latest) return;
+		if (run !== latest || rightHl.classList.contains('loading')) return;
 		const a = widths(leftHl);
 		const b = widths(rightHl);
 		const verdict = $('#verdict');
@@ -470,12 +470,34 @@ function render(text, langName) {
 	const rightChips = $$('[data-right]');
 	rightChips.forEach(c => c.addEventListener('click', () => {
 		press(rightChips, c);
-		state.right = c.dataset.right;
-		rightHl.style.fontFamily = right[state.right].family;
-		$('#right-label').textContent = c.textContent;
+		useRight(c.dataset.right, c.textContent);
+	}));
+
+	// A comparison font is applied only once its files have arrived. Until then the pane says
+	// it is loading, instead of showing the browser's default serif, and the verdict waits.
+	let fontRun = 0;
+	async function useRight(name, label) {
+		const run = ++fontRun;
+		const r = right[name];
+		$('#right-label').textContent = label;
+		if (name !== 'system') {
+			rightHl.dataset.loading = `Loading ${label}…`;
+			rightHl.classList.add('loading');
+			$('#verdict').textContent = '';
+			try {
+				await Promise.all([
+					document.fonts.load('14px ' + r.family, input.value || 'a'),
+					document.fonts.load('italic 14px ' + r.family, input.value || 'a'),
+				]);
+			} catch (e) { /* show whatever loaded */ }
+			if (run !== fontRun) return;
+		}
+		rightHl.classList.remove('loading');
+		state.right = name;
+		rightHl.style.fontFamily = r.family;
 		applyLigatures();
 		measure();
-	}));
+	}
 
 	const ligaButton = $('#liga-button');
 	ligaButton.addEventListener('click', () => {
@@ -485,7 +507,7 @@ function render(text, langName) {
 		measure();
 	});
 
-	rightHl.style.fontFamily = right[state.right].family;
 	applyLigatures();
 	load(state.example);
+	useRight(state.right, $('[data-right][aria-pressed="true"]').textContent);
 })();

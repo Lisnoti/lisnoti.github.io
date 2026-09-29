@@ -368,8 +368,14 @@ main > section { padding: 4.5rem 0; }
 @media (hover: hover) { .theme-button:hover { color: var(--ink); background: var(--band); } }
 .theme-button svg { width: 1.3em; height: 1.3em; fill: currentColor; }
 
-@media (max-width: 720px) {
+/* Below 860 px the section links do not fit beside the logo and switch, so the bar keeps only
+   those and the buttons, which move to the far end. */
+@media (max-width: 860px) {
+	.topbar nav { display: none; }
 	.theme-button { margin-left: auto; }
+}
+
+@media (max-width: 720px) {
 	.icon-link { display: none; }
 }
 
@@ -653,6 +659,18 @@ button:focus-visible, a:focus-visible, textarea:focus-visible, input:focus-visib
 }
 
 .pane-label { font-weight: 600; color: var(--deep); margin: 0; }
+
+/* While a comparison font loads, its pane keeps its size but shows only a note. */
+.pane-text.loading { position: relative; }
+.pane-text.loading > * { visibility: hidden; }
+.pane-text.loading::before {
+	content: attr(data-loading);
+	position: absolute;
+	top: 1rem;
+	left: 1rem;
+	color: var(--muted);
+	font-family: Lisnoti, sans-serif;
+}
 
 .pane-text {
 	margin: 0;
@@ -945,9 +963,6 @@ math .mathscr, mo.tml-prime { font-family: inherit; }
 }
 
 @media (max-width: 720px) {
-	/* The top bar keeps only the font switch and the two buttons. */
-	.topbar nav { display: none; }
-
 	.chips.has-menu { display: none; }
 	.chip-menu { display: inline-flex; }
 
