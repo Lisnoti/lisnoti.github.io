@@ -1,471 +1,286 @@
 <!DOCTYPE html>
-<html  lang="en">
+<html lang="en-GB">
 <head>
 <meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Lisnoti</title>
-	<link rel="icon" type="image/svg+xml" href="/Lisnoti-logo.svg">
-	<style type="text/css">
-		/* The Lisnoti font delivery service, imported rather than linked, as the
-		   readme recommends for a site with no shared head template. It has to be
-		   the first rule in the sheet, or browsers ignore it. */
-		@import url("/lisnoti.css");
-
-		body, code {
-			-ms-text-size-adjust: 100%;
-			-webkit-text-size-adjust: 100%;
-			text-size-adjust: 100%;
-			margin: 0;
-			font-family: Lisnoti,"Noto Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
-			font-size: 16px;
-			line-height: 1.5;
-			word-wrap: break-word;
-			scroll-behavior: auto !important;
-			color: #1f2328;
-			background-color: #ffffff;
-		}
-
-		code {
-			color: #444;
-			background-color: transparent;
-		}
-
-		h1, h2, h3, h4, h5, h6 {
-			margin-top: 1.5rem;
-			margin-bottom: 1rem;
-			font-weight: 600;
-			line-height: 1.25;
-		}
-
-		h1 {
-			margin: .67em 0;
-			font-weight: 600;
-			padding-bottom: .3rem;
-			font-size: 3rem;
-		}
-
-		h2 {
-			font-weight: 600;
-			padding-bottom: .3rem;
-			font-size: 1.5rem;
-		}
-
-		h1, h2 {
-			border-bottom: 1px solid #3d444db3;
-		}
-
-		h3 {
-			font-weight: 600;
-			font-size: 1.25rem;
-		}
-
-		h4 {
-			font-weight: 600;
-			font-size: 1rem;
-		}
-
-        p {
-          margin-top: 0;
-          margin-bottom: 1rem;
-        }
-
-		ul, ol {
-			margin-top: 0;
-        	margin-bottom: 1rem;
-			padding-left: 2rem;
-		}
-
-		li {
-			margin-bottom: .5rem;
-		}
-
-		li li {
-			margin-bottom: .25rem;
-		}
-
-		ol ol, ul ol {
-		list-style-type: lower-roman;
-		}
-
-		a {
-			background-color: transparent;
-			color: #0969da;
-			text-decoration: none;
-		}
-
-		.type {
-			padding: 0 .25rem;
-		}
-
-		pre, .type {
-			background-color: #818b981f;
-		}
-
-		pre {
-			margin-top: 0;
-			margin-bottom: 1rem;
-			word-wrap: normal;
-			padding: 1rem;
-			overflow: auto;
-			line-height: 1.45;
-			border-radius: 6px;
-		}
-
-		body {
-			box-sizing: border-box;
-			min-width: 200px;
-			max-width: 980px;
-			margin: 0 auto;
-			padding: 45px;
-		}
-
-		.image-right {
-				float: right;
-				margin-left: 8px;
-				width: 50%;
-		}
-
-			@media (prefers-color-scheme: dark) {
-			body {
-				color: #f0f6fc;
-				background-color: #1e2129;
-			}
-			code {
-				color: #ccc;
-			}
-			h1, h2 {
-				border-bottom-color: #e2e4e9d1;
-			}
-			a {
-				color: #61cde3;
-			}
-			pre, .type {
-				background-color: #272d35;
-			}
-		}
-
-		@media (min-width: 546px) {
-			.image-right {
-				margin-left: 16px;
-				width: 225px;
-			}
-		}
-
-		/* Callouts in the style of GitHub's NOTE and TIP, so the page reads like the readme. */
-		.callout {
-			margin: 0 0 1rem;
-			padding: .5rem 1rem;
-			border-left: .25em solid #0969da;
-		}
-
-		.callout > :last-child {
-			margin-bottom: 0;
-		}
-
-		.callout-title {
-			margin-bottom: .25rem;
-			font-weight: 600;
-			color: #0969da;
-		}
-
-		.callout.tip {
-			border-left-color: #1a7f37;
-		}
-
-		.callout.tip .callout-title {
-			color: #1a7f37;
-		}
-
-		.footnotes {
-			margin-top: 3rem;
-			padding-top: 1rem;
-			border-top: 1px solid #3d444db3;
-			font-size: .875rem;
-		}
-
-		@media (prefers-color-scheme: dark) {
-			.callout {
-				border-left-color: #4493f8;
-			}
-			.callout-title {
-				color: #4493f8;
-			}
-			.callout.tip {
-				border-left-color: #3fb950;
-			}
-			.callout.tip .callout-title {
-				color: #3fb950;
-			}
-			.footnotes {
-				border-top-color: #e2e4e9d1;
-			}
-		}
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lisnoti</title>
+<meta name="description" content="Lisnoti is a free proportional sans serif font for general use, with special emphasis on math, science and actuarial work.">
+<meta name="color-scheme" content="light dark">
+<script>
+// Both before the first paint: a pinned theme, so it never flashes the other one, and the
+// marker that reveals the button that sets it.
+document.documentElement.classList.add('js');
+try {
+	var t = localStorage.getItem('lisnoti-theme');
+	if (t === 'light' || t === 'dark') { document.documentElement.dataset.theme = t; }
+} catch (e) {}
+</script>
+<link rel="icon" type="image/svg+xml" href="/Lisnoti-logo.svg">
+<link rel="stylesheet" href="/lisnoti.css">
+<link rel="stylesheet" href="/lisnoti-code.css">
+<link rel="stylesheet" href="/vendor/temml/Temml-Local.css">
+<link rel="stylesheet" href="/assets/site.css?v=20260929g">
 </head>
-<body>
-<h1>Lisnoti</h1>
+<body class="theme-lisnoti">
 
-<div>
-	<a href="https://timgord.com/2024-01/lisnoti-a-proportional-font-that-works-for-coding-too/" >
-		<img class="image-right" src="LisnotiCard.svg" alt="Card providing examples of the Lisnoti typeface"/>
-	</a>
-	<p>
-		Lisnoti (/lɪzˈnəʊtiː/) is a proportional sans serif font designed for general use
-		but with particular consideration given to making it work
-	</p>
-	<ul>
-		<li>in maths, science and actuarial contexts (including equations in LuaLaTeX and Word), and</li>
-		<li>for writing computer code.</li>
-	</ul>
-	<p>
-		Lisnoti is available in regular, italic, bold and bold-italic variants in
-		OpenType (<code>.ttf</code>) and web (<code>.woff2</code>) formats under the
-		<a href="https://openfontlicense.org/">SIL Open Font Licence (OFL)</a>.
-		The current release is <strong>version&nbsp;2.003</strong> (25&nbsp;September 2026).
-	</p>
-	<p>
-		If you’re interested in why Lisnoti exists, please see
-		<a href="https://timgord.com/2024-01/lisnoti-a-proportional-font-that-works-for-coding-too/">this article</a>.
-	</p>
-</div>
+<header class="topbar">
+	<div class="topbar-inner">
+		<a class="brand" href="#top" aria-label="Back to the top">
+			<svg viewBox="0 0 100 100" aria-hidden="true">
+				<rect class="logo-frame" x="0" y="0" width="100" height="100"/>
+				<rect class="logo-face" x="5" y="5" width="90" height="90"/>
+				<path class="logo-frame" d="M40 45h20v7.5h-20zM40 55h20v7.5h-20zM52.5 37.5h6l-10 32.5h-6z"/>
+				<path fill="#ff6c11" stroke="#ff6c11" stroke-width="50" transform="translate(0 88) scale(0.1 -0.1)" d="M350 -10q-79 0 -115 42.5t-36 117.5v610h88v-613q0 -49 21 -66.5t53 -17.5q20 0 35.5 3t30.5 7v-71q-13 -5 -32 -8.5t-45 -3.5zM870 0h-258v52l84 19v571l-84 20v52h258v-52l-84 -20v-571l84 -19v-52z"/>
+			</svg>
+		</a>
+		<div class="font-switch" role="group" aria-label="Font">
+			<a class="to-lisnoti" href="/" aria-current="page">Lisnoti</a>
+			<a class="to-code" href="/code/">Lisnoti Code</a>
+		</div>
+		<nav aria-label="Sections">
+			<a href="#try">Try it</a>
+			<a href="#key-features">Features</a>
+			<a href="#math">Math</a>
+			<a href="#glyphs">Glyphs</a>
+			<a href="#get">Get Lisnoti</a>
+		</nav>
+		<button type="button" class="theme-button" id="theme"></button>
+		<a class="icon-link" href="https://github.com/Lisnoti/Lisnoti" aria-label="Lisnoti on GitHub" title="Lisnoti on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></a>
+	</div>
+</header>
 
-<h2>Getting Lisnoti</h2>
+<main>
 
-<p>There are three ways to use Lisnoti.</p>
-
-<h3>1. Install it</h3>
-<p>
-	To get Lisnoti to work on your computer, download
-	<a href="https://github.com/Lisnoti/Lisnoti/raw/refs/heads/main/font-Lisnoti/Lisnoti-ttf.zip">Lisnoti-ttf.zip</a>,
-	unzip it and install the four <code>.ttf</code> files in the usual way for your operating system:
-</p>
-<ul>
-	<li>Windows: select the font files, right-click and choose <em>Install</em>.</li>
-	<li>Mac: open the font files in Font Book.</li>
-</ul>
-
-<h3 id="using-lisnoti-for-websites">2. Website &ndash; served by the website</h3>
-<p>
-	Download
-	<a href="https://github.com/Lisnoti/Lisnoti/raw/refs/heads/main/font-Lisnoti/Lisnoti-woff2.zip">Lisnoti-woff2.zip</a>,
-	copy the folder into your site, link its stylesheet, and name the font in your CSS:
-</p>
-<pre><code>&lt;link rel="stylesheet" href="/Lisnoti-woff2/lisnoti.css">
-</code></pre>
-<pre><code>body { font-family: Lisnoti, sans-serif; }
-</code></pre>
-<p>
-	If you would rather not have a <code>&lt;link></code> in your pages, put this line at the
-	top of your own stylesheet instead and drop the
-	<code>&lt;link></code>.<sup><a href="#fn-import" id="ref-import">1</a></sup>
-</p>
-<pre><code>@import url("/Lisnoti-woff2/lisnoti.css");
-</code></pre>
-<p>
-	Either way, leave <code>lisnoti.css</code> in the folder with its font
-	files.<sup><a href="#fn-paths" id="ref-paths">3</a></sup>
-</p>
-<p>
-	<code>lisnoti.css</code> serves the font by subset: Latin letters plus common characters,
-	Greek, Cyrillic, maths symbols and so on are separate files, and a page fetches only the
-	subsets for the characters it uses. A page of English text fetches about 27&nbsp;KB for
-	each font weight, and the maths and symbol subsets only as and when needed.
-</p>
-<div class="callout">
-	<p class="callout-title">Note</p>
-	<p>
-		If you would rather have one file per style (about 425&nbsp;KB each), or your page sets
-		decomposed phonetic text (a base letter followed by a combining mark, which needs both
-		to come from one file), use
-		<a href="https://github.com/Lisnoti/Lisnoti/raw/refs/heads/main/font-Lisnoti/Lisnoti-woff2-monolithic.zip">Lisnoti-woff2-monolithic.zip</a>
-		instead and link its <code>lisnoti-monolithic.css</code>.
-	</p>
-</div>
-
-<h3>3. Website &ndash; served by lisnoti.com</h3>
-<p>
-	You don’t need to host anything if you don’t want to. Simply point at the stylesheet on
-	lisnoti.com instead, either from your web pages (which means they all require this link in
-	their <code>&lt;head></code> section)
-</p>
-<pre><code>&lt;link rel="stylesheet" href="https://lisnoti.com/lisnoti.css">
-</code></pre>
-<p>or from the top of your own stylesheet (which is what lisnoti.com itself does)</p>
-<pre><code>@import url("https://lisnoti.com/lisnoti.css");
-</code></pre>
-<p>
-	The above links deliver the font by subset (which is usually the optimal approach for web
-	pages). If instead you want the monolithic version use
-	<code><a href="https://lisnoti.com/lisnoti-monolithic.css">https://lisnoti.com/lisnoti-monolithic.css</a></code>.
-</p>
-
-<h2>Feedback</h2>
-<p>
-	If you have comments on Lisnoti, please use
-	<a href="https://github.com/Lisnoti/Lisnoti/discussions">the GitHub repo discussions page</a>.
-</p>
-<p>Please bear in mind that I am not a typography expert, just a frustrated user.</p>
-
-<h2 id="key-features">Key features</h2>
-<p>
-	Lisnoti is derived from
-	<a href="https://fonts.google.com/noto">Noto's sans serif fonts</a>,
-	but with the following adaptions:
-</p>
-<ol>
-	<li>
-		<p>
-			Reliable distinction of upper case <code>I</code>, lower case <code>l</code> and one
-			<code>1</code>, and of upper case <code>O</code> and zero <code>0</code>, in every style:
+<!-- Opening -->
+<section id="top" class="hero">
+	<div class="wrap">
+		<h1 class="title">Lisnoti</h1>
+		<p class="lede">
+			Lisnoti (/lɪzˈnəʊtiː/) is a proportional sans serif font for general use but also with
+			special emphasis on math, science and actuarial work.
 		</p>
-		<p><span class="type">Il1 O0&ensp;<i>Il1 O0</i>&ensp;<b>Il1 O0</b>&ensp;<b><i>Il1 O0</i></b></span></p>
-	</li>
-	<li>
-		<p>
-			Consistent arithmetic, comparison, logic, set, <i>n</i>-ary and other maths operators,
-			all sitting on one maths axis, e.g.
+		<div class="actions">
+			<a class="button action" href="#get">Get Lisnoti</a>
+		</div>
+		<p class="small">
+			Version 2.004 · regular, italic, bold and bold italic ·
+			free under the <a href="https://openfontlicense.org/">SIL Open Font Licence</a>
 		</p>
-		<ul>
-			<li>arithmetic: <span class="type">− × ÷ ± ∓ ∞</span></li>
-			<li>comparison: <span class="type">≤ ≠ ≥ ≈ ≡ ≢ ∝</span></li>
-			<li>logic: <span class="type">¬ ∧ ∨ ⊻ ⊤ ⊥ ⊦</span></li>
-			<li>set: <span class="type">∩ ∪ ∈ ∉ ⊂ ⊃ ⊆ ⊇ ∅</span></li>
-			<li><i>n</i>-ary: <span class="type">∑ ∏ ∐ ⋀ ⋁ ⋂ ⋃ ⨀ ⨁ ⨂</span></li>
-			<li>other: <span class="type">∫ ∂ √ Δ ∇ ∀ ∃</span></li>
-		</ul>
-	</li>
-	<li>
-		<p>
-			An OpenType <code>MATH</code> table, so Lisnoti can be chosen as the equation font in
-			Word and loaded by <code>unicode-math</code> in LuaLaTeX: fractions, radicals, big
-			operators with limits, stretchy brackets and accents are all set from the font's own data.
-		</p>
-	</li>
-	<li>
-		<p>
-			Greek and Cyrillic letters &ndash; maths and logic make frequent use of Greek letters
-			and occasionally Cyrillic ones too.
-		</p>
-	</li>
-	<li>
-		<p>
-			Consistently formatted digit and &ndash; if available &ndash; Roman letter sub and
-			superscripts:
-		</p>
-		<ul>
-			<li>examples: <span class="type">x² + y² = r²&emsp;f⁽ⁿ⁾(x)&emsp;aᵢⱼ&emsp;H₂O&emsp;xₙ₊₁</span></li>
-			<li>superscript: <span class="type">x⁰¹²³⁴⁵⁶⁷⁸⁹⁽⁾⁺⁻ᵃᵇᶜᵈᵉᶠᵍʰⁱʲᵏˡᵐⁿᵒᵖ𐞥ʳˢᵗᵘᵛʷˣʸᶻᴬᴮꟲᴰᴱꟳᴳᴴᴵᴶᴷᴸᴹᴺᴼᴾꟴᴿᵀᵁⱽᵂx</span></li>
-			<li>subscript: <span class="type">x₀₁₂₃₄₅₆₇₈₉₍₎₊₋ₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤᵥ₝ₓ₞₟x</span></li>
-		</ul>
-	</li>
-	<li>
-		<p>A reasonable selection of symbols, including</p>
-		<ul>
-			<li>squares, diamonds, rectangles, triangles, circles and stars: <span class="type">■□▪▫▬▭▮▯▰▱▲△▴▵▶▷▸▹►▻▼▽▾▿◀◁◂◃◄◅◆◇◊○◌●◦◯◻◼◽◾⚪⚫⚬★☆</span></li>
-			<li>lots of arrows: <span class="type">←↑→↓↔↕ ↖↗↘↙ ⇄ ⇅ ⇵ ⇆ ⇋⇌ ⇐ ⇒⇔ ⇦⇧⇨⇩ ￩￪￫￬</span></li>
-			<li>ticks and crosses: <span class="type">☐☑☒ ✓✔✕✖✗✘</span></li>
-			<li>box drawing: <span class="type">─│┌┐└┘├┤┬┴┼╭╮╯╰╱╲╳╴╵╶╷</span></li>
-			<li>game characters: <span class="type">♔♕♖♗♘♙♚♛♜♝♞♟ ♠♡♢♣♤♥♦♧</span></li>
-			<li>currency, the whole Unicode currency block U+20A0 to U+20C1 among them: <span class="type">$ £ € ¥ ₹ ₽ ₩ ৳ ฿ ⃁ ₿</span></li>
-			<li>misc but useful: <span class="type">⌂☸ ♩♪♫♬♭♮♯ ♀♂⚢⚣⚤⚥⚦⚧⚨⚩⚭⚮⚯⚲ ⌘ ␣ ☉ ♿ 円圓</span></li>
-		</ul>
-	</li>
-	<li>
-		<p>
-			All the operators
-			<a href="https://github.com/JuliaLang/julia/blob/master/src/julia-parser.scm">parsed by Julia</a>
-			(which is itself a good test of a technical font).
-		</p>
-	</li>
-	<li>
-		<p>
-			<a href="https://en.wikipedia.org/wiki/Mathematical_Alphanumeric_Symbols">Unicode mathematical alphanumeric symbols</a>:
-		</p>
-		<p><span class="type">𝐀𝐴𝑨 𝒜𝒲𝓐 𝔄 𝔸 𝕬 𝖠𝗔𝘈𝘼 𝙰</span></p>
-		<p>
-			The script capitals come in both roundhand (the default, <code>\mathscr</code>) and
-			chancery (<code>\mathcal</code>) styles:
-		</p>
-		<p><span class="type">𝒜ℬ𝒞𝒟ℰℱ𝒢ℋℐ𝒥𝒦ℒℳ𝒩𝒪𝒫𝒬ℛ𝒮𝒯𝒰𝒱𝒲𝒳𝒴𝒵</span></p>
-		<p><span class="type">𝒜&#xFE00;ℬ&#xFE00;𝒞&#xFE00;𝒟&#xFE00;ℰ&#xFE00;ℱ&#xFE00;𝒢&#xFE00;ℋ&#xFE00;ℐ&#xFE00;𝒥&#xFE00;𝒦&#xFE00;ℒ&#xFE00;ℳ&#xFE00;𝒩&#xFE00;𝒪&#xFE00;𝒫&#xFE00;𝒬&#xFE00;ℛ&#xFE00;𝒮&#xFE00;𝒯&#xFE00;𝒰&#xFE00;𝒱&#xFE00;𝒲&#xFE00;𝒳&#xFE00;𝒴&#xFE00;𝒵&#xFE00;</span></p>
-		<p>
-			The chancery forms are reached by Unicode's variation sequence (the capital followed
-			by U+FE00) or by the <code>ss01</code> feature, which is what <code>unicode-math</code>
-			uses: <code>\setmathfont{Lisnoti}[range=\mathcal, StylisticSet=1]</code>.
-		</p>
-	</li>
-	<li>
-		<p>
-			Other standardised variation sequences of maths blocks, each shown here after its base:
-			cups and caps with serifs, circled operators with a white rim, subsets with the stroke
-			through both lower members, relations with a slanted equals, empty set and zero with
-			a slash: <span class="type">∩∩&#xFE00; ∪∪&#xFE00; ⊓⊓&#xFE00; ⊔⊔&#xFE00; ⊕⊕&#xFE00; ⊗⊗&#xFE00; ⊜⊜&#xFE00; ⊊⊊&#xFE00; ⊋⊋&#xFE00; ≨≨&#xFE00; ⪬⪬&#xFE00; ∅∅&#xFE00; 00&#xFE00;</span>
-		</p>
-	</li>
-</ol>
-<div class="callout tip">
-	<p class="callout-title">Tip</p>
-	<p>
-		If you want the above but with a monospaced font, then take a look at
-		<a href="https://juliamono.netlify.app/">Julia Mono</a>.
-	</p>
-</div>
-
-<h2 id="equations-in-microsoft-word-on-windows">Equations in Microsoft Word on Windows</h2>
-<p>
-	Lisnoti can now be used for equations in Word, but there are two potential gotchas that
-	it's worth being aware of:
-</p>
-<ol>
-	<li>
-		<p>
-			<strong>Always select 'Lisnoti', <em>not</em> '@Lisnoti'</strong>. Windows provides the
-			'@Lisnoti' option because of how it handles fonts that include East Asian characters,
-			but this is not what you want.
-		</p>
-	</li>
-	<li>
-		<p>
-			If <strong>Lisnoti is not shown as a font option for equations</strong> and you have
-			previously installed Lisnoti v1 then try closing all Office programs, and then the
-			following in a command prompt:
-		</p>
-		<pre><code>reg delete "HKCU\Software\Microsoft\Office\16.0\Common\MathFonts" /v Lisnoti /f
-</code></pre>
-	</li>
-</ol>
-
-<section class="footnotes">
-	<ol>
-		<li id="fn-import">
-			<p>
-				<code>@import</code> has to be the first rule in the stylesheet, before anything
-				else, or browsers ignore it. It also costs a little speed: the browser has to fetch
-				your stylesheet and read its first line before it discovers <code>lisnoti.css</code>,
-				where a <code>&lt;link></code> in the head is found and fetched straight
-				away.<sup><a href="#fn-link" id="ref-link">2</a></sup>
-				<a href="#ref-import" aria-label="Back to the text">↩</a>
-			</p>
-		</li>
-		<li id="fn-link">
-			<p>
-				A <code>&lt;link></code> is usually one edit, not one per page: most sites put it in
-				a template, a layout or a shared header. Where that is so, the <code>&lt;link></code>
-				is both the tidier and the faster of the two.
-				<a href="#ref-link" aria-label="Back to the text">↩</a>
-			</p>
-		</li>
-		<li id="fn-paths">
-			<p>
-				The font file names inside <code>lisnoti.css</code> are relative to that file, so the
-				fonts are found wherever your own CSS lives. Pasting the <code>@font-face</code> rules
-				into your own stylesheet also works, and saves a request, but then the names are
-				relative to <em>your</em> file and have to be repointed at the folder.
-				<a href="#ref-paths" aria-label="Back to the text">↩</a>
-			</p>
-		</li>
-	</ol>
+		<p>If you are a programmer, there is a special version of Lisnoti for coding. Try <a href="/code/">Lisnoti Code</a>.</p>
+	</div>
 </section>
 
+<!-- Type tester -->
+<section id="try" class="band">
+	<div class="wrap">
+		<h2>Try it</h2>
+		<p class="section-lede">Type or paste anything. The text never leaves your device.</p>
+		<div class="tester">
+			<div class="toolbar" role="toolbar" aria-label="Type tester settings">
+				<div class="chips" role="group" aria-label="Style" data-menu="Style">
+					<button type="button" class="chip" data-tester-style="regular" aria-pressed="true">Regular</button>
+					<button type="button" class="chip" data-tester-style="italic" aria-pressed="false"><i>Italic</i></button>
+					<button type="button" class="chip" data-tester-style="bold" aria-pressed="false"><b>Bold</b></button>
+					<button type="button" class="chip" data-tester-style="bolditalic" aria-pressed="false"><b><i>Bold italic</i></b></button>
+				</div>
+				<label class="size">
+					<span>Size</span>
+					<input type="range" id="tester-size" min="12" max="120" value="16">
+					<output for="tester-size" id="tester-size-out">16 px</output>
+				</label>
+				<div class="chips" role="group" aria-label="Sample text" data-menu="Sample">
+					<button type="button" class="chip" data-tester-sample="text" aria-pressed="true">Text</button>
+					<button type="button" class="chip" data-tester-sample="math" aria-pressed="false">Math</button>
+					<button type="button" class="chip" data-tester-sample="greek" aria-pressed="false">Greek</button>
+					<button type="button" class="chip" data-tester-sample="cyrillic" aria-pressed="false">Cyrillic</button>
+					<button type="button" class="chip" data-tester-sample="devanagari" aria-pressed="false">Devanagari</button>
+				</div>
+			</div>
+			<textarea id="tester-text" class="tester-text" spellcheck="false" aria-label="Sample text in Lisnoti"></textarea>
+		</div>
+	</div>
+</section>
+
+<!-- Key features -->
+<section id="key-features">
+	<div class="wrap">
+		<h2>Key features</h2>
+		<p class="section-lede">
+			Lisnoti is derived from <a href="https://fonts.google.com/noto">Noto's sans serif fonts</a>,
+			adapted so that nothing in a formula or a line of code can be mistaken for something else.
+		</p>
+		<div class="tiles">
+			<article class="tile wide">
+				<h3>No lookalikes</h3>
+				<p class="specimen">Il1 O0 <i>Il1 O0</i> <b>Il1 O0</b></p>
+			</article>
+			<article class="tile">
+				<h3>Arrows</h3>
+				<p class="specimen">→ ↦ ⇒ ⟹ ⇔ ⟺</p>
+			</article>
+			<article class="tile">
+				<h3>Symbols and currencies</h3>
+				<p class="specimen">✓✗☑♔♞♠ $£€₹⃁₿</p>
+			</article>
+			<article class="tile">
+				<h3>Sub and superscripts</h3>
+				<p class="specimen">H₂O aᵢⱼ xₙ₊₁ β⁽⁰⁾</p>
+			</article>
+			<article class="tile">
+				<h3>Greek</h3>
+				<p class="specimen">αβγδε θλμπσφω</p>
+			</article>
+			<article class="tile">
+				<h3>Cyrillic</h3>
+				<p class="specimen">БГДЖЛФЦШЯ жщя</p>
+			</article>
+			<article class="tile">
+				<h3>Devanagari</h3>
+				<p class="specimen">देवनागरी क्ष त्र ज्ञ ॐ</p>
+			</article>
+			<article class="tile">
+				<h3>Math symbols</h3>
+				<p class="specimen">−×±≤≠∈⊂∪∨∞∅</p>
+			</article>
+			<article class="tile">
+				<h3>Math N-aries</h3>
+				<p class="specimen">∫ ∑ ∏ ⋀ ⋂ ⨆ √</p>
+			</article>
+			<article class="tile">
+				<h3>Math scripts</h3>
+				<p class="specimen">𝐀𝐴𝑨𝒜𝔄𝔸𝕬𝖠𝙰</p>
+			</article>
+		</div>
+	</div>
+</section>
+
+<!-- Math -->
+<section id="math" class="band">
+	<div class="wrap">
+		<h2>Equations</h2>
+		<p class="section-lede">
+			Lisnoti has a full OpenType <code>MATH</code> table, which means it can be used to
+			typeset equations properly in LaTeX (using LuaLaTeX) and in Word.
+		</p>
+		<div class="equations" id="equations"></div>
+
+		<div class="try-math">
+			<label for="tex-input"><strong>Try your own LaTeX</strong></label>
+			<textarea id="tex-input" spellcheck="false" autocorrect="off" autocapitalize="off" autocomplete="off">\mathrm{P}(A \mid B) = \frac{\mathrm{P}(B \mid A)\,\mathrm{P}(A)}{\mathrm{P}(B)}</textarea>
+			<div class="tex-output" id="tex-output"></div>
+			<p class="tex-error" id="tex-error" aria-live="polite"></p>
+		</div>
+
+		<div class="pair tips">
+			<article class="card">
+				<h3>LuaLaTeX</h3>
+				<p>With Lisnoti installed, <code>unicode-math</code> loads it as the math font. The second line gives <code>\mathcal</code> the chancery capitals.</p>
+				<pre class="snippet"><code>\usepackage{unicode-math}
+\setmathfont{Lisnoti}
+\setmathfont{Lisnoti}[range=\mathcal, StylisticSet=1]</code></pre>
+			</article>
+			<article class="card" id="equations-in-microsoft-word-on-windows">
+				<h3>Word on Windows</h3>
+				<p>Choose Lisnoti as the equation font.</p>
+			</article>
+		</div>
+		<p class="small">
+			The equations on this page are converted by <a href="https://temml.org/">Temml</a>, a
+			small open-source library, and set by the browser from Lisnoti's <code>MATH</code> table.
+		</p>
+	</div>
+</section>
+
+<!-- Glyph explorer -->
+<section id="glyphs" data-font="lisnoti">
+	<div class="wrap">
+		<h2>Every character</h2>
+		<p class="section-lede" id="glyph-count">Lisnoti has over 5,700 characters. Pick a group, then point at or tap a character.</p>
+		<div class="explorer">
+			<div class="chips groups" role="group" aria-label="Character group" id="glyph-groups" data-menu="Group"></div>
+			<div class="explorer-body">
+				<div class="glyph-grid" id="glyph-grid" role="list"></div>
+				<aside class="glyph-detail" aria-live="polite">
+					<div class="glyph-big" id="glyph-big">A</div>
+					<p class="glyph-name" id="glyph-name">Latin Capital Letter A</p>
+					<p class="glyph-cp" id="glyph-cp">U+0041</p>
+				</aside>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- Getting Lisnoti -->
+<section id="get" class="band">
+	<div class="wrap">
+		<h2>Get Lisnoti</h2>
+		<p class="section-lede">There are three ways to use Lisnoti, all free.</p>
+		<div class="ways">
+			<article class="card">
+				<h3>1. Install it</h3>
+				<p>Download the four fonts and install them in the usual way.</p>
+				<ul>
+					<li>Windows: select the files, right-click and choose <em>Install</em>.</li>
+					<li>Mac: open the files in Font Book.</li>
+				</ul>
+				<p><a class="button action" href="https://github.com/Lisnoti/Lisnoti/raw/refs/heads/main/font-Lisnoti/Lisnoti-ttf.zip">Lisnoti-ttf.zip</a></p>
+			</article>
+			<article class="card" id="using-lisnoti-for-websites">
+				<h3>2. Link to lisnoti.com</h3>
+				<p>Add the following line to each page's <code>&lt;head&gt;</code>:</p>
+				<div class="copyable">
+					<pre class="snippet"><code>&lt;link rel="stylesheet" href="https://lisnoti.com/lisnoti.css"&gt;</code></pre>
+					<button type="button" class="copy">Copy</button>
+				</div>
+				<p>and name the font in your CSS:</p>
+				<div class="copyable">
+					<pre class="snippet"><code>body { font-family: Lisnoti, sans-serif; }</code></pre>
+					<button type="button" class="copy">Copy</button>
+				</div>
+				<p class="small">Pages fetch only the subsets they need: about 32&nbsp;KB per style for English text.</p>
+			</article>
+			<article class="card">
+				<h3>3. Host it yourself</h3>
+				<p>
+					Download <a href="https://github.com/Lisnoti/Lisnoti/raw/refs/heads/main/font-Lisnoti/Lisnoti-woff2.zip">Lisnoti-woff2.zip</a>,
+					copy the folder into your site and link its <code>lisnoti.css</code>. Keep the
+					stylesheet in the folder with its font files.
+				</p>
+				<p class="small">
+					For one file per style, or for text with separately encoded accents, use
+					<a href="https://github.com/Lisnoti/Lisnoti/raw/refs/heads/main/font-Lisnoti/Lisnoti-woff2-monolithic.zip">Lisnoti-woff2-monolithic.zip</a>
+					and its <code>lisnoti-monolithic.css</code>.
+				</p>
+			</article>
+		</div>
+	</div>
+</section>
+
+</main>
+
+<footer class="footer">
+	<div class="wrap">
+		<p>
+			Comments on Lisnoti are welcome on
+			<a href="https://github.com/Lisnoti/Lisnoti/discussions">the GitHub discussions page</a>.
+			Please bear in mind that I am not a typography expert, just a frustrated user.
+		</p>
+		<p class="small">
+			Credit: Lisnoti and Lisnoti Code are built on Google's admirable
+			<a href="https://fonts.google.com/noto">Noto</a> fonts. Lisnoti's math functionality
+			derives from Khaled Hosny's wholesale redesign of
+			<a href="https://fonts.google.com/noto/specimen/Noto+Sans+Math">Noto Sans Math</a> in 2024.
+		</p>
+		<p class="small">
+			<a href="https://github.com/Lisnoti/Lisnoti">Lisnoti on GitHub</a> ·
+			<a href="/code/">Lisnoti Code</a> ·
+			<a href="https://timgord.com/2024-01/lisnoti-a-proportional-font-that-works-for-coding-too/">Why Lisnoti exists</a> ·
+			Fonts under the <a href="https://openfontlicense.org/">SIL Open Font Licence</a>
+		</p>
+	</div>
+</footer>
+
+<script src="/vendor/temml/temml.min.js" defer></script>
+<script src="/assets/site.js?v=20260929g" defer></script>
 </body>
 </html>

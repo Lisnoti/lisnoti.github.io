@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lisnoti Code</title>
+<meta name="description" content="Lisnoti Code is a free proportional font for writing code: every character distinct, a real minus, sensible spacing and a few helpful ligatures.">
+<meta name="color-scheme" content="light dark">
+<script>
+// Both before the first paint: a pinned theme, so it never flashes the other one, and the
+// marker that reveals the button that sets it.
+document.documentElement.classList.add('js');
+try {
+	var t = localStorage.getItem('lisnoti-theme');
+	if (t === 'light' || t === 'dark') { document.documentElement.dataset.theme = t; }
+} catch (e) {}
+</script>
+<link rel="icon" type="image/svg+xml" href="/Lisnoti-Code-logo.svg">
+<link rel="stylesheet" href="/lisnoti.css">
+<link rel="stylesheet" href="/lisnoti-code.css">
+<link rel="stylesheet" href="/assets/site.css?v=20260929g">
+</head>
+<body class="theme-code">
+
+<header class="topbar">
+	<div class="topbar-inner">
+		<a class="brand" href="#top" aria-label="Back to the top">
+			<svg viewBox="0 0 100 100" aria-hidden="true">
+				<rect class="logo-frame" x="0" y="0" width="100" height="100"/>
+				<rect class="logo-face" x="5" y="5" width="90" height="90"/>
+				<path class="logo-frame" d="M40 45h20v7.5h-20zM40 55h20v7.5h-20zM52.5 37.5h6l-10 32.5h-6z"/>
+				<path fill="#2a9fd8" stroke="#2a9fd8" stroke-width="50" transform="translate(0 88) scale(0.1 -0.1)" d="M350 -10q-79 0 -115 42.5t-36 117.5v610h88v-613q0 -49 21 -66.5t53 -17.5q20 0 35.5 3t30.5 7v-71q-13 -5 -32 -8.5t-45 -3.5zM870 0h-258v52l84 19v571l-84 20v52h258v-52l-84 -20v-571l84 -19v-52z"/>
+			</svg>
+		</a>
+		<div class="font-switch" role="group" aria-label="Font">
+			<a class="to-lisnoti" href="/">Lisnoti</a>
+			<a class="to-code" href="/code/" aria-current="page">Lisnoti Code</a>
+		</div>
+		<nav aria-label="Sections">
+			<a href="#try">Try it</a>
+			<a href="#features">Features</a>
+			<a href="#faq">FAQ</a>
+			<a href="#glyphs">Glyphs</a>
+			<a href="#get">Get Lisnoti Code</a>
+		</nav>
+		<button type="button" class="theme-button" id="theme"></button>
+		<a class="icon-link" href="https://github.com/Lisnoti/Lisnoti" aria-label="Lisnoti on GitHub" title="Lisnoti on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></a>
+	</div>
+</header>
+
+<main>
+
+<!-- Opening -->
+<section id="top" class="hero">
+	<div class="wrap">
+		<h1 class="title">Lisnoti Code</h1>
+		<p>Lisnoti Code is a <em>proportional</em> font for coding.</p>
+		<p>
+			The case for using proportional fonts for code comes down to readability and
+			efficiency. It has been well made by
+			<a href="https://storck.io/posts/proportional-programming-code-fonts/">Martĳn Storck</a>,
+			<a href="https://nelsonslog.wordpress.com/2021/09/12/proportional-fonts-and-yapf-vs-black/">Nelson Minar</a>
+			and <a href="https://input.djr.com/info/">David Jonathan Ross</a> (and I've had a go
+			<a href="https://timgord.com/2024-01/lisnoti-a-proportional-font-that-works-for-coding-too/">here</a>).
+		</p>
+		<p>But font design still matters:</p>
+		<ul>
+			<li><span class="eg">Il1</span> and <span class="eg">O0</span> need to be clearly distinguishable.</li>
+			<li>Programming languages use hyphen as a minus sign (<span class="eg">−</span>), but it looks like short dash (<span class="eg">-</span>) in most fonts.</li>
+			<li>Proportional fonts have narrow spaces that make indentation tight and errors hard to spot.</li>
+			<li>Ligatures make ASCII code combinations such as <span class="eg">&gt;=</span> clearer by changing their appearance to <span class="eg code-font">&gt;=</span>.</li>
+		</ul>
+		<p>Lisnoti Code addresses all of these issues. Try it out below.</p>
+		<div class="actions">
+			<a class="button action" href="#get">Get Lisnoti Code</a>
+		</div>
+		<p class="small">
+			Version 0.902 · regular, italic, bold and bold italic ·
+			free under the <a href="https://openfontlicense.org/">SIL Open Font Licence</a>
+		</p>
+		<p>Try the non-code version, <a href="/">Lisnoti</a>, for general use. It is particularly helpful if your content is math-heavy.</p>
+	</div>
+</section>
+
+<!-- Try it: Lisnoti Code against a monospaced font -->
+<section id="try" class="band">
+	<div class="wrap">
+		<h2>Try it</h2>
+		<p class="section-lede">
+			Pick an example, or type in the left-hand box. The right-hand box shows the same code
+			in a monospaced font, at the same size, and the widths are measured in your browser.
+		</p>
+
+		<div class="webkit-note" id="webkit-note" hidden>
+			<p><strong>WebKit detected</strong></p>
+			<p>
+				Safari and iOS browsers do not implement OpenType spacing correctly and so Lisnoti
+				Code's variable spacing falls back to a single wider space.
+			</p>
+		</div>
+
+		<div class="compare">
+			<div class="compare-top">
+				<div class="chips" role="group" aria-label="Example" data-menu="Example">
+					<button type="button" class="chip" data-example="javascript" aria-pressed="true">JavaScript</button>
+					<button type="button" class="chip" data-example="python" aria-pressed="false">Python</button>
+					<button type="button" class="chip" data-example="r" aria-pressed="false">R</button>
+					<button type="button" class="chip" data-example="cpp" aria-pressed="false">C++</button>
+					<button type="button" class="chip" data-example="csharp" aria-pressed="false">C#</button>
+					<button type="button" class="chip" data-example="julia" aria-pressed="false">Julia</button>
+					<button type="button" class="chip" data-example="tree" aria-pressed="false">Trees</button>
+				</div>
+				<button type="button" class="chip" id="liga-button" aria-pressed="true">Use ligatures</button>
+			</div>
+			<div class="compare-fonts">
+				<span class="compare-with">Compare with</span>
+				<div class="chips" role="group" aria-label="Monospaced font" data-menu="">
+					<button type="button" class="chip" data-right="jetbrains" aria-pressed="true">JetBrains Mono</button>
+					<button type="button" class="chip" data-right="fira" aria-pressed="false">Fira Code</button>
+					<button type="button" class="chip" data-right="cascadia" aria-pressed="false">Cascadia Code</button>
+					<button type="button" class="chip" data-right="monaspace" aria-pressed="false">Monaspace Neon</button>
+					<button type="button" class="chip" data-right="victor" aria-pressed="false">Victor Mono</button>
+					<button type="button" class="chip" data-right="system" aria-pressed="false">Your monospace</button>
+				</div>
+			</div>
+			<div class="panes">
+				<div class="pane">
+					<p class="pane-label code-font">Lisnoti Code</p>
+					<div class="editor">
+						<pre class="pane-text hl code-font" id="left-hl" aria-hidden="true"></pre>
+						<textarea class="pane-text code-font" id="left-input" spellcheck="false" wrap="off" autocorrect="off" autocapitalize="off" autocomplete="off" aria-label="Code in Lisnoti Code, which you can edit"></textarea>
+					</div>
+				</div>
+				<div class="pane">
+					<p class="pane-label" id="right-label">JetBrains Mono</p>
+					<pre class="pane-text hl" id="right-hl"></pre>
+				</div>
+			</div>
+			<p class="verdict" id="verdict" aria-live="polite"></p>
+		</div>
+	</div>
+</section>
+
+<!-- Features -->
+<section id="features">
+	<div class="wrap">
+		<h2>Key features</h2>
+		<p class="section-lede">
+			Lisnoti Code is Lisnoti set up for programming. It keeps every character Lisnoti has,
+			and changes only what code needs.
+		</p>
+		<div class="tiles">
+			<article class="tile wide">
+				<h3>No lookalikes</h3>
+				<p class="specimen code-font">Il1 O0 <i>Il1 O0</i> <b>Il1 O0</b></p>
+				<p>Capital I, small l and one are always distinct, as are capital O and zero, in every style.</p>
+			</article>
+			<article class="tile">
+				<h3>A real minus</h3>
+				<p class="specimen code-font">-5 + x - y test-main</p>
+				<p>Many monospace fonts make the hyphen a compromise between true hyphen and true minus. Lisnoti Code uses context to do both.</p>
+			</article>
+			<article class="tile">
+				<h3>Spacing designed for code</h3>
+				<p class="specimen block code-font">if ready:
+    start(now)</p>
+				<p>Lisnoti sets runs of spaces as wide spaces to make indentation clear but uses standard space between words.</p>
+			</article>
+			<article class="tile">
+				<h3>Trees that line up</h3>
+				<p class="specimen block code-font">src/
+├── main.py
+└── tests/
+    └── test_main.py</p>
+				<p>Box-drawing characters are as wide as the wide space, so directory trees join up and line up.</p>
+			</article>
+			<article class="tile wide" id="ligatures">
+				<h3>Code-friendly ligatures</h3>
+				<div class="ligs">
+					<div class="lig-row"><span class="lig-label">Equality</span><span class="lig-items"><span class="lig"><span class="off">==</span><span class="on">==</span></span><span class="lig"><span class="off">===</span><span class="on">===</span></span><span class="lig"><span class="off">!=</span><span class="on">!=</span></span><span class="lig"><span class="off">!==</span><span class="on">!==</span></span></span></div>
+					<div class="lig-row"><span class="lig-label">Relations</span><span class="lig-items"><span class="lig"><span class="off">&lt;=</span><span class="on">&lt;=</span></span><span class="lig"><span class="off">&gt;=</span><span class="on">&gt;=</span></span></span></div>
+					<div class="lig-row"><span class="lig-label">Arrows</span><span class="lig-items"><span class="lig"><span class="off">-&gt;</span><span class="on">-&gt;</span></span><span class="lig"><span class="off">&lt;-</span><span class="on">&lt;-</span></span><span class="lig"><span class="off">=&gt;</span><span class="on">=&gt;</span></span></span></div>
+					<div class="lig-row"><span class="lig-label">Pipes</span><span class="lig-items"><span class="lig"><span class="off">|&gt;</span><span class="on">|&gt;</span></span><span class="lig"><span class="off">||&gt;</span><span class="on">||&gt;</span></span><span class="lig"><span class="off">|||&gt;</span><span class="on">|||&gt;</span></span><span class="lig"><span class="off">&lt;|</span><span class="on">&lt;|</span></span><span class="lig"><span class="off">&lt;||</span><span class="on">&lt;||</span></span></span></div>
+				</div>
+			</article>
+			<article class="tile wide">
+				<h3>Comprehensive symbols</h3>
+				<p class="specimen code-font">=≠ ≡≢ &lt;≤ ⊂⊆ ±∓ ∞∝ ∪⊔∨⊻ ∀∃∈∉∅ √∫∂ ∑∏⋀⋃ β⁽⁰⁾ΔΘ x₀ f′ ⊕ ✓✗☑♔♞♠ $£€₹⃁</p>
+				<p>5,700-plus characters, including every operator Julia parses, so nothing is substituted using another font.</p>
+			</article>
+		</div>
+	</div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="band">
+	<div class="wrap">
+		<h2>FAQ</h2>
+		<div class="faq">
+			<details>
+				<summary>Aren't monospaced fonts simply better for code?</summary>
+				<p>
+					Mostly they are just familiar. Many objections to proportional fonts come down to
+					people being used to monospace. A lot of coders aren't even aware that most
+					editors and IDEs have excellent support for proportional fonts. Try one for a
+					week before deciding.
+				</p>
+			</details>
+			<details>
+				<summary>What about code that lines things up in columns?</summary>
+				<p>
+					It won't line up. Hanging comments, tables drawn with spaces and <code>=</code>
+					signs padded into a column all assume every reader has a monospaced font. That
+					habit is arguably brittle: change one line and its neighbours need re-padding,
+					which clutters every diff.
+				</p>
+			</details>
+			<details>
+				<summary>Does indentation still work?</summary>
+				<p>
+					Yes. Indentation lines up with itself, because every line indents with the same
+					characters. Runs of spaces are wide, so each level is easy to see, while a single
+					space between words stays narrow.
+				</p>
+			</details>
+			<details>
+				<summary>Why have math symbols in a coding font?</summary>
+				<p>
+					Math and other symbols turn up in documentation all the time. And in Julia they are
+					actual code. If the font lacks a character, the editor shows a replacement box or
+					borrows the character from another font, which rarely matches.
+				</p>
+			</details>
+			<details>
+				<summary>Ligatures don't work on my setup</summary>
+				<p>Many editors switch ligatures off unless told otherwise. In VS Code, add these to your settings:</p>
+				<pre class="snippet"><code>"editor.fontFamily": "Lisnoti Code",
+"editor.fontLigatures": true</code></pre>
+				<p>Other editors usually have a similar setting.</p>
+				<p>
+					If every space looks the same width, the app has switched off contextual
+					alternates (<code>calt</code>) as well. To keep the spacing and the short hyphen
+					without the ligatures, VS Code takes
+					<code>"editor.fontLigatures": "'liga' off, 'calt' on"</code>.
+				</p>
+				<p>
+					Safari, and every browser on an iPhone or iPad, cannot apply the spacing rule, so
+					Lisnoti Code's web stylesheet switches it off there.
+				</p>
+			</details>
+			<details>
+				<summary>When is monospace the right choice?</summary>
+				<p>
+					Sometimes monospace is exactly what you want: editing hex data, writing assembly,
+					working in a terminal, or drawing ASCII tables and art.
+				</p>
+				<p>
+					The <a href="#get">VS Code settings below</a> set <code>terminal.integrated.fontFamily</code>
+					to a monospace family for precisely this reason. Similar settings may be available in
+					other IDEs.
+				</p>
+			</details>
+		</div>
+	</div>
+</section>
+
+<!-- Glyph explorer -->
+<section id="glyphs" data-font="code">
+	<div class="wrap">
+		<h2>Every character</h2>
+		<p class="section-lede" id="glyph-count">Lisnoti Code has over 5,700 characters. Pick a group, then point at or tap a character.</p>
+		<div class="explorer">
+			<div class="chips groups" role="group" aria-label="Character group" id="glyph-groups" data-menu="Group"></div>
+			<div class="explorer-body">
+				<div class="glyph-grid" id="glyph-grid" role="list"></div>
+				<aside class="glyph-detail" aria-live="polite">
+					<div class="glyph-big" id="glyph-big">A</div>
+					<p class="glyph-name" id="glyph-name">Latin Capital Letter A</p>
+					<p class="glyph-cp" id="glyph-cp">U+0041</p>
+				</aside>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- Getting Lisnoti Code -->
+<section id="get" class="band">
+	<div class="wrap">
+		<h2>Get Lisnoti Code</h2>
+		<p class="section-lede">There are three ways to use Lisnoti Code, all free.</p>
+		<div class="ways">
+			<article class="card">
+				<h3>1. Install it</h3>
+				<p>Download the four fonts and install them in the usual way.</p>
+				<ul>
+					<li>Windows: select the files, right-click and choose <em>Install</em>.</li>
+					<li>Mac: open the files in Font Book.</li>
+				</ul>
+				<p><a class="button action" href="https://github.com/Lisnoti/Lisnoti/raw/refs/heads/main/font-LisnotiCode/LisnotiCode-ttf.zip">LisnotiCode-ttf.zip</a></p>
+				<p>VS Code switches the ligatures and spacing off unless told otherwise, so add these to your settings:</p>
+				<div class="copyable">
+					<pre class="snippet"><code>"editor.fontFamily": "Lisnoti Code",
+"editor.fontLigatures": true,
+"terminal.integrated.fontFamily": "Consolas, Menlo, monospace"</code></pre>
+					<button type="button" class="copy">Copy</button>
+				</div>
+				<p>A terminal needs a monospaced font, so the last line keeps VS Code's terminal on one.</p>
+			</article>
+			<article class="card" id="using-lisnoti-code-for-websites">
+				<h3>2. Link to lisnoti.com</h3>
+				<p>Add the following line to each page's <code>&lt;head&gt;</code>:</p>
+				<div class="copyable">
+					<pre class="snippet"><code>&lt;link rel="stylesheet" href="https://lisnoti.com/lisnoti-code.css"&gt;</code></pre>
+					<button type="button" class="copy">Copy</button>
+				</div>
+				<p>and name the font in your CSS:</p>
+				<div class="copyable">
+					<pre class="snippet"><code>code, pre { font-family: 'Lisnoti Code', monospace; }</code></pre>
+					<button type="button" class="copy">Copy</button>
+				</div>
+				<p class="small">Pages fetch only the subsets they need: about 26&nbsp;KB per style for English text.</p>
+			</article>
+			<article class="card">
+				<h3>3. Host it yourself</h3>
+				<p>
+					Download <a href="https://github.com/Lisnoti/Lisnoti/raw/refs/heads/main/font-LisnotiCode/LisnotiCode-woff2.zip">LisnotiCode-woff2.zip</a>,
+					copy the folder into your site and link its <code>lisnoti-code.css</code>. Keep the
+					stylesheet in the folder with its font files.
+				</p>
+				<p class="small">
+					For one file per style, use
+					<a href="https://github.com/Lisnoti/Lisnoti/raw/refs/heads/main/font-LisnotiCode/LisnotiCode-woff2-monolithic.zip">LisnotiCode-woff2-monolithic.zip</a>
+					and its <code>lisnoti-code-monolithic.css</code>.
+				</p>
+			</article>
+		</div>
+	</div>
+</section>
+
+</main>
+
+<footer class="footer">
+	<div class="wrap">
+		<p>
+			Comments on Lisnoti Code are welcome on
+			<a href="https://github.com/Lisnoti/Lisnoti/discussions">the GitHub discussions page</a>.
+			Please bear in mind that I am not a typography expert, just a frustrated user.
+		</p>
+		<p class="small">
+			Credit: Lisnoti and Lisnoti Code are built on Google's admirable
+			<a href="https://fonts.google.com/noto">Noto</a> fonts. Lisnoti's math functionality
+			derives from Khaled Hosny's wholesale redesign of
+			<a href="https://fonts.google.com/noto/specimen/Noto+Sans+Math">Noto Sans Math</a> in 2024.
+		</p>
+		<p class="small">
+			<a href="https://github.com/Lisnoti/Lisnoti">Lisnoti on GitHub</a> ·
+			<a href="/">Lisnoti</a> ·
+			<a href="https://timgord.com/2024-01/lisnoti-a-proportional-font-that-works-for-coding-too/">Why Lisnoti exists</a> ·
+			Fonts under the <a href="https://openfontlicense.org/">SIL Open Font Licence</a>
+		</p>
+	</div>
+</footer>
+
+<script src="/assets/site.js?v=20260929g" defer></script>
+<script src="/assets/code.js?v=20260929g" defer></script>
+</body>
+</html>

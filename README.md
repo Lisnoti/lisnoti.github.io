@@ -1,49 +1,70 @@
 # lisnoti.com
 
-This repository is the website [lisnoti.com](https://lisnoti.com), served by GitHub Pages
-from the root of `main`. The font itself, its files for installing and its documentation are
-in [Lisnoti/Lisnoti](https://github.com/Lisnoti/Lisnoti).
+This repository is the website [lisnoti.com](https://lisnoti.com).
 
-The site is also the Lisnoti font delivery service. Any website can use Lisnoti by linking
-one stylesheet:
+The fonts themselves and associated documentation are in
+[the Lisnoti repo](https://github.com/Lisnoti/Lisnoti).
+
+The site serves two purposes.
+
+It is the **user-friendly home page** for Lisnoti and Lisnoti Code.
+
+It also provides the **Lisnoti and Lisnoti Code font delivery service**. Websites can use the fonts simply by linking to stylesheets served at lisnoti.com:
 
 ```html
 <link rel="stylesheet" href="https://lisnoti.com/lisnoti.css">
+<link rel="stylesheet" href="https://lisnoti.com/lisnoti-code.css">
 ```
 
-and then naming Lisnoti in its styles, for example `font-family: Lisnoti, system-ui, sans-serif;`.
-The home page explains the options.
+and then naming the fonts in their styles, e.g.
 
-## What is here
+```
+font-family: Lisnoti, system-ui, sans-serif;
+```
+or
+```
+font-family: 'Lisnoti Code', monospace;
+```
 
-| file | what it is |
+See [the Lisnoti](https://lisnoti.com/#using-lisnoti-for-websites) or [the Lisnoti Code](https://lisnoti.com/code/#using-lisnoti-code-for-websites) pages for more detail.
+
+## Repo contents
+
+| Path | Contents |
 |:--|:--|
-| `index.html` | the home page |
-| `lisnoti.css` | the service stylesheet, which serves each style in 13 subsets so that a page fetches only the pieces it uses |
-| `lisnoti-monolithic.css` | the alternative stylesheet, one whole-font file a style |
-| `lisnoti-full.css` | the same stylesheet under its old name, kept so that existing links keep working |
-| `fonts/<version>/` | the WOFF2 files the stylesheets name |
-| `update-fonts.py` | writes the stylesheets and font files above from a release of the font |
-| `test.html` | a one-line check that the service stylesheet loads |
+| `index.html` | *Lisnoti* webpage |
+| `code/index.html` | *Lisnoti Code* webpage |
+| `assets/` | Shared styles and scripts, and the character list for the glyph explorer |
+| `lisnoti.css` | *Lisnoti* stylesheet &ndash; served in subsets |
+| `lisnoti-monolithic.css` | *Lisnoti* stylesheet &ndash; one monolithic font file per style |
+| `lisnoti-code.css` | *Lisnoti Code* stylesheet &ndash; served in subsets |
+| `lisnoti-code-monolithic.css` | *Lisnoti Code* stylesheet &ndash; one monolithic font file per style |
+| `fonts/<version>/`<br/> `fonts/code-<version>/` | The WOFF2 files referenced by the stylesheets |
+| `fonts/compare/` | Monospaced fonts used for comparison on the Lisnoti Code page (including licences) |
+| `vendor/temml/` | [Temml](https://temml.org), used to convert LaTeX to equations |
+| `lisnoti-full.css` (deprecated) | Older name for `lisnoti-monolithic.css` &ndash; will be removed in due course |
 
-## Updating the fonts
+## Font files
 
-After each release of the font, with [Lisnoti/Lisnoti](https://github.com/Lisnoti/Lisnoti)
-checked out beside this repository, run
+The Lisnoti and Lisnoti Code files in `fonts/` are copied from [the Lisnoti repo](https://github.com/Lisnoti/Lisnoti) &ndash; they're the same files.
 
-    python update-fonts.py
+The version names are included in the font paths, which means that
+- web pages linking to the stylesheets on this site will end up with the latest versions of the fonts, whereas
+- web pages that link direct to the fonts will stay on the versions specified in the paths used (just like if the fonts are downloaded and served direct).
 
-It needs `fontTools` (`pip install fonttools`). It copies the released WOFF2 files into
-`fonts/<version>/` and rewrites both stylesheets to point there.
+Old version folders will be retained for the lifetime of this repo.
 
-The version is in the path because GitHub Pages gives every file a ten-minute cache lifetime
-and cannot be configured to give a longer one. A new release therefore gets a new folder and
-a new stylesheet, and never new bytes at an old URL. Leave an old version folder in place
-until nothing links it: other sites may hold a cached copy of the old stylesheet.
-
-The site serves WOFF2 only. Every browser in use reads it.
+The site serves only WOFF2 files on the basis that they are compatible with all modern browsers.
 
 ## Licences
 
-The font files in `fonts/` are under the [SIL Open Font License 1.1](https://openfontlicense.org).
-Everything else here is under the MIT licence in `LICENSE`.
+Lisnoti and Lisnoti Code, in `fonts/`, are under the
+[SIL Open Font License 1.1](https://openfontlicense.org).
+
+The comparison fonts in
+`fonts/compare/` are under the same licence, with each font's copyright notice in its folder.
+
+[Temml](https://temml.org) is under the MIT licence in `vendor/temml/LICENSE`.
+
+Everything else here is under the MIT
+licence in [`LICENSE`](LICENSE).

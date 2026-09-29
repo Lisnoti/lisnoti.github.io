@@ -1,0 +1,986 @@
+/* lisnoti.com: shared by the Lisnoti page (body.theme-lisnoti) and the Lisnoti Code page
+   (body.theme-code). Lisnoti's colours start from the icon and the type card; Lisnoti Code's
+   are their complements, tuned for contrast. */
+
+/* ---- Fonts for the comparison on the Lisnoti Code page ---- */
+
+/* Each under its own name, so an installed copy is never used instead. Browsers fetch them
+   only when chosen. */
+@font-face { font-family: 'Compare JetBrains Mono'; font-weight: 400; src: url(/fonts/compare/jetbrains-mono/JetBrainsMono-Regular.woff2) format('woff2'); }
+@font-face { font-family: 'Compare JetBrains Mono'; font-weight: 700; src: url(/fonts/compare/jetbrains-mono/JetBrainsMono-Bold.woff2) format('woff2'); }
+@font-face { font-family: 'Compare Fira Code'; font-weight: 400; src: url(/fonts/compare/fira-code/FiraCode-Regular.woff2) format('woff2'); }
+@font-face { font-family: 'Compare Fira Code'; font-weight: 700; src: url(/fonts/compare/fira-code/FiraCode-Bold.woff2) format('woff2'); }
+@font-face { font-family: 'Compare Cascadia Code'; font-weight: 400; src: url(/fonts/compare/cascadia-code/CascadiaCode-Regular.woff2) format('woff2'); }
+@font-face { font-family: 'Compare Cascadia Code'; font-weight: 700; src: url(/fonts/compare/cascadia-code/CascadiaCode-Bold.woff2) format('woff2'); }
+@font-face { font-family: 'Compare Monaspace Neon'; font-weight: 400; src: url(/fonts/compare/monaspace-neon/MonaspaceNeon-Regular.woff2) format('woff2'); }
+@font-face { font-family: 'Compare Monaspace Neon'; font-weight: 700; src: url(/fonts/compare/monaspace-neon/MonaspaceNeon-Bold.woff2) format('woff2'); }
+@font-face { font-family: 'Compare Victor Mono'; font-weight: 400; src: url(/fonts/compare/victor-mono/VictorMono-Regular.woff2) format('woff2'); }
+@font-face { font-family: 'Compare Victor Mono'; font-weight: 700; src: url(/fonts/compare/victor-mono/VictorMono-Bold.woff2) format('woff2'); }
+/* Italics, for comments. Fira Code has none, so the browser slants its upright, as an editor would. */
+@font-face { font-family: 'Compare JetBrains Mono'; font-style: italic; font-weight: 400; src: url(/fonts/compare/jetbrains-mono/JetBrainsMono-Italic.woff2) format('woff2'); }
+@font-face { font-family: 'Compare Cascadia Code'; font-style: italic; font-weight: 400; src: url(/fonts/compare/cascadia-code/CascadiaCode-Italic.woff2) format('woff2'); }
+@font-face { font-family: 'Compare Monaspace Neon'; font-style: italic; font-weight: 400; src: url(/fonts/compare/monaspace-neon/MonaspaceNeon-Italic.woff2) format('woff2'); }
+@font-face { font-family: 'Compare Victor Mono'; font-style: italic; font-weight: 400; src: url(/fonts/compare/victor-mono/VictorMono-Italic.woff2) format('woff2'); }
+
+/* ---- Colours ---- */
+
+:root {
+	--paper: #ffffff;
+	--ink: #1d1b19;
+	--muted: #5f5850;
+	--line: #e9e4da;
+	--code-bg: #f6f2ea;
+	--chip-bg: #ffffff;
+	--shadow: 0 1px 2px rgb(60 40 20 / 8%), 0 4px 16px rgb(60 40 20 / 6%);
+	/* Each font's own colours, used by the switch on both pages: text, and the mid tint that
+	   marks a selected option everywhere. */
+	--lisnoti-colour: #843c13;
+	--code-colour: #135b84;
+	--lisnoti-selected: #f5dfa9;
+	--code-selected: #b4ddf1;
+	/* Text on a selected option: the tints stay light in dark mode too, so always dark. */
+	--selected-ink: #1d1b19;
+	/* The logo's frame and face, so it can sit on the dark paper too. */
+	--logo-frame: #e9eaeb;
+	--logo-face: #ffffff;
+	--warn: #b42318;
+	color-scheme: light dark;
+}
+
+.theme-lisnoti {
+	--band: #fbf3dc;
+	--soft: #f5e0a3;
+	--accent: #e06a29;
+	--deep: #843c13;
+	--selected: var(--lisnoti-selected);
+	--action: #c2531c;
+	--action-hover: #a94816;
+}
+
+.theme-code {
+	--band: #eaf4fb;
+	--soft: #a9d3ee;
+	--accent: #2a9fd8;
+	--deep: #135b84;
+	--selected: var(--code-selected);
+	--action: #1a74a6;
+	--action-hover: #16699a;
+	--line: #dde6ec;
+	--code-bg: #f2f6f9;
+	/* Syntax colours */
+	--syn-kw: #8a3fa8;
+	--syn-str: #2d7a36;
+	--syn-com: #6e7a83;
+	--syn-num: #b0521a;
+	--syn-fn: #135b84;
+	--syn-type: #1d7a70;
+}
+
+/* Three states, as on naxp.org: with nothing chosen the page follows the system; the
+   button in the top bar pins it light or dark by stamping data-theme on the root, and
+   'auto' removes the stamp. The dark set is written twice because it has to answer to
+   both selectors. Keep the two copies identical. */
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme="light"]) {
+		--paper: #16181c;
+		--ink: #eceef1;
+		--muted: #a9adb4;
+		--line: #34383f;
+		--code-bg: #25282e;
+		--chip-bg: #16181c;
+		--shadow: 0 1px 2px rgb(0 0 0 / 30%), 0 4px 16px rgb(0 0 0 / 25%);
+		--lisnoti-colour: #ffc46b;
+		--code-colour: #8fd0f5;
+		--lisnoti-selected: #f5dfa9;
+		--code-selected: #b4ddf1;
+		--warn: #ff8a80;
+	}
+
+	:root:not([data-theme="light"]) .theme-lisnoti {
+		--band: #1d2025;
+		--soft: #2a2e34;
+		--accent: #f28a4f;
+		--deep: #ffc46b;
+		--logo-frame: var(--line);
+		--logo-face: var(--code-bg);
+	}
+
+	:root:not([data-theme="light"]) .theme-code {
+		--paper: #12171b;
+		--ink: #e8eef2;
+		--muted: #9fb0bd;
+		--line: #2a3640;
+		--code-bg: #1b242c;
+		--chip-bg: #12171b;
+		--band: #172028;
+		--soft: #1f4a66;
+		--accent: #4fb6ea;
+		--deep: #8fd0f5;
+		--syn-kw: #d2a8ff;
+		--syn-str: #8fd694;
+		--syn-com: #8a98a3;
+		--syn-num: #f0a36b;
+		--syn-fn: #8fd0f5;
+		--syn-type: #72d4c8;
+		--logo-frame: var(--line);
+		--logo-face: var(--code-bg);
+	}
+}
+
+:root[data-theme="dark"] {
+	--paper: #16181c;
+	--ink: #eceef1;
+	--muted: #a9adb4;
+	--line: #34383f;
+	--code-bg: #25282e;
+	--chip-bg: #16181c;
+	--shadow: 0 1px 2px rgb(0 0 0 / 30%), 0 4px 16px rgb(0 0 0 / 25%);
+	--lisnoti-colour: #ffc46b;
+	--code-colour: #8fd0f5;
+	--lisnoti-selected: #f5dfa9;
+	--code-selected: #b4ddf1;
+	--warn: #ff8a80;
+}
+
+:root[data-theme="dark"] .theme-lisnoti {
+	--band: #1d2025;
+	--soft: #2a2e34;
+	--accent: #f28a4f;
+	--deep: #ffc46b;
+	--logo-frame: var(--line);
+	--logo-face: var(--code-bg);
+}
+
+:root[data-theme="dark"] .theme-code {
+	--paper: #12171b;
+	--ink: #e8eef2;
+	--muted: #9fb0bd;
+	--line: #2a3640;
+	--code-bg: #1b242c;
+	--chip-bg: #12171b;
+	--band: #172028;
+	--soft: #1f4a66;
+	--accent: #4fb6ea;
+	--deep: #8fd0f5;
+	--syn-kw: #d2a8ff;
+	--syn-str: #8fd694;
+	--syn-com: #8a98a3;
+	--syn-num: #f0a36b;
+	--syn-fn: #8fd0f5;
+	--syn-type: #72d4c8;
+	--logo-frame: var(--line);
+	--logo-face: var(--code-bg);
+}
+
+/* So that form controls, scrollbars and the like follow the choice too. */
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="dark"] { color-scheme: dark; }
+
+/* ---- Type sizes ----
+   Every size on both pages comes from this list. Body text is 18 px, so the others are
+   given in px as well, to avoid rem (16 px here) producing near-misses such as 18.4 px.
+   The headings (title and h2) scale with the window; the type tester and the big glyph in
+   the explorer are set on their own; inline code takes the size of the text around it; and
+   the equations' sub- and superscripts are sized by Temml. */
+:root {
+	--fs-specimen: 25.6px;  /* specimens, ligatures, glyph grid */
+	--fs-large: 20.8px;     /* opening lede, equations */
+	--fs-h3: 19.2px;        /* card and tile headings */
+	--fs-body: 18px;        /* running text, inputs, verdict */
+	--fs-small: 14.4px;     /* notes, buttons, top bar, tile text, tips, code panes and snippets */
+	--fs-label: 12.8px;     /* capitalised labels, copy buttons, equation source */
+}
+
+/* ---- Base ---- */
+
+/* Boxes have square corners; anything that can be pressed is a pill. */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-padding-top: 4.5rem; }
+
+@media (prefers-reduced-motion: no-preference) {
+	html { scroll-behavior: smooth; }
+}
+
+body {
+	margin: 0;
+	font-family: Lisnoti, sans-serif;
+	font-size: var(--fs-body);
+	line-height: 1.6;
+	color: var(--ink);
+	background: var(--paper);
+	-webkit-text-size-adjust: 100%;
+	text-size-adjust: 100%;
+}
+
+a { color: var(--deep); text-underline-offset: .15em; }
+/* Hover effects only where a pointer can hover: on a phone a tap would leave them stuck on. */
+@media (hover: hover) { a:hover { color: var(--accent); } }
+
+h1, h2, h3 { line-height: 1.2; margin: 0 0 .75rem; }
+h2 { font-size: clamp(1.9rem, 4vw, 2.6rem); }
+h3 { font-size: var(--fs-h3); }
+p { margin: 0 0 1rem; }
+
+code {
+	font-family: 'Lisnoti Code', Lisnoti, monospace;
+	/* The same size as the text around it: Lisnoti Code shares Lisnoti's x-height. */
+	font-size: 1em;
+	background: var(--code-bg);
+	padding: .05em .3em;
+}
+
+.small { font-size: var(--fs-small); color: var(--muted); }
+
+.wrap {
+	max-width: 1120px;
+	margin: 0 auto;
+	padding: 0 1.25rem;
+}
+
+main > section { padding: 4.5rem 0; }
+
+.band { background: var(--band); }
+
+.section-lede {
+	font-size: var(--fs-body);
+	color: var(--muted);
+	max-width: 44rem;
+	margin-bottom: 2rem;
+}
+
+
+.code-font { font-family: 'Lisnoti Code', Lisnoti, monospace; }
+
+/* ---- Top bar ---- */
+
+.topbar {
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	background: color-mix(in srgb, var(--paper) 88%, transparent);
+	backdrop-filter: blur(8px);
+	border-bottom: 1px solid var(--line);
+}
+
+.topbar-inner {
+	max-width: 1120px;
+	margin: 0 auto;
+	padding: .5rem 1.25rem;
+	display: flex;
+	align-items: center;
+	gap: .5rem 1rem;
+}
+
+.brand { display: flex; flex: none; }
+.brand svg { width: 30px; height: 30px; border-radius: 4px; display: block; }
+.brand .logo-frame { fill: var(--logo-frame); }
+.brand .logo-face { fill: var(--logo-face); }
+
+.font-switch {
+	display: flex;
+	flex: none;
+	border-radius: 999px;
+	background: var(--code-bg);
+	padding: 3px;
+	gap: 2px;
+}
+
+.font-switch a {
+	padding: .3rem .85rem;
+	border-radius: 999px;
+	text-decoration: none;
+	font-weight: 600;
+	font-size: var(--fs-small);
+	white-space: nowrap;
+	line-height: 1.3;
+}
+
+.font-switch .to-lisnoti { color: var(--lisnoti-colour); }
+.font-switch .to-code { color: var(--code-colour); font-family: 'Lisnoti Code', Lisnoti, monospace; }
+@media (hover: hover) { .font-switch a:hover { background: var(--paper); } }
+
+.font-switch .to-lisnoti[aria-current="page"] { background: var(--lisnoti-selected); color: var(--selected-ink); }
+.font-switch .to-code[aria-current="page"] { background: var(--code-selected); color: var(--selected-ink); }
+
+.topbar nav {
+	display: flex;
+	gap: .15rem;
+	overflow-x: auto;
+	scrollbar-width: none;
+	margin-left: auto;
+	min-width: 0;
+}
+
+.topbar nav a {
+	padding: .35rem .7rem;
+	border-radius: 999px;
+	color: var(--muted);
+	text-decoration: none;
+	white-space: nowrap;
+	font-size: var(--fs-small);
+}
+
+@media (hover: hover) { .topbar nav a:hover { color: var(--ink); background: var(--band); } }
+
+.topbar nav a.current {
+	color: var(--selected-ink);
+	background: var(--selected);
+}
+
+@media (max-width: 720px) {
+	/* On phones the bar keeps only the font switch and the light/dark button, so it stays
+	   one row. The GitHub button is hidden after its own rule, below; the footer links GitHub. */
+	.topbar-inner { flex-wrap: wrap; }
+	.brand { display: none; }
+	.topbar nav { order: 3; width: 100%; margin-left: 0; }
+}
+
+/* The GitHub link beside it. */
+.icon-link {
+	display: inline-flex;
+	flex: none;
+	border-radius: 999px;
+	color: var(--muted);
+	padding: .4rem;
+	line-height: 0;
+}
+
+@media (hover: hover) { .icon-link:hover { color: var(--ink); background: var(--band); } }
+.icon-link svg { width: 1.3em; height: 1.3em; fill: currentColor; }
+
+/* The light/dark button: hidden until the inline script marks the page .js. */
+.theme-button {
+	display: none;
+	flex: none;
+	font: inherit;
+	border: 0;
+	border-radius: 999px;
+	background: transparent;
+	color: var(--muted);
+	padding: .4rem;
+	cursor: pointer;
+	line-height: 0;
+}
+
+.js .theme-button { display: inline-flex; }
+@media (hover: hover) { .theme-button:hover { color: var(--ink); background: var(--band); } }
+.theme-button svg { width: 1.3em; height: 1.3em; fill: currentColor; }
+
+@media (max-width: 720px) {
+	.theme-button { margin-left: auto; }
+	.icon-link { display: none; }
+}
+
+/* ---- Buttons and chips ---- */
+
+.button {
+	display: inline-block;
+	padding: .6rem 1.2rem;
+	border-radius: 999px;
+	border: 1.5px solid var(--deep);
+	color: var(--deep);
+	background: transparent;
+	text-decoration: none;
+	font: inherit;
+	font-weight: 600;
+	line-height: 1.3;
+	cursor: pointer;
+}
+
+@media (hover: hover) { .button:hover { background: var(--band); color: var(--deep); } }
+
+/* Action buttons (get or download something): solid, with white text. */
+.button.action {
+	background: var(--action);
+	border-color: var(--action);
+	color: #ffffff;
+	font-weight: 700;
+}
+
+@media (hover: hover) { .button.action:hover { background: var(--action-hover); border-color: var(--action-hover); color: #ffffff; } }
+
+
+.chips { display: flex; flex-wrap: wrap; gap: .4rem; }
+
+.chip {
+	font: inherit;
+	font-size: var(--fs-small);
+	padding: .3rem .8rem;
+	border-radius: 999px;
+	border: 1px solid var(--line);
+	background: var(--chip-bg);
+	color: var(--ink);
+	cursor: pointer;
+}
+
+@media (hover: hover) { .chip:hover { border-color: var(--accent); } }
+
+/* A selected option, anywhere on the page: the mid tint. */
+.chip[aria-pressed="true"] {
+	background: var(--selected);
+	border-color: var(--selected);
+	color: var(--selected-ink);
+}
+
+button:focus-visible, a:focus-visible, textarea:focus-visible, input:focus-visible, summary:focus-visible {
+	outline: 2px solid var(--accent);
+	outline-offset: 2px;
+}
+
+/* ---- Opening ---- */
+
+.hero { padding-top: 3.5rem; }
+
+.title {
+	font-size: clamp(4.5rem, 14vw, 9rem);
+	line-height: 1;
+	letter-spacing: -.01em;
+	margin: 0 0 1.5rem;
+}
+
+.theme-code .title { font-family: 'Lisnoti Code', Lisnoti, monospace; }
+
+.lede { font-size: var(--fs-large); max-width: 46rem; }
+
+/* Body-size text in the opening keeps a reading width too. */
+.hero p, .hero ul { max-width: 46rem; }
+.hero ul { padding-left: 1.4rem; }
+.hero li { margin-bottom: .3rem; }
+/* Characters named in running text, in the specimen colour. */
+.eg { color: var(--deep); }
+
+.actions { display: flex; flex-wrap: wrap; gap: .6rem; margin: 1.75rem 0 1.25rem; }
+
+/* ---- Type tester ---- */
+
+.tester {
+	background: var(--paper);
+	box-shadow: var(--shadow);
+	overflow: hidden;
+}
+
+.toolbar {
+	display: flex;
+	flex-wrap: wrap;
+	gap: .75rem 1.5rem;
+	align-items: center;
+	padding: 1rem 1.25rem;
+	border-bottom: 1px solid var(--line);
+}
+
+.size { display: flex; align-items: center; gap: .5rem; font-size: var(--fs-small); color: var(--muted); }
+.size input { accent-color: var(--accent); width: 9rem; }
+.size output { min-width: 3.5rem; }
+
+.tester-text {
+	display: block;
+	width: 100%;
+	border: 0;
+	padding: 1.25rem 1.5rem;
+	resize: none;
+	overflow: hidden;
+	background: transparent;
+	color: var(--ink);
+	font-family: Lisnoti, sans-serif;
+	font-size: 16px;
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+.tester-text:focus-visible { outline: none; box-shadow: inset 0 0 0 2px var(--accent); }
+
+/* ---- Feature tiles ---- */
+
+.tiles {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	gap: 1rem;
+}
+
+.tile {
+	border: 1px solid var(--line);
+	padding: 1.25rem 1.25rem .5rem;
+	background: var(--paper);
+}
+
+.tile.wide { grid-column: 1 / -1; }
+
+/* The specimen under each heading sits in a light frame that hugs it. */
+.tile .specimen {
+	justify-self: start;
+	align-self: start;
+	max-width: 100%;
+	border: 1px solid var(--line);
+	padding: .3rem .75rem;
+}
+
+/* Each tile shares the row tracks of its neighbours, so headings line up across a row
+   however many lines the specimens above them take. */
+@supports (grid-template-rows: subgrid) {
+	.tile { display: grid; grid-row: span 3; grid-template-rows: subgrid; row-gap: 0; }
+}
+
+.tile p:not(.specimen) { color: var(--muted); font-size: var(--fs-small); }
+
+/* One size for every specimen and ligature on both pages, a little smaller on phones so
+   the widest (the arrows, the tree) fit their frames at 360 px. */
+:root { --specimen-size: var(--fs-specimen); }
+@media (max-width: 720px) { :root { --specimen-size: 1.4rem; } }
+
+.specimen {
+	font-size: var(--specimen-size);
+	line-height: 1.3;
+	margin-bottom: .75rem;
+	color: var(--deep);
+	overflow-wrap: anywhere;
+}
+
+/* Box-drawing lines reach from descender to ascender, so they join at the natural line height. */
+.specimen.block { white-space: pre; overflow-wrap: normal; overflow-x: auto; line-height: normal; }
+
+/* ---- Cards ---- */
+
+.pair, .ways {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: 1rem;
+	margin-bottom: 1rem;
+}
+
+.card {
+	background: var(--paper);
+	border: 1px solid var(--line);
+	padding: 1.25rem 1.25rem .25rem;
+}
+
+.card ol, .card ul { padding-left: 1.3rem; }
+.card li { margin-bottom: .5rem; }
+
+.snippet {
+	margin: 0 0 1rem;
+	background: var(--code-bg);
+	padding: .75rem 1rem;
+	overflow-x: auto;
+	font-size: var(--fs-small);
+	line-height: 1.5;
+}
+
+.snippet code { background: none; padding: 0; font-size: inherit; }
+
+/* Short snippets wrap rather than scroll, so nothing hides under the copy button. */
+.card .snippet { white-space: pre-wrap; overflow-wrap: anywhere; }
+
+/* Tips, such as the LuaLaTeX and Word cards under the equations: smaller text, but the
+   snippets keep their size, which is set in rem. */
+.tips .card { font-size: var(--fs-small); }
+.tips .card h3 { font-size: var(--fs-body); }
+
+.copyable { position: relative; }
+.copyable .snippet { padding-right: 4.5rem; }
+
+.copy {
+	position: absolute;
+	top: .4rem;
+	right: .4rem;
+	font: inherit;
+	font-size: var(--fs-label);
+	padding: .2rem .6rem;
+	border-radius: 999px;
+	border: 1px solid var(--line);
+	background: var(--paper);
+	color: var(--ink);
+	cursor: pointer;
+}
+
+@media (hover: hover) { .copy:hover { border-color: var(--accent); } }
+
+/* ---- Lisnoti Code: WebKit note ---- */
+
+.webkit-note {
+	border-left: 4px solid var(--accent);
+	background: var(--paper);
+	padding: 1rem 1.25rem .25rem;
+	margin: 0 0 1.5rem;
+}
+
+/* ---- Lisnoti Code: the comparison ---- */
+
+.compare {
+	background: var(--paper);
+	box-shadow: var(--shadow);
+	padding: 1.25rem;
+}
+
+.compare-top {
+	display: flex;
+	flex-wrap: wrap;
+	gap: .75rem 1.5rem;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 1rem;
+}
+
+.compare-fonts {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: .5rem 1rem;
+	margin-bottom: 1rem;
+	padding-top: 1rem;
+	border-top: 1px solid var(--line);
+}
+
+.compare-with { font-size: var(--fs-small); color: var(--muted); }
+
+.panes {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	column-gap: 1rem;
+}
+
+@media (max-width: 860px) {
+	.panes { grid-template-columns: 1fr; }
+}
+
+.pane {
+	min-width: 0;
+	display: grid;
+	grid-row: span 2;
+	grid-template-rows: subgrid;
+	row-gap: .6rem;
+}
+
+.pane-label { font-weight: 600; color: var(--deep); margin: 0; }
+
+.pane-text {
+	margin: 0;
+	background: var(--paper);
+	border: 1px solid var(--line);
+	padding: 1rem;
+	font-size: var(--fs-small);
+	line-height: 1.55;
+	white-space: pre;
+	overflow: auto;
+	min-height: 16rem;
+	color: var(--ink);
+	tab-size: 4;
+}
+
+/* The editor: a transparent text box over a highlighted copy of its text. */
+.editor { position: relative; min-width: 0; }
+.editor .pane-text { overflow: hidden; }
+
+.editor textarea.pane-text {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	resize: none;
+	background: transparent;
+	color: transparent;
+	caret-color: var(--ink);
+}
+
+.editor textarea.pane-text::selection { background: color-mix(in srgb, var(--accent) 35%, transparent); color: transparent; }
+
+/* Trees join only at each font's natural line height. */
+.compare.tight .pane-text { line-height: normal; }
+
+.verdict {
+	margin: 1rem 0 0;
+	padding: .8rem 1rem;
+	background: var(--band);
+	font-size: var(--fs-body);
+}
+
+.verdict strong { color: var(--deep); }
+.verdict-note { display: block; margin-top: .4rem; font-size: var(--fs-small); color: var(--muted); }
+
+/* A character the comparison font lacks, which the browser took from another font. */
+.hl .borrowed { outline: 2px solid var(--warn); outline-offset: 1px; }
+
+/* Syntax colours, applied identically to both sides. */
+.hl .kw { color: var(--syn-kw); }
+.hl .str { color: var(--syn-str); }
+.hl .com { color: var(--syn-com); font-style: italic; }
+.hl .num { color: var(--syn-num); }
+.hl .fn { color: var(--syn-fn); }
+.hl .type { color: var(--syn-type); }
+
+/* ---- Lisnoti Code: ligatures, one row a group ---- */
+
+.ligs { margin: 0 0 .75rem; }
+
+.lig-row {
+	display: grid;
+	grid-template-columns: 6.5rem 1fr;
+	align-items: baseline;
+	gap: .5rem;
+	padding: .35rem 0;
+	border-top: 1px solid var(--line);
+}
+
+.lig-row:first-child { border-top: 0; }
+
+.lig-label { font-size: var(--fs-label); text-transform: uppercase; letter-spacing: .06em; color: var(--deep); font-weight: 600; }
+
+.lig-items { display: flex; flex-wrap: wrap; gap: .3rem 1.6rem; }
+
+.lig {
+	display: inline-flex;
+	gap: .55rem;
+	align-items: baseline;
+	font-family: 'Lisnoti Code', Lisnoti, monospace;
+	font-size: var(--specimen-size);
+	line-height: 1.4;
+}
+
+.lig .off { font-variant-ligatures: no-common-ligatures; color: var(--muted); }
+.lig .on { color: var(--deep); border: 1px solid var(--line); padding: 0 .35rem; }
+
+/* ---- FAQ ---- */
+
+.faq details {
+	background: var(--paper);
+	border: 1px solid var(--line);
+	padding: .75rem 1.1rem;
+	margin-bottom: .6rem;
+}
+
+.faq summary { cursor: pointer; font-weight: 600; }
+.faq details[open] summary { margin-bottom: .6rem; }
+.faq details p, .faq details ul { margin-bottom: .6rem; }
+
+/* ---- Equations ---- */
+
+/* From 2.003, Lisnoti's latin subset carries the MATH data for the large operators and
+   stretchy brackets, so equations work straight from lisnoti.css. */
+math { font-family: Lisnoti, math; }
+
+/* Temml sets \mathscr and the prime in its own small font; Lisnoti has both. */
+math .mathscr, mo.tml-prime { font-family: inherit; }
+
+.equations {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+	gap: 1rem;
+	margin-bottom: 1.5rem;
+}
+
+.equation {
+	background: var(--paper);
+	border: 1px solid var(--line);
+	padding: 1rem 1.1rem .8rem;
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+}
+
+.equation h3 {
+	font-size: var(--fs-label);
+	text-transform: uppercase;
+	letter-spacing: .06em;
+	color: var(--deep);
+	margin-bottom: .25rem;
+}
+
+.equation .out {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: var(--fs-large);
+	min-height: 5rem;
+	overflow-x: auto;
+	overflow-y: hidden;
+}
+
+.equation .src {
+	margin: .6rem 0 0;
+	font-family: 'Lisnoti Code', Lisnoti, monospace;
+	font-size: var(--fs-label);
+	color: var(--muted);
+	background: var(--code-bg);
+	padding: .4rem .6rem;
+	white-space: pre-wrap;
+	overflow-wrap: anywhere;
+}
+
+/* No panel of its own: the section is already the band colour, so the input and the
+   output run the full width, level with the equation cards above. */
+.try-math {
+	margin-bottom: 2rem;
+}
+
+.try-math textarea {
+	display: block;
+	width: 100%;
+	margin-top: .5rem;
+	min-height: 4.5rem;
+	resize: none;
+	overflow: hidden;
+	font: var(--fs-body) 'Lisnoti Code', Lisnoti, monospace;
+	padding: .6rem .8rem;
+	border: 1px solid var(--line);
+	background: var(--paper);
+	color: var(--ink);
+}
+
+.tex-output {
+	background: var(--paper);
+	margin-top: .75rem;
+	padding: 1rem;
+	font-size: var(--fs-large);
+	min-height: 4rem;
+	overflow-x: auto;
+}
+
+.tex-error { color: var(--warn); font-size: var(--fs-small); margin: .5rem 0 0; min-height: 1em; }
+
+/* ---- Glyph explorer ---- */
+
+.explorer {
+	background: var(--paper);
+	box-shadow: var(--shadow);
+	padding: 1.25rem;
+}
+
+.groups { margin-bottom: 1rem; }
+
+.explorer-body {
+	display: grid;
+	grid-template-columns: 1fr 260px;
+	gap: 1.25rem;
+	align-items: start;
+}
+
+@media (max-width: 760px) {
+	.explorer-body { grid-template-columns: 1fr; }
+	.glyph-detail { order: -1; }
+}
+
+.glyph-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(3rem, 1fr));
+	gap: 2px;
+	max-height: 30rem;
+	overflow-y: auto;
+	padding: 2px;
+}
+
+.glyph-grid button {
+	font: inherit;
+	font-size: var(--fs-specimen);
+	line-height: 1;
+	aspect-ratio: 1;
+	border: 0;
+	background: var(--code-bg);
+	color: var(--ink);
+	cursor: pointer;
+	padding: 0;
+}
+
+.glyph-grid button[aria-current="true"] {
+	background: var(--selected);
+	color: var(--selected-ink);
+}
+
+[data-font="code"] .glyph-grid button,
+[data-font="code"] .glyph-big { font-family: 'Lisnoti Code', Lisnoti, monospace; }
+
+.glyph-detail {
+	position: sticky;
+	top: 5rem;
+	text-align: center;
+	border: 1px solid var(--line);
+	padding: 1rem;
+}
+
+.glyph-big {
+	font-size: 8rem;
+	line-height: 1.25;
+	min-height: 10rem;
+	color: var(--deep);
+	background: linear-gradient(var(--line), var(--line)) 0 72% / 100% 1px no-repeat;
+}
+
+.glyph-name { font-weight: 600; margin: .5rem 0 .2rem; min-height: 1.6em; }
+.glyph-cp { font-family: 'Lisnoti Code', Lisnoti, monospace; color: var(--muted); margin: 0; }
+
+/* ---- Footer ---- */
+
+.footer {
+	border-top: 4px solid var(--accent);
+	background: var(--band);
+	padding: 2.5rem 0 2rem;
+}
+
+/* Keep short inline code whole inside the narrow feature tiles. */
+.tile code { white-space: nowrap; }
+
+/* ---- Phones ---- */
+
+/* The dropdowns that stand in for groups of option buttons on narrow screens. */
+.chip-menu {
+	display: none;
+	align-items: center;
+	gap: .5rem;
+	font-size: var(--fs-small);
+	color: var(--muted);
+}
+
+.chip-menu select {
+	font: inherit;
+	font-size: var(--fs-body);
+	color: var(--ink);
+	background: var(--chip-bg);
+	border: 1px solid var(--line);
+	border-radius: 999px;
+	padding: .5rem 2rem .5rem .75rem;
+	min-height: 44px;
+	max-width: 100%;
+}
+
+@media (max-width: 720px) {
+	/* The top bar keeps only the font switch and the two buttons. */
+	.topbar nav { display: none; }
+
+	.chips.has-menu { display: none; }
+	.chip-menu { display: inline-flex; }
+
+	/* Remaining buttons a little smaller, at full tap height. */
+	.chip { padding: .3rem .7rem; min-height: 40px; }
+	.toolbar, .compare-top, .compare-fonts { gap: .6rem 1rem; }
+}
+
+@media (max-width: 760px) {
+	/* The glyph detail becomes a strip above the grid that scrolls with the page. */
+	.glyph-detail {
+		position: static;
+		display: grid;
+		grid-template-columns: 5.5rem 1fr;
+		grid-template-rows: auto auto;
+		align-items: center;
+		column-gap: 1rem;
+		text-align: left;
+		padding: .5rem 1rem;
+	}
+
+	.glyph-big {
+		grid-row: 1 / span 2;
+		font-size: 3.5rem;
+		min-height: 0;
+		line-height: 1.3;
+		text-align: center;
+	}
+
+	.glyph-name { margin: 0; align-self: end; }
+	.glyph-cp { align-self: start; }
+	.glyph-grid { max-height: 22rem; }
+}
+
+/* Room between the group dropdown and the character strip. */
+.explorer .chip-menu { margin-bottom: .75rem; }
