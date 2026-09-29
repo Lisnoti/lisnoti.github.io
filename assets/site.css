@@ -187,7 +187,7 @@
 	--fs-large: 20.8px;     /* opening lede, equations */
 	--fs-h3: 19.2px;        /* card and tile headings */
 	--fs-body: 18px;        /* running text, inputs, verdict */
-	--fs-small: 14.4px;     /* notes, buttons, top bar, tile text, tips, code panes and snippets */
+	--fs-small: 14.4px;     /* notes, buttons, top bar, tile text, code panes and snippets */
 	--fs-label: 12.8px;     /* capitalised labels, copy buttons, equation source */
 }
 
@@ -578,10 +578,6 @@ button:focus-visible, a:focus-visible, textarea:focus-visible, input:focus-visib
 /* Short snippets wrap rather than scroll, so nothing hides under the copy button. */
 .card .snippet { white-space: pre-wrap; overflow-wrap: anywhere; }
 
-/* Tips, such as the LuaLaTeX and Word cards under the equations: smaller text, but the
-   snippets keep their size, which is set in rem. */
-.tips .card { font-size: var(--fs-small); }
-.tips .card h3 { font-size: var(--fs-body); }
 
 .copyable { position: relative; }
 .copyable .snippet { padding-right: 4.5rem; }
@@ -830,8 +826,14 @@ math .mathscr, mo.tml-prime { font-family: inherit; }
 /* No panel of its own: the section is already the band colour, so the input and the
    output run the full width, level with the equation cards above. */
 .try-math {
-	margin-bottom: 2rem;
+	margin-bottom: 1.5rem;
 }
+
+/* The LuaLaTeX set-up under the LaTeX box: its heading matches 'Try your own LaTeX', and its
+   text the small note on Temml below it. */
+.latex-tip { margin-bottom: 1.5rem; }
+.latex-tip h3 { font-size: var(--fs-body); margin: 0 0 .5rem; }
+.latex-tip .small { margin-bottom: .75rem; }
 
 .try-math textarea {
 	display: block;
@@ -856,7 +858,7 @@ math .mathscr, mo.tml-prime { font-family: inherit; }
 	overflow-x: auto;
 }
 
-.tex-error { color: var(--warn); font-size: var(--fs-small); margin: .5rem 0 0; min-height: 1em; }
+.tex-output.has-error { color: var(--warn); font-size: var(--fs-small); }
 
 /* ---- Glyph explorer ---- */
 

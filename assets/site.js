@@ -252,14 +252,19 @@ window.addEventListener('DOMContentLoaded', function equations() {
 
 	const input = $('#tex-input');
 	const output = $('#tex-output');
-	const error = $('#tex-error');
+	// A LaTeX error replaces the equation in the output box, so no space is kept for it. The
+	// box keeps the height it had, so the page does not jump while an equation is half typed.
 	const update = () => {
 		if (!hasTemml) return;
+		const height = output.offsetHeight;   // measured first: Temml empties the box before it fails
 		try {
 			temml.render(input.value, output, { displayMode: true, throwOnError: true });
-			error.textContent = '';
+			output.classList.remove('has-error');
+			output.style.minHeight = '';
 		} catch (e) {
-			error.textContent = e.message;
+			if (!output.classList.contains('has-error')) output.style.minHeight = height + 'px';
+			output.textContent = e.message;
+			output.classList.add('has-error');
 		}
 	};
 	// The box grows and shrinks with its text, as the type tester's does. Its border is
