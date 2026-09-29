@@ -19,7 +19,7 @@ try {
 <link rel="stylesheet" href="/lisnoti.css">
 <link rel="stylesheet" href="/lisnoti-code.css">
 <link rel="stylesheet" href="/vendor/temml/Temml-Local.css">
-<link rel="stylesheet" href="/assets/site.css?v=20260929i">
+<link rel="stylesheet" href="/assets/site.css?v=20260929n">
 </head>
 <body class="theme-lisnoti">
 
@@ -168,21 +168,16 @@ try {
 			<label for="tex-input"><strong>Try your own LaTeX</strong></label>
 			<textarea id="tex-input" spellcheck="false" autocorrect="off" autocapitalize="off" autocomplete="off">\mathrm{P}(A \mid B) = \frac{\mathrm{P}(B \mid A)\,\mathrm{P}(A)}{\mathrm{P}(B)}</textarea>
 			<div class="tex-output" id="tex-output"></div>
-			<p class="tex-error" id="tex-error" aria-live="polite"></p>
 		</div>
 
-		<div class="pair tips">
-			<article class="card">
-				<h3>LuaLaTeX</h3>
-				<p>With Lisnoti installed, <code>unicode-math</code> loads it as the math font. The second line gives <code>\mathcal</code> the chancery capitals.</p>
-				<pre class="snippet"><code>\usepackage{unicode-math}
+		<div class="latex-tip">
+			<h3>LuaLaTeX</h3>
+			<p class="small">With Lisnoti installed, use the following at the start of your LaTeX document to set the math font to Lisnoti. The last line ensures <code>\mathcal</code> produces the correct (chancery) capitals.</p>
+			<pre class="snippet"><code>\usepackage{unicode-math}
+\setmainfont{Lisnoti}
 \setmathfont{Lisnoti}
 \setmathfont{Lisnoti}[range=\mathcal, StylisticSet=1]</code></pre>
-			</article>
-			<article class="card" id="equations-in-microsoft-word-on-windows">
-				<h3>Word on Windows</h3>
-				<p>Choose Lisnoti as the equation font.</p>
-			</article>
+			<p class="small">The second line of the snippet sets the main font to Lisnoti &ndash; delete the line if you don't want that.</p>
 		</div>
 		<p class="small">
 			The equations on this page are converted by <a href="https://temml.org/">Temml</a>, a
@@ -281,6 +276,6 @@ try {
 </footer>
 
 <script src="/vendor/temml/temml.min.js" defer></script>
-<script src="/assets/site.js?v=20260929i" defer></script>
+<script src="/assets/site.js?v=20260929n" defer></script>
 </body>
 </html>
