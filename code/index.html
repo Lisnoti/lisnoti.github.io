@@ -68,7 +68,7 @@ try {
 			<li><span class="eg">Il1</span> and <span class="eg">O0</span> need to be clearly distinguishable.</li>
 			<li>Programming languages use hyphen as a minus sign (<span class="eg">−</span>), but it looks like short dash (<span class="eg">-</span>) in most fonts.</li>
 			<li>Proportional fonts have narrow spaces that make indentation tight and errors hard to spot.</li>
-			<li>Ligatures make ASCII code combinations such as <span class="eg">&gt;=</span> clearer by changing their appearance to <span class="eg code-font">&gt;=</span>.</li>
+			<li>Ligatures make multi-character operators like <span class="eg">&gt;=</span> or <span class="eg">|&gt;</span> clearer by drawing them as single symbols, <span class="eg code-font">&gt;=</span> or <span class="eg code-font">|&gt;</span>.</li>
 		</ul>
 		<p>Lisnoti Code addresses all of these issues. Try it out below.</p>
 		<div class="actions">
@@ -198,37 +198,45 @@ try {
 		<h2>FAQ</h2>
 		<div class="faq">
 			<details>
-				<summary>Aren't monospaced fonts simply better for code?</summary>
+				<summary>Aren't monospaced fonts better for code?</summary>
 				<p>
 					Mostly they are just familiar. Many objections to proportional fonts come down to
-					people being used to monospace. A lot of coders aren't even aware that most
-					editors and IDEs have excellent support for proportional fonts. Try one for a
-					week before deciding.
+					people simply being used to monospace and unable to imagine anything else. A lot of
+					coders aren't even aware that most editors and IDEs have excellent support for
+					proportional fonts.
 				</p>
-			</details>
-			<details>
-				<summary>What about code that lines things up in columns?</summary>
 				<p>
-					It won't line up. Hanging comments, tables drawn with spaces and <code>=</code>
-					signs padded into a column all assume every reader has a monospaced font. That
-					habit is arguably brittle: change one line and its neighbours need re-padding,
-					which clutters every diff.
+					Why not try Lisnoti Code for a week before deciding? (But do read the other FAQs
+					first.)
 				</p>
 			</details>
 			<details>
 				<summary>Does indentation still work?</summary>
 				<p>
-					Yes. Indentation lines up with itself, because every line indents with the same
-					characters. Runs of spaces are wide, so each level is easy to see, while a single
-					space between words stays narrow.
+					Yes. Indentation lines up because every line indents with the same characters.
+					Lisnoti Code helps by making runs of spaces wide so that each level is easy to see,
+					while using normal spaces between words for readability.
+				</p>
+			</details>
+			<details>
+				<summary>What about code that aligns text in columns?</summary>
+				<p>
+					Trying to align columns in a proportional font doesn't work. But that's arguably a
+					brittle way of writing code &ndash; a one-line change can require re-padding other
+					lines, which is diff-unfriendly. Many coding standards discourage aligning trailing
+					comments and aligning at <code>=</code> signs for this reason.
 				</p>
 			</details>
 			<details>
 				<summary>Why have math symbols in a coding font?</summary>
 				<p>
 					Math and other symbols turn up in documentation all the time. And in Julia they are
-					actual code. If the font lacks a character, the editor shows a replacement box or
-					borrows the character from another font, which rarely matches.
+					actual code.
+				</p>
+				<p>
+					When a character is missing from a font, editors either show a meaningless
+					replacement box or borrow the missing character from another font, which rarely
+					matches. With Lisnoti Code you're unlikely to have this problem.
 				</p>
 			</details>
 			<details>
@@ -245,7 +253,8 @@ try {
 				</p>
 				<p>
 					Safari, and every browser on an iPhone or iPad, cannot apply the spacing rule, so
-					Lisnoti Code's web stylesheet switches it off there.
+					Lisnoti Code's web stylesheet switches it off there (which makes all spaces
+					moderately wide).
 				</p>
 			</details>
 			<details>
