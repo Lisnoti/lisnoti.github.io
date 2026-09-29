@@ -144,9 +144,9 @@ $$('.chips[data-menu]').forEach(group => {
 			'W. B. Yeats, ‘The Second Coming’ (1920)',
 		].join('\n'),
 		math: [
+			'(For proper math typesetting use LaTeX – see the ‘Equations’ section below.)',
 			'∀x ∈ ℝ: x² ≥ 0',
 			'∑ᵢ₌₁ⁿ i = n(n + 1)/2',
-			'E² = (pc)² + (mc²)²',
 			't′ = t / √(1 − v²/c²)',
 			'∮ E · dA = Q / ε₀',
 			'äₓ = ∑ₜ vᵗ ₜpₓ',
