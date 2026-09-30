@@ -42,7 +42,7 @@ See [the Lisnoti](https://lisnoti.com/#using-lisnoti-for-websites) or [the Lisno
 | `fonts/<version>/`<br/> `fonts/code-<version>/` | The WOFF2 files referenced by the stylesheets |
 | `fonts/compare/` | Monospaced fonts used for comparison on the Lisnoti Code page (including licences) |
 | `vendor/temml/` | [Temml](https://temml.org), used to convert LaTeX to equations |
-| `images/` | Type cards for *Lisnoti* and *Lisnoti Code* (`lisnoti-card.svg`, `lisnoti-code-card.svg`) and the webpages' link-preview images for social media and chat apps |
+| `images/` | Type cards for *Lisnoti* and *Lisnoti Code* (`lisnoti-card.svg`, `lisnoti-code-card.svg`), the webpages' icons (`lisnoti-logo.svg`, `lisnoti-code-logo.svg`) and their link-preview images for social media and chat apps |
 | `sitemap.xml` | The list of pages for search engines |
 | `lisnoti-full.css` (deprecated) | Older name for `lisnoti-monolithic.css` &ndash; will be removed in due course |
 
