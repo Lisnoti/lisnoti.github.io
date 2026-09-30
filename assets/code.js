@@ -131,10 +131,10 @@ public record Portfolio(IEnumerable<Policy> Policies)
 `# Newton's method, written the way it looks on paper
 function newton(f, f′, x₀; tol = 1e-12, maxiter = 50)
     x = x₀
-    for _ in 1:maxiter
+    for _ ∈ 1:maxiter
         Δx = f(x) / f′(x)
         x -= Δx
-        abs(Δx) ≤ tol && return x
+        (abs ∘ f)(x) <= tol && return x
     end
     error("Newton's method did not converge in $maxiter steps")
 end
@@ -295,17 +295,24 @@ function render(text, langName) {
 		jetbrains: { name: 'JetBrains Mono', family: "'Compare JetBrains Mono'", ligaturesOff: 'none' },
 		fira: { name: 'Fira Code', family: "'Compare Fira Code'", ligaturesOff: 'none' },
 		cascadia: { name: 'Cascadia Code', family: "'Compare Cascadia Code'", ligaturesOff: 'none' },
-		// Monaspace's ligatures are in liga; its calt is texture healing, which stays on.
-		monaspace: { name: 'Monaspace Neon', family: "'Compare Monaspace Neon'", ligaturesOff: 'no-common-ligatures' },
+		// Monaspace's code ligatures are in stylistic sets ss01 to ss10, which are off unless
+		// asked for, so they are switched on with the ligatures. Its calt is texture healing,
+		// which stays on either way.
+		monaspace: { name: 'Monaspace Neon', family: "'Compare Monaspace Neon'", ligaturesOff: 'no-common-ligatures',
+			ligaturesOn: '"ss01", "ss02", "ss03", "ss04", "ss05", "ss06", "ss07", "ss08", "ss09", "ss10"' },
 		// Victor Mono's ligatures are in calt, like JetBrains Mono's.
 		victor: { name: 'Victor Mono', family: "'Compare Victor Mono'", ligaturesOff: 'none' },
+		// JuliaMono's arrows and pipes are in calt, like JetBrains Mono's. It covers over 11,000
+		// characters, so its files are about a megabyte each and take a while on a slow line.
+		juliamono: { name: 'JuliaMono', family: "'Compare JuliaMono'", ligaturesOff: 'none',
+			loading: 'Its files are large because it covers so many characters.' },
 		system: { name: 'your monospace font', family: 'monospace, monospace', ligaturesOff: 'none' },
 	};
 
 	const input = $('#left-input');
 	const leftHl = $('#left-hl');
 	const rightHl = $('#right-hl');
-	const state = { example: 'javascript', right: 'jetbrains', ligatures: true };
+	const state = { example: 'javascript', right: 'fira', ligatures: true };
 	let latest = 0;
 	let timer = 0;
 
@@ -314,7 +321,9 @@ function render(text, langName) {
 		const left = state.ligatures ? 'normal' : 'no-common-ligatures';
 		input.style.fontVariantLigatures = left;
 		leftHl.style.fontVariantLigatures = left;
-		rightHl.style.fontVariantLigatures = state.ligatures ? 'normal' : right[state.right].ligaturesOff;
+		const r = right[state.right];
+		rightHl.style.fontVariantLigatures = state.ligatures ? 'normal' : r.ligaturesOff;
+		rightHl.style.fontFeatureSettings = state.ligatures && r.ligaturesOn ? r.ligaturesOn : 'normal';
 	}
 
 	function paint() {
@@ -481,7 +490,7 @@ function render(text, langName) {
 		const r = right[name];
 		$('#right-label').textContent = label;
 		if (name !== 'system') {
-			rightHl.dataset.loading = `Loading ${label}…`;
+			rightHl.dataset.loading = `Loading ${label}…` + (r.loading ? ` ${r.loading}` : '');
 			rightHl.classList.add('loading');
 			$('#verdict').textContent = '';
 			try {
@@ -503,6 +512,7 @@ function render(text, langName) {
 	ligaButton.addEventListener('click', () => {
 		state.ligatures = !state.ligatures;
 		ligaButton.setAttribute('aria-pressed', String(state.ligatures));
+		$('.liga-mark', ligaButton).textContent = state.ligatures ? '✔' : '✗';
 		applyLigatures();
 		measure();
 	});

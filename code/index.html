@@ -18,7 +18,7 @@ try {
 <link rel="icon" type="image/svg+xml" href="/Lisnoti-Code-logo.svg">
 <link rel="stylesheet" href="/lisnoti.css">
 <link rel="stylesheet" href="/lisnoti-code.css">
-<link rel="stylesheet" href="/assets/site.css?v=20260929r">
+<link rel="stylesheet" href="/assets/site.css?v=20260930g">
 </head>
 <body class="theme-code">
 
@@ -56,8 +56,9 @@ try {
 		<h1 class="title">Lisnoti Code</h1>
 		<p>Lisnoti Code is a <em>proportional</em> font for coding.</p>
 		<p>
-			The case for using proportional fonts for code comes down to readability and
-			efficiency. It has been well made by
+			The case for using proportional fonts for code comes down to efficiency &ndash; they're
+			faster and easier to read, and they make better use of space. It has been well made by
+			<a href="https://www.nichesoftware.co.nz/2016/01/24/why-monospaced-fonts.html">Bevan Arps</a>,
 			<a href="https://storck.io/posts/proportional-programming-code-fonts/">Martĳn Storck</a>,
 			<a href="https://nelsonslog.wordpress.com/2021/09/12/proportional-fonts-and-yapf-vs-black/">Nelson Minar</a>
 			and <a href="https://input.djr.com/info/">David Jonathan Ross</a> (and I've had a go
@@ -106,19 +107,20 @@ try {
 					<button type="button" class="chip" data-example="javascript" aria-pressed="true">JavaScript</button>
 					<button type="button" class="chip" data-example="python" aria-pressed="false">Python</button>
 					<button type="button" class="chip" data-example="r" aria-pressed="false">R</button>
+					<button type="button" class="chip" data-example="julia" aria-pressed="false">Julia</button>
 					<button type="button" class="chip" data-example="cpp" aria-pressed="false">C++</button>
 					<button type="button" class="chip" data-example="csharp" aria-pressed="false">C#</button>
-					<button type="button" class="chip" data-example="julia" aria-pressed="false">Julia</button>
 					<button type="button" class="chip" data-example="tree" aria-pressed="false">Trees</button>
 				</div>
-				<button type="button" class="chip" id="liga-button" aria-pressed="true">Use ligatures</button>
+				<button type="button" class="chip" id="liga-button" aria-pressed="true"><span class="liga-mark" aria-hidden="true">✔</span> Ligatures</button>
 			</div>
 			<div class="compare-fonts">
-				<span class="compare-with">Compare with</span>
+				<span class="compare-with">Compare</span>
 				<div class="chips" role="group" aria-label="Monospaced font" data-menu="">
-					<button type="button" class="chip" data-right="jetbrains" aria-pressed="true">JetBrains Mono</button>
-					<button type="button" class="chip" data-right="fira" aria-pressed="false">Fira Code</button>
+					<button type="button" class="chip" data-right="fira" aria-pressed="true">Fira Code</button>
 					<button type="button" class="chip" data-right="cascadia" aria-pressed="false">Cascadia Code</button>
+					<button type="button" class="chip" data-right="juliamono" aria-pressed="false">JuliaMono</button>
+					<button type="button" class="chip" data-right="jetbrains" aria-pressed="false">JetBrains Mono</button>
 					<button type="button" class="chip" data-right="monaspace" aria-pressed="false">Monaspace Neon</button>
 					<button type="button" class="chip" data-right="victor" aria-pressed="false">Victor Mono</button>
 					<button type="button" class="chip" data-right="system" aria-pressed="false">Your monospace</button>
@@ -133,7 +135,7 @@ try {
 					</div>
 				</div>
 				<div class="pane">
-					<p class="pane-label" id="right-label">JetBrains Mono</p>
+					<p class="pane-label" id="right-label">Fira Code</p>
 					<pre class="pane-text hl" id="right-hl"></pre>
 				</div>
 			</div>
@@ -200,27 +202,28 @@ try {
 			<details>
 				<summary>Aren't monospaced fonts better for code?</summary>
 				<p>
-					Mostly they are just familiar. Many objections to proportional fonts come down to
-					people simply being used to monospace and unable to imagine anything else.
+					Mostly they are just familiar. Many (not all) objections to proportional fonts boil
+					down to people simply being used to monospace for coding and misconceptions about
+					proportional fonts.
 				</p>
-				<p>Many code editors and IDEs have excellent support for proportional fonts.</p>
+				<p>Proportional fonts are easier to read, make better use of space and have excellent support in most code editors and IDEs.</p>
 				<p>Why not try Lisnoti Code for a week before deciding? (But do read the other FAQs first.)</p>
 			</details>
 			<details>
 				<summary>Does indentation still work?</summary>
 				<p>
-					Yes. Indentation lines up because every line indents with the same characters.
-					Lisnoti Code helps by making runs of spaces wide so that each level is easy to see,
-					while using normal spaces between words for readability.
+					Yes, of course it does &ndash; indentations line up because indents use the same
+					characters. Lisnoti Code helps by making runs of spaces wide so that each level is
+					easy to see, while using normal spaces between words for readability.
 				</p>
 			</details>
 			<details>
 				<summary>What about code that aligns text in columns?</summary>
 				<p>
 					Trying to align columns in a proportional font doesn't work. But that's arguably a
-					brittle way of writing code &ndash; a one-line change can require re-padding other
-					lines, which is diff-unfriendly. Many coding standards discourage aligning trailing
-					comments and aligning at <code>=</code> signs for this reason.
+					brittle way of writing code in any case &ndash; a one-line change can require repadding
+					other lines, which is diff-unfriendly and why many coding standards discourage aligning
+					trailing comments and aligning at <code>=</code> signs.
 				</p>
 			</details>
 			<details>
@@ -260,9 +263,9 @@ try {
 					writing assembly or drawing ASCII tables and art.
 				</p>
 				<p>
-					The <a href="#get">VS Code settings below</a> set <code>terminal.integrated.fontFamily</code>
-					to a monospace family for precisely this reason. Similar settings may be available in
-					other IDEs.
+					This is why the <a href="#get">VS Code settings below</a> set
+					<code>terminal.integrated.fontFamily</code> to a monospace family. Similar settings may
+					be available in other IDEs.
 				</p>
 			</details>
 		</div>
@@ -365,7 +368,7 @@ try {
 	</div>
 </footer>
 
-<script src="/assets/site.js?v=20260929r" defer></script>
-<script src="/assets/code.js?v=20260929r" defer></script>
+<script src="/assets/site.js?v=20260930g" defer></script>
+<script src="/assets/code.js?v=20260930g" defer></script>
 </body>
 </html>

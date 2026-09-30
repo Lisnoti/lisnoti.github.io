@@ -21,6 +21,9 @@
 @font-face { font-family: 'Compare Cascadia Code'; font-style: italic; font-weight: 400; src: url(/fonts/compare/cascadia-code/CascadiaCode-Italic.woff2) format('woff2'); }
 @font-face { font-family: 'Compare Monaspace Neon'; font-style: italic; font-weight: 400; src: url(/fonts/compare/monaspace-neon/MonaspaceNeon-Italic.woff2) format('woff2'); }
 @font-face { font-family: 'Compare Victor Mono'; font-style: italic; font-weight: 400; src: url(/fonts/compare/victor-mono/VictorMono-Italic.woff2) format('woff2'); }
+/* JuliaMono: regular and italic only, since the comparison uses no bold. About 1 MB each. */
+@font-face { font-family: 'Compare JuliaMono'; font-weight: 400; src: url(/fonts/compare/juliamono/JuliaMono-Regular.woff2) format('woff2'); }
+@font-face { font-family: 'Compare JuliaMono'; font-style: italic; font-weight: 400; src: url(/fonts/compare/juliamono/JuliaMono-RegularItalic.woff2) format('woff2'); }
 
 /* ---- Colours ---- */
 
@@ -636,6 +639,14 @@ button:focus-visible, a:focus-visible, textarea:focus-visible, input:focus-visib
 
 .compare-with { font-size: var(--fs-small); color: var(--muted); }
 
+/* The ligatures switch shows its state as a green tick or a red cross. The tick sits on the
+   pressed tint, which is light in both themes, so its green is fixed; the cross sits on the
+   ordinary button, so it takes each theme's warning red. */
+/* A little larger than the word, without making the button taller. */
+.liga-mark { font-size: 1.3em; line-height: 0; vertical-align: -.05em; }
+#liga-button[aria-pressed="true"] .liga-mark { color: #1f7a3a; }
+#liga-button[aria-pressed="false"] .liga-mark { color: var(--warn); }
+
 .panes {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
@@ -664,6 +675,8 @@ button:focus-visible, a:focus-visible, textarea:focus-visible, input:focus-visib
 	position: absolute;
 	top: 1rem;
 	left: 1rem;
+	right: 1rem;
+	white-space: normal;
 	color: var(--muted);
 	font-family: Lisnoti, sans-serif;
 }
