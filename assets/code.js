@@ -50,11 +50,7 @@ const largest = [...openTotals(orders)]
 
 	python:
 `def moving_average(values: list[float], window: int = 3) -> list[float]:
-    """Return the trailing moving average of a series.
 
-    The first window - 1 points have no full window behind them,
-    so they average whatever values are available.
-    """
     if window <= 0:
         raise ValueError("window must be positive")
     averages = []
