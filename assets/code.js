@@ -146,7 +146,7 @@ println <| newton(cos, x -> -sin(x), 1.0)  # π/2`,
 ├── README.md
 ├── data/
 │   ├── deaths-by-age-and-calendar-year-england-and-wales.csv
-│   └── exposure.csv
+│   └── exposure-by-age-and-calendar-year-england-and-wales.csv
 ├── src/
 │   ├── fit.jl
 │   ├── plots.jl
