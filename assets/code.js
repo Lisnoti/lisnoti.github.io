@@ -129,12 +129,12 @@ public record Portfolio(IEnumerable<Policy> Policies)
 
 	julia:
 `# Newton's method, written the way it looks on paper
-function newton(f, f′, x₀; tol = 1e-12, maxiter = 50)
+function newton(f, f′, x₀; tolerance = 1e-12, maxiter = 50)
     x = x₀
     for _ ∈ 1:maxiter
         Δx = f(x) / f′(x)
         x -= Δx
-        (abs ∘ f)(x) <= tol && return x
+        (abs ∘ f)(x) <= tolerance && return x
     end
     error("Newton's method did not converge in $maxiter steps")
 end
@@ -142,8 +142,8 @@ end
 # |> passes a value forwards; define <| to pass it back
 (<|)(f, x) = f(x)
 
-newton(x -> x^2 - 2, x -> 2x, 1.0) |> println   # √2
-println <| newton(cos, x -> -sin(x), 1.0)       # π/2`,
+newton(x -> x^2 - 2, x -> 2x, 1.0) |> println  # √2
+println <| newton(cos, x -> -sin(x), 1.0)  # π/2`,
 
 	tree:
 `survival-model/
