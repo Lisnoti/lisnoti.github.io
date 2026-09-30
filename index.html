@@ -3,8 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lisnoti</title>
-<meta name="description" content="Lisnoti is a free proportional sans serif font for general use, with special emphasis on math, science and actuarial work.">
+<title>Lisnoti – free sans serif font for math, science and code</title>
+<meta name="description" content="Lisnoti is a free proportional sans serif font for general use, with special emphasis on math, science and actuarial work, including equations in LaTeX and Word.">
+<link rel="canonical" href="https://lisnoti.com/">
+<!-- What social sites and chat apps show when the page is shared. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Lisnoti">
+<meta property="og:url" content="https://lisnoti.com/">
+<meta property="og:title" content="Lisnoti – free sans serif font for math, science and code">
+<meta property="og:description" content="Lisnoti is a free proportional sans serif font for general use, with special emphasis on math, science and actuarial work, including equations in LaTeX and Word.">
+<meta property="og:image" content="https://lisnoti.com/images/lisnoti-preview.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Lisnoti type card beside the words: Lisnoti, free sans serif font for math, science and code">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="color-scheme" content="light dark">
 <script>
 // Both before the first paint: a pinned theme, so it never flashes the other one, and the
@@ -19,7 +31,7 @@ try {
 <link rel="stylesheet" href="/lisnoti.css">
 <link rel="stylesheet" href="/lisnoti-code.css">
 <link rel="stylesheet" href="/vendor/temml/Temml-Local.css">
-<link rel="stylesheet" href="/assets/site.css?v=20260930g">
+<link rel="stylesheet" href="/assets/site.css?v=20260930o">
 </head>
 <body class="theme-lisnoti">
 
@@ -55,9 +67,18 @@ try {
 <section id="top" class="hero">
 	<div class="wrap">
 		<h1 class="title">Lisnoti</h1>
-		<p class="lede">
-			Lisnoti (/lɪzˈnəʊtiː/) is a proportional sans serif font for general use but also with
-			special emphasis on math, science and actuarial work (including typesetting equations).
+		<img class="hero-card" src="/images/lisnoti-card.svg" width="396" height="468" alt="The Lisnoti type card: sample letters, the word Intelligible, the alphabet and figures">
+		<p>
+			Lisnoti (/lɪzˈnəʊtiː/) is a free sans serif font for everyday use, with clear, unambiguous
+			letters and coverage of Latin, Greek, Cyrillic and Devanagari character sets.
+		</p>
+		<p>
+			It is particularly strong for math, science and actuarial work, including typesetting
+			equations.
+		</p>
+		<p>
+			If you’re interested in why Lisnoti exists, see
+			<a href="https://timgord.com/2024-01/lisnoti-a-proportional-font-that-works-for-coding-too/#the-a1-ai-called-al">this blog article</a>.
 		</p>
 		<div class="actions">
 			<a class="button action" href="#get">Get Lisnoti</a>
@@ -106,7 +127,7 @@ try {
 	<div class="wrap">
 		<h2>Key features</h2>
 		<p class="section-lede">
-			Lisnoti is derived from <a href="https://fonts.google.com/noto">Noto's sans serif fonts</a>,
+			Lisnoti is derived from <a href="https://fonts.google.com/noto">Noto’s sans serif fonts</a>,
 			adapted so that nothing in a formula or a line of code can be mistaken for something else.
 		</p>
 		<div class="tiles">
@@ -160,7 +181,7 @@ try {
 		<h2>Equations</h2>
 		<p class="section-lede">
 			Lisnoti has a full OpenType <code>MATH</code> table, which means it can be used to
-			typeset equations properly in LaTeX (using LuaLaTeX) and in Word.
+			typeset equations properly in LaTeX (using LuaLaTeX) and in Word (choose Lisnoti as the equation font).
 		</p>
 		<div class="equations" id="equations"></div>
 
@@ -172,7 +193,7 @@ try {
 
 		<p class="small">
 			The equations on this page are converted by <a href="https://temml.org/">Temml</a>, a
-			small open-source library, and set by the browser from Lisnoti's <code>MATH</code> table.
+			small open-source library, and set by the browser from Lisnoti’s <code>MATH</code> table.
 		</p>
 		<div class="latex-tip">
 			<h3>LuaLaTeX</h3>
@@ -181,7 +202,7 @@ try {
 \setmainfont{Lisnoti}
 \setmathfont{Lisnoti}
 \setmathfont{Lisnoti}[range=\mathcal, StylisticSet=1]</code></pre>
-			<p class="small">The second line of the snippet sets the main font to Lisnoti &ndash; delete the line if you don't want that.</p>
+			<p class="small">The second line of the snippet sets the main font to Lisnoti &ndash; delete the line if you don’t want that.</p>
 		</div>
 	</div>
 </section>
@@ -222,7 +243,7 @@ try {
 			</article>
 			<article class="card" id="using-lisnoti-for-websites">
 				<h3>2. Link to lisnoti.com</h3>
-				<p>Add the following line to each page's <code>&lt;head&gt;</code>:</p>
+				<p>Add the following line to each page’s <code>&lt;head&gt;</code>:</p>
 				<div class="copyable">
 					<pre class="snippet"><code>&lt;link rel="stylesheet" href="https://lisnoti.com/lisnoti.css"&gt;</code></pre>
 					<button type="button" class="copy">Copy</button>
@@ -260,9 +281,9 @@ try {
 			<a href="https://github.com/Lisnoti/Lisnoti/discussions">the GitHub discussions page</a>.
 		</p>
 		<p class="small">
-			Credit: Lisnoti and Lisnoti Code derive from Google's admirable
-			<a href="https://fonts.google.com/noto">Noto</a> fonts. Lisnoti's math functionality
-			derives from Khaled Hosny's wholesale redesign of
+			Credit: Lisnoti and Lisnoti Code derive from Google’s admirable
+			<a href="https://fonts.google.com/noto">Noto</a> fonts. Lisnoti’s math functionality
+			derives from Khaled Hosny’s wholesale redesign of
 			<a href="https://fonts.google.com/noto/specimen/Noto+Sans+Math">Noto Sans Math</a> in 2024.
 		</p>
 		<p class="small">
@@ -275,6 +296,6 @@ try {
 </footer>
 
 <script src="/vendor/temml/temml.min.js" defer></script>
-<script src="/assets/site.js?v=20260930g" defer></script>
+<script src="/assets/site.js?v=20260930o" defer></script>
 </body>
 </html>

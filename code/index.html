@@ -3,8 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lisnoti Code</title>
-<meta name="description" content="Lisnoti Code is a free proportional font for writing code: every character distinct, a real minus, sensible spacing and a few helpful ligatures.">
+<title>Lisnoti Code – free proportional font for programming</title>
+<meta name="description" content="Lisnoti Code: a free proportional font that fits more code on screen than monospaced fonts, with distinct characters, code-friendly spacing and ligatures.">
+<link rel="canonical" href="https://lisnoti.com/code/">
+<!-- What social sites and chat apps show when the page is shared. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Lisnoti">
+<meta property="og:url" content="https://lisnoti.com/code/">
+<meta property="og:title" content="Lisnoti Code – free proportional font for programming">
+<meta property="og:description" content="Lisnoti Code: a free proportional font that fits more code on screen than monospaced fonts, with distinct characters, code-friendly spacing and ligatures.">
+<meta property="og:image" content="https://lisnoti.com/images/lisnoti-code-preview.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Lisnoti Code type card beside the words: Lisnoti Code, free proportional font for programming">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="color-scheme" content="light dark">
 <script>
 // Both before the first paint: a pinned theme, so it never flashes the other one, and the
@@ -18,7 +30,7 @@ try {
 <link rel="icon" type="image/svg+xml" href="/Lisnoti-Code-logo.svg">
 <link rel="stylesheet" href="/lisnoti.css">
 <link rel="stylesheet" href="/lisnoti-code.css">
-<link rel="stylesheet" href="/assets/site.css?v=20260930g">
+<link rel="stylesheet" href="/assets/site.css?v=20260930o">
 </head>
 <body class="theme-code">
 
@@ -54,14 +66,15 @@ try {
 <section id="top" class="hero">
 	<div class="wrap">
 		<h1 class="title">Lisnoti Code</h1>
-		<p>Lisnoti Code is a <em>proportional</em> font for coding.</p>
+		<img class="hero-card" src="/images/lisnoti-code-card.svg" width="396" height="468" alt="The Lisnoti Code type card: sample letters, the code x => x != 0 with its ligatures, the alphabet and figures">
+		<p>Lisnoti Code is a <em>proportional</em> font for coding that typically fits 20&ndash;30% more code on a line than popular monospaced fonts.</p>
 		<p>
-			The case for using proportional fonts for code comes down to efficiency &ndash; they're
-			faster and easier to read, and they make better use of space. It has been well made by
+			The case for using proportional fonts for code largely comes down to efficiency &ndash; they’re
+			faster and easier to read, and make better use of space. It has been well made by
 			<a href="https://www.nichesoftware.co.nz/2016/01/24/why-monospaced-fonts.html">Bevan Arps</a>,
 			<a href="https://storck.io/posts/proportional-programming-code-fonts/">Martĳn Storck</a>,
 			<a href="https://nelsonslog.wordpress.com/2021/09/12/proportional-fonts-and-yapf-vs-black/">Nelson Minar</a>
-			and <a href="https://input.djr.com/info/">David Jonathan Ross</a> (and I've had a go
+			and <a href="https://input.djr.com/info/">David Jonathan Ross</a> (and I’ve had a go
 			<a href="https://timgord.com/2024-01/lisnoti-a-proportional-font-that-works-for-coding-too/">here</a>).
 		</p>
 		<p>But font design still matters:</p>
@@ -94,10 +107,11 @@ try {
 		</p>
 
 		<div class="webkit-note" id="webkit-note" hidden>
-			<p><strong>WebKit detected</strong></p>
+			<p><strong>Viewing in Safari or on an iPhone or iPad?</strong></p>
 			<p>
-				Safari and iOS browsers do not implement OpenType spacing correctly and so Lisnoti
-				Code's variable spacing falls back to a single wider space.
+				These browsers can’t use context-aware spacing on web pages, so you will see wider
+				spaces between words. This issue doesn’t affect Lisnoti Code’s general use &ndash; code
+				editors such as VS Code work fine.
 			</p>
 		</div>
 
@@ -166,7 +180,7 @@ try {
 				<h3>Spacing designed for code</h3>
 				<p class="specimen block code-font">if ready:
     start(now)</p>
-				<p>Lisnoti sets runs of spaces as wide spaces to make indentation levels clear but uses normal spaces between words for readability.</p>
+				<p>Lisnoti Code sets runs of spaces as wide spaces to make indentation levels clear but uses normal spaces between words for readability.</p>
 			</article>
 			<article class="tile">
 				<h3>Trees that line up</h3>
@@ -200,7 +214,7 @@ try {
 		<h2>FAQ</h2>
 		<div class="faq">
 			<details>
-				<summary>Aren't monospaced fonts better for code?</summary>
+				<summary>Aren’t monospaced fonts better for code?</summary>
 				<p>
 					Mostly they are just familiar. Many (not all) objections to proportional fonts boil
 					down to people simply being used to monospace for coding and misconceptions about
@@ -220,7 +234,7 @@ try {
 			<details>
 				<summary>What about code that aligns text in columns?</summary>
 				<p>
-					Trying to align columns in a proportional font doesn't work. But that's arguably a
+					Trying to align columns in a proportional font doesn’t work. But that’s arguably a
 					brittle way of writing code in any case &ndash; a one-line change can require repadding
 					other lines, which is diff-unfriendly and why many coding standards discourage aligning
 					trailing comments and aligning at <code>=</code> signs.
@@ -235,11 +249,11 @@ try {
 				<p>
 					When a character is missing from a font, editors either show a meaningless
 					replacement box or borrow the missing character from another font, which rarely
-					matches. With Lisnoti Code you're unlikely to have this problem.
+					matches. With Lisnoti Code you’re unlikely to have this problem.
 				</p>
 			</details>
 			<details>
-				<summary>Ligatures don't work on my setup</summary>
+				<summary>Ligatures don’t work on my setup</summary>
 				<p>Many editors switch ligatures off unless told otherwise. In VS Code, add these to your settings:</p>
 				<pre class="snippet"><code>"editor.fontFamily": "Lisnoti Code",
 "editor.fontLigatures": true</code></pre>
@@ -252,7 +266,7 @@ try {
 				</p>
 				<p>
 					Safari, and every browser on an iPhone or iPad, cannot apply the spacing rule, so
-					Lisnoti Code's web stylesheet switches it off there (which makes all spaces
+					Lisnoti Code’s web stylesheet switches it off there (which makes all spaces
 					moderately wide).
 				</p>
 			</details>
@@ -305,18 +319,10 @@ try {
 					<li>Mac: open the files in Font Book.</li>
 				</ul>
 				<p><a class="button action" href="https://github.com/Lisnoti/Lisnoti/raw/refs/heads/main/font-LisnotiCode/LisnotiCode-ttf.zip">LisnotiCode-ttf.zip</a></p>
-				<p>VS Code switches the ligatures and spacing off unless told otherwise, so add these to your settings:</p>
-				<div class="copyable">
-					<pre class="snippet"><code>"editor.fontFamily": "Lisnoti Code",
-"editor.fontLigatures": true,
-"terminal.integrated.fontFamily": "Consolas, Menlo, monospace"</code></pre>
-					<button type="button" class="copy">Copy</button>
-				</div>
-				<p>A terminal needs a monospaced font, so the last line keeps VS Code's terminal on one.</p>
 			</article>
 			<article class="card" id="using-lisnoti-code-for-websites">
 				<h3>2. Link to lisnoti.com</h3>
-				<p>Add the following line to each page's <code>&lt;head&gt;</code>:</p>
+				<p>Add the following line to each page’s <code>&lt;head&gt;</code>:</p>
 				<div class="copyable">
 					<pre class="snippet"><code>&lt;link rel="stylesheet" href="https://lisnoti.com/lisnoti-code.css"&gt;</code></pre>
 					<button type="button" class="copy">Copy</button>
@@ -342,6 +348,32 @@ try {
 				</p>
 			</article>
 		</div>
+		<div class="pair tips" id="good-to-know">
+			<article class="card">
+				<h3>VS Code</h3>
+				<p>VS Code switches the ligatures and spacing off unless told otherwise, so add these to your settings:</p>
+				<div class="copyable">
+					<pre class="snippet"><code>"editor.fontFamily": "Lisnoti Code",
+"editor.fontLigatures": true,
+"terminal.integrated.fontFamily": "Consolas, Menlo, monospace"</code></pre>
+					<button type="button" class="copy">Copy</button>
+				</div>
+				<p>A terminal needs a monospaced font, so the last line keeps VS Code’s terminal on one.</p>
+			</article>
+			<article class="card">
+				<h3>Can’t find Lisnoti Code in your editor’s font list?</h3>
+				<p>Some editors list only monospaced fonts until told otherwise.</p>
+				<p>
+					Look for a setting such as &lsquo;Show only monospaced fonts&rsquo; and untick it, or type
+					the name &lsquo;Lisnoti Code&rsquo; in directly.
+				</p>
+				<p>
+					In JetBrains IDEs such as IntelliJ IDEA and PyCharm, the font settings are under
+					Settings &rsaquo; Editor &rsaquo; Font, where you can also tick &lsquo;Enable
+					ligatures&rsquo;.
+				</p>
+			</article>
+		</div>
 	</div>
 </section>
 
@@ -354,9 +386,9 @@ try {
 			<a href="https://github.com/Lisnoti/Lisnoti/discussions">the GitHub discussions page</a>.
 		</p>
 		<p class="small">
-			Credit: Lisnoti and Lisnoti Code derive from Google's admirable
-			<a href="https://fonts.google.com/noto">Noto</a> fonts. Lisnoti's math functionality
-			derives from Khaled Hosny's wholesale redesign of
+			Credit: Lisnoti and Lisnoti Code derive from Google’s admirable
+			<a href="https://fonts.google.com/noto">Noto</a> fonts. Lisnoti’s math functionality
+			derives from Khaled Hosny’s wholesale redesign of
 			<a href="https://fonts.google.com/noto/specimen/Noto+Sans+Math">Noto Sans Math</a> in 2024.
 		</p>
 		<p class="small">
@@ -368,7 +400,7 @@ try {
 	</div>
 </footer>
 
-<script src="/assets/site.js?v=20260930g" defer></script>
-<script src="/assets/code.js?v=20260930g" defer></script>
+<script src="/assets/site.js?v=20260930o" defer></script>
+<script src="/assets/code.js?v=20260930o" defer></script>
 </body>
 </html>

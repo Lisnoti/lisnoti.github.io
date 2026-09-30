@@ -187,7 +187,7 @@
    the equations' sub- and superscripts are sized by Temml. */
 :root {
 	--fs-specimen: 25.6px;  /* specimens, ligatures, glyph grid */
-	--fs-large: 20.8px;     /* opening lede, equations */
+	--fs-large: 20.8px;     /* equations */
 	--fs-h3: 19.2px;        /* card and tile headings */
 	--fs-body: 18px;        /* running text, inputs, verdict */
 	--fs-small: 14.4px;     /* notes, buttons, top bar, tile text, code panes and snippets */
@@ -451,10 +451,30 @@ button:focus-visible, a:focus-visible, textarea:focus-visible, input:focus-visib
 
 .theme-code .title { font-family: 'Lisnoti Code', Lisnoti, monospace; }
 
-.lede { font-size: var(--fs-large); max-width: 46rem; }
 
 /* Body-size text in the opening keeps a reading width too. */
 .hero p, .hero ul { max-width: 46rem; }
+
+/* The type card beside the opening, level with the first line of text under the title. Below
+   860 px there is no room for it beside the text, and under it would push the download button
+   down, so it goes. */
+.hero-card {
+	float: right;
+	width: clamp(220px, 24vw, 280px);
+	height: auto;
+	margin: 0 0 1.5rem 2.5rem;
+	box-shadow: var(--shadow);
+}
+
+/* Its top level with the tops of the capitals in the first line, which is at body size on both
+   pages: half the leading plus the gap from the font's ascent to its cap height,
+   (1.6 - 1.362) / 2 + 0.355 = 0.474 of the size, less a pixel for the antialiased edge,
+   measured in the page. */
+.hero-card { margin-top: calc(var(--fs-body) * .474 - 1px); }
+
+@media (max-width: 860px) {
+	.hero-card { display: none; }
+}
 .hero ul { padding-left: 1.4rem; }
 .hero li { margin-bottom: .3rem; }
 /* Characters named in running text, in the specimen colour. */
@@ -580,6 +600,10 @@ button:focus-visible, a:focus-visible, textarea:focus-visible, input:focus-visib
 
 /* Short snippets wrap rather than scroll, so nothing hides under the copy button. */
 .card .snippet { white-space: pre-wrap; overflow-wrap: anywhere; }
+
+/* Tips under the ways to get Lisnoti Code: headings as usual, the prose smaller. The snippets
+   keep their own size. */
+.tips .card p { font-size: var(--fs-small); }
 
 
 .copyable { position: relative; }
