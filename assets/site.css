@@ -86,7 +86,7 @@
 @media (prefers-color-scheme: dark) {
 	:root:not([data-theme="light"]) {
 		--paper: #16181c;
-		--ink: #eceef1;
+		--ink: #dadde1;
 		--muted: #a9adb4;
 		--line: #34383f;
 		--code-bg: #25282e;
@@ -110,7 +110,7 @@
 
 	:root:not([data-theme="light"]) .theme-code {
 		--paper: #12171b;
-		--ink: #e8eef2;
+		--ink: #d6dde2;
 		--muted: #9fb0bd;
 		--line: #2a3640;
 		--code-bg: #1b242c;
@@ -132,7 +132,7 @@
 
 :root[data-theme="dark"] {
 	--paper: #16181c;
-	--ink: #eceef1;
+	--ink: #dadde1;
 	--muted: #a9adb4;
 	--line: #34383f;
 	--code-bg: #25282e;
@@ -156,7 +156,7 @@
 
 :root[data-theme="dark"] .theme-code {
 	--paper: #12171b;
-	--ink: #e8eef2;
+	--ink: #d6dde2;
 	--muted: #9fb0bd;
 	--line: #2a3640;
 	--code-bg: #1b242c;
@@ -225,6 +225,10 @@ h1, h2, h3 { line-height: 1.2; margin: 0 0 .75rem; }
 h2 { font-size: clamp(1.9rem, 4vw, 2.6rem); }
 h3 { font-size: var(--fs-h3); }
 p { margin: 0 0 1rem; }
+/* Lists are spaced like paragraphs: no gap above, so the gap after the sentence that
+   introduces a list is that sentence's own, wherever the list is. */
+ul, ol { margin: 0 0 1rem; padding-left: 1.4rem; }
+li { margin-bottom: .3rem; }
 
 code {
 	font-family: 'Lisnoti Code', Lisnoti, monospace;
@@ -252,6 +256,10 @@ main > section { padding: 4.5rem 0; }
 	max-width: 44rem;
 	margin-bottom: 2rem;
 }
+
+/* A lede that runs on into another, such as a sentence introducing a list, is spaced like a
+   paragraph: the wider gap is only for the end of the lede. */
+.section-lede:has(+ .section-lede) { margin-bottom: 1rem; }
 
 
 .code-font { font-family: 'Lisnoti Code', Lisnoti, monospace; }
@@ -475,8 +483,6 @@ button:focus-visible, a:focus-visible, textarea:focus-visible, input:focus-visib
 @media (max-width: 860px) {
 	.hero-card { display: none; }
 }
-.hero ul { padding-left: 1.4rem; }
-.hero li { margin-bottom: .3rem; }
 /* Characters named in running text, in the specimen colour. */
 .eg { color: var(--deep); }
 

@@ -30,7 +30,7 @@ try {
 <link rel="icon" type="image/svg+xml" href="/images/lisnoti-code-logo.svg">
 <link rel="stylesheet" href="/lisnoti.css">
 <link rel="stylesheet" href="/lisnoti-code.css">
-<link rel="stylesheet" href="/assets/site.css?v=20260930s">
+<link rel="stylesheet" href="/assets/site.css?v=20261009c">
 </head>
 <body class="theme-code">
 
@@ -80,9 +80,17 @@ try {
 		<p>But font design still matters:</p>
 		<ul>
 			<li><span class="eg">Il1</span> and <span class="eg">O0</span> need to be clearly distinguishable.</li>
-			<li>Programming languages use hyphen as a minus sign (<span class="eg">−</span>), but it looks like short dash (<span class="eg">-</span>) in most fonts.</li>
+			<li>
+				Programming languages use the hyphen as a minus sign (<span class="eg">−</span>),
+				but it looks like a short dash (<span class="eg">-</span>) in most fonts.
+			</li>
 			<li>Proportional fonts have narrow spaces that make indentation tight and errors hard to spot.</li>
-			<li>Ligatures make multi-character operators like <span class="eg">&gt;=</span> or <span class="eg">|&gt;</span> clearer by drawing them as single symbols, <span class="eg code-font">&gt;=</span> or <span class="eg code-font">|&gt;</span>.</li>
+			<li>
+				Ligatures can make multi-character operators like
+				<span class="eg">&gt;=</span> or <span class="eg">|&gt;</span>
+				clearer by drawing them as single symbols, 
+				<span class="eg code-font">&gt;=</span> or <span class="eg code-font">|&gt;</span>.
+			</li>
 		</ul>
 		<p>Lisnoti Code addresses all of these issues. Try it out below.</p>
 		<div class="actions">
@@ -102,8 +110,11 @@ try {
 	<div class="wrap">
 		<h2>Try it</h2>
 		<p class="section-lede">
-			Pick an example, or type in the left-hand box. The right-hand box shows the same code
-			in a monospaced font at the same size, and the widths are measured in your browser.
+			Pick an example, or type in the left-hand box,
+			which uses Lisnoti Code.
+			The right-hand box reproduces the same code
+			at the same size
+			but in your choice of monospaced font.
 		</p>
 
 		<div class="webkit-note" id="webkit-note" hidden>
@@ -163,24 +174,31 @@ try {
 	<div class="wrap">
 		<h2>Key features</h2>
 		<p class="section-lede">
-			Lisnoti Code is an adaptation of Lisnoti specifically for programming.
+			Lisnoti Code inherits Lisnoti’s clarity and aesthetics,
+			but with additional features specifically to help with writing code.
 		</p>
 		<div class="tiles">
 			<article class="tile wide">
 				<h3>No lookalikes</h3>
 				<p class="specimen code-font">Il1 O0 <i>Il1 O0</i> <b>Il1 O0</b></p>
-				<p>Capital I, small l and one are always distinct, as are capital O and zero, in every style.</p>
+				<p>Capital I, small l and number 1 are always distinct, as are capital O and number 0.</p>
 			</article>
 			<article class="tile">
 				<h3>A real minus</h3>
 				<p class="specimen code-font">-5 + x - y test-main</p>
-				<p>Many monospace fonts make the hyphen a compromise between true hyphen and true minus. Lisnoti Code uses context to do both.</p>
+				<p>
+					Many monospaced fonts make the hyphen a compromise between true hyphen and true minus.
+					Lisnoti Code uses context to do both.
+				</p>
 			</article>
 			<article class="tile">
 				<h3>Spacing designed for code</h3>
 				<p class="specimen block code-font">if ready:
     start(now)</p>
-				<p>Lisnoti Code sets runs of spaces as wide spaces to make indentation levels clear but uses normal spaces between words for readability.</p>
+				<p>
+					Lisnoti Code sets runs of spaces as extra wide to make indentation levels clear,
+					but leaves single spaces at normal width for readability.
+				</p>
 			</article>
 			<article class="tile">
 				<h3>Trees that line up</h3>
@@ -202,7 +220,7 @@ try {
 			<article class="tile wide">
 				<h3>Comprehensive symbols</h3>
 				<p class="specimen code-font">=≠ ≡≢ &lt;≤ ⊂⊆ ±∓ ∞∝ ∪⊔∨⊻ ∀∃∈∉∅ √∫∂ ∑∏⋀⋃ β⁽⁰⁾ΔΘ x₀ f′ ⊕ ✓✗☑♔♞♠ $£€₹⃁</p>
-				<p>5,700-plus characters, including every operator Julia parses, so nothing is substituted using another font.</p>
+				<p>5,700-plus characters, including every operator Julia parses, so nothing has to be borrowed from another font.</p>
 			</article>
 		</div>
 	</div>
@@ -216,25 +234,34 @@ try {
 			<details>
 				<summary>Aren’t monospaced fonts better for code?</summary>
 				<p>
-					Mostly they are just familiar. Many (not all) objections to proportional fonts boil
-					down to people simply being used to monospace for coding and misconceptions about
-					proportional fonts.
+					Monospaced fonts are mostly just familiar.
+					Many (not all) objections to proportional fonts boil down to
 				</p>
+				<ul>
+					<li>habit, i.e. people are simply used to monospace for code, and</li>
+					<li>misconceptions about proportional fonts &ndash; see the indentation FAQ below.</li>
+				</ul>
 				<p>Proportional fonts are easier to read, make better use of space and have excellent support in most code editors and IDEs.</p>
-				<p>Why not try Lisnoti Code for a week before deciding? (But do read the other FAQs first.)</p>
+				<p>Why not try Lisnoti Code for a week before deciding? (But do read the other FAQs first!)</p>
 			</details>
 			<details>
 				<summary>Does indentation still work?</summary>
 				<p>
-					Yes, of course it does &ndash; indentations line up because indents use the same
-					characters. Lisnoti Code helps by making runs of spaces wide so that each level is
+					Yes, of course indentation still works &ndash; indentations
+					line up because indents use the same characters.
+				</p>
+				<p>
+					Lisnoti Code helps by making runs of spaces wide so that each level is
 					easy to see, while using normal spaces between words for readability.
 				</p>
 			</details>
 			<details>
 				<summary>What about code that aligns text in columns?</summary>
 				<p>
-					Trying to align columns in a proportional font doesn’t work. But that’s arguably a
+					Trying to align columns in a proportional font does not work.
+				</p>
+				<p>
+					But that’s arguably a
 					brittle way of writing code in any case &ndash; a one-line change can require repadding
 					other lines, which is diff-unfriendly and why many coding standards discourage aligning
 					trailing comments and aligning at <code>=</code> signs.
@@ -273,9 +300,14 @@ try {
 			<details>
 				<summary>When is monospace the right choice?</summary>
 				<p>
-					Sometimes monospace is exactly what you want: working in a terminal, editing hex data,
-					writing assembly or drawing ASCII tables and art.
+					Sometimes monospace is exactly what you want:
 				</p>
+				<ul>
+					<li>working in a terminal,</li>
+					<li>editing hex data,</li>
+					<li>writing assembly, or</li>
+					<li>drawing ASCII tables and art.</li>
+				</ul>
 				<p>
 					This is why the <a href="#get">VS Code settings below</a> set
 					<code>terminal.integrated.fontFamily</code> to a monospace family. Similar settings may
@@ -400,7 +432,7 @@ try {
 	</div>
 </footer>
 
-<script src="/assets/site.js?v=20260930s" defer></script>
-<script src="/assets/code.js?v=20260930s" defer></script>
+<script src="/assets/site.js?v=20261009c" defer></script>
+<script src="/assets/code.js?v=20261009c" defer></script>
 </body>
 </html>
