@@ -41,6 +41,11 @@
 	--code-colour: #135b84;
 	--lisnoti-selected: #f5dfa9;
 	--code-selected: #b4ddf1;
+	/* Each page's band and border colours, for the note on each page that points to the other. */
+	--lisnoti-tint: #fbf3dc;
+	--code-tint: #eaf4fb;
+	--lisnoti-line: #e9e4da;
+	--code-line: #dde6ec;
 	/* Text on a selected option: the tints stay light in dark mode too, so always dark. */
 	--selected-ink: #1d1b19;
 	/* The logo's frame and face, so it can sit on the dark paper too. */
@@ -96,6 +101,10 @@
 		--code-colour: #8fd0f5;
 		--lisnoti-selected: #f5dfa9;
 		--code-selected: #b4ddf1;
+		--lisnoti-tint: #1d2025;
+		--code-tint: #172028;
+		--lisnoti-line: #34383f;
+		--code-line: #2a3640;
 		--warn: #ff8a80;
 	}
 
@@ -142,6 +151,10 @@
 	--code-colour: #8fd0f5;
 	--lisnoti-selected: #f5dfa9;
 	--code-selected: #b4ddf1;
+	--lisnoti-tint: #1d2025;
+	--code-tint: #172028;
+	--lisnoti-line: #34383f;
+	--code-line: #2a3640;
 	--warn: #ff8a80;
 }
 
@@ -483,6 +496,22 @@ button:focus-visible, a:focus-visible, textarea:focus-visible, input:focus-visib
 @media (max-width: 860px) {
 	.hero-card { display: none; }
 }
+
+/* The note under the version line pointing to the other font, boxed in the other page's band
+   and border colours, with its link in that font's colour.
+   flow-root keeps the box beside the type card rather than running under it. */
+.other-font {
+	display: flow-root;
+	max-width: 46rem;
+	margin: 1.5rem 0 0;
+	padding: 1rem 1.25rem;
+	background: var(--other-tint);
+	border: 1px solid var(--other-line);
+}
+.theme-lisnoti .other-font { --other-tint: var(--code-tint); --other-line: var(--code-line); --other-colour: var(--code-colour); }
+.theme-code .other-font { --other-tint: var(--lisnoti-tint); --other-line: var(--lisnoti-line); --other-colour: var(--lisnoti-colour); }
+.other-font p:last-child { margin-bottom: 0; }
+.other-font a { color: var(--other-colour); font-weight: 600; }
 /* Characters named in running text, in the specimen colour. */
 .eg { color: var(--deep); }
 
