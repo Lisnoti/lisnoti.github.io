@@ -307,9 +307,25 @@ window.addEventListener('DOMContentLoaded', function equations() {
 		if (button) button.setAttribute('aria-current', 'true');
 	}
 
-	function openGroup(index) {
+	// The grid is drawn only once the pieces of the font its characters need have arrived.
+	// WebKit sometimes fails to redraw text when a piece arrives late, which left the grid
+	// blank on iPhones. A slow connection gets three seconds, then the grid is drawn anyway.
+	const faces = fontName === 'Lisnoti Code' ? ["16px 'Lisnoti Code'", '16px Lisnoti'] : ['16px Lisnoti'];
+	let opening = 0;
+
+	async function openGroup(index) {
+		const run = ++opening;
 		const group = data.groups[index];
 		press($$('.chip', groupsEl), groupsEl.children[index]);
+		if (!grid.children.length) grid.innerHTML = '<p class="glyph-loading">Loading…</p>';
+		grid.setAttribute('aria-busy', 'true');
+		const text = group.chars.map(([cp]) => String.fromCodePoint(cp)).join('');
+		await Promise.race([
+			Promise.all(faces.map(f => document.fonts.load(f, text))).catch(() => {}),
+			new Promise(r => setTimeout(r, 3000)),
+		]);
+		if (run !== opening) return;
+		grid.removeAttribute('aria-busy');
 		grid.textContent = '';
 		const frag = document.createDocumentFragment();
 		for (const [cp, name] of group.chars) {

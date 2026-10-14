@@ -975,6 +975,14 @@ math .mathscr, mo.tml-prime { font-family: inherit; }
 	padding: 0;
 }
 
+.glyph-loading {
+	grid-column: 1 / -1;
+	margin: 0;
+	padding: .5rem;
+	font-size: var(--fs-small);
+	color: var(--muted);
+}
+
 .glyph-grid button[aria-current="true"] {
 	background: var(--selected);
 	color: var(--selected-ink);

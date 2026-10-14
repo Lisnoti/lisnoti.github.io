@@ -355,6 +355,14 @@ function render(text, langName) {
 		const chars = [...new Set([...text].filter(ch => ch.codePointAt(0) > 0x7e && !/\s/.test(ch)))];
 		if (!chars.length) return [];
 		try { await document.fonts.load('40px Lisnoti', chars.join('')); } catch (e) { /* draw anyway */ }
+		// The test works only once the canvas is drawing these characters in Lisnoti: until then
+		// both drawings fall back to the same default font and every character looks present.
+		// WebKit can lag a moment behind the load, so wait for it, for up to two seconds (a
+		// character Lisnoti itself lacks never passes).
+		for (let tries = 0; tries < 20; tries++) {
+			if (chars.every(ch => draw('40px Lisnoti, serif', ch) !== draw('40px serif', ch))) break;
+			await new Promise(r => setTimeout(r, 100));
+		}
 		return chars.filter(ch => draw(`40px ${family}, Lisnoti`, ch) !== draw(`40px ${family}, serif`, ch));
 	}
 
