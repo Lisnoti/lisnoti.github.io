@@ -486,8 +486,56 @@ function render(text, langName) {
 		useRight(c.dataset.right, c.textContent);
 	}));
 
+	// The src of a comparison font's @font-face rule, to make a fresh copy of a face.
+	function sourceOf(family, style) {
+		for (const sheet of document.styleSheets) {
+			let rules;
+			try { rules = sheet.cssRules; } catch (e) { continue; }
+			for (const rule of rules) {
+				if (rule instanceof CSSFontFaceRule
+					&& rule.style.getPropertyValue('font-family').replace(/['"]/g, '') === family
+					&& (rule.style.getPropertyValue('font-style') || 'normal') === style
+					&& (rule.style.getPropertyValue('font-weight') || '400') === '400') {
+					return rule.style.getPropertyValue('src');
+				}
+			}
+		}
+		return null;
+	}
+
+	// Load a comparison font's regular and italic, and say whether they arrived. A face whose
+	// download failed stays failed, and the browser never tries it again, so a failed face is
+	// replaced by a fresh copy from the same file, for up to three tries in all.
+	async function loadRight(r, text) {
+		const family = r.family.replace(/['"]/g, '');
+		const faces = () => [...document.fonts].filter(f => f.family.replace(/['"]/g, '') === family && f.weight === '400');
+		try {
+			await Promise.all([
+				document.fonts.load('14px ' + r.family, text),
+				document.fonts.load('italic 14px ' + r.family, text),
+			]);
+		} catch (e) { /* checked below */ }
+		for (let tries = 1; ; tries++) {
+			// Once one copy of a face has failed, fonts.load gives up without waiting for the
+			// others, so wait for any still on their way.
+			await Promise.allSettled(faces().filter(f => f.status === 'loading').map(f => f.loaded));
+			const all = faces();
+			const lacking = [...new Set(all.map(f => f.style))].filter(style => !all.some(f => f.style === style && f.status === 'loaded'));
+			if (!lacking.length) return true;
+			if (tries === 3) return false;
+			await Promise.allSettled(lacking.map(style => {
+				const src = sourceOf(family, style);
+				if (!src) return null;
+				const face = new FontFace(family, src, { style, weight: '400' });
+				document.fonts.add(face);
+				return face.load();
+			}));
+		}
+	}
+
 	// A comparison font is applied only once its files have arrived. Until then the pane says
 	// it is loading, instead of showing the browser's default serif, and the verdict waits.
+	// If they never arrive, the pane says so, rather than measuring a stand-in font.
 	let fontRun = 0;
 	async function useRight(name, label) {
 		const run = ++fontRun;
@@ -497,13 +545,12 @@ function render(text, langName) {
 			rightHl.dataset.loading = `Loading ${label}…` + (r.loading ? ` ${r.loading}` : '');
 			rightHl.classList.add('loading');
 			$('#verdict').textContent = '';
-			try {
-				await Promise.all([
-					document.fonts.load('14px ' + r.family, input.value || 'a'),
-					document.fonts.load('italic 14px ' + r.family, input.value || 'a'),
-				]);
-			} catch (e) { /* show whatever loaded */ }
+			const ok = await loadRight(r, input.value || 'a');
 			if (run !== fontRun) return;
+			if (!ok) {
+				rightHl.dataset.loading = `Couldn’t load ${label}. Check your connection and choose it again.`;
+				return;
+			}
 		}
 		rightHl.classList.remove('loading');
 		state.right = name;
