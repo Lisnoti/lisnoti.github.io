@@ -31,7 +31,7 @@ try {
 <link rel="stylesheet" href="/lisnoti.css">
 <link rel="stylesheet" href="/lisnoti-code.css">
 <link rel="stylesheet" href="/vendor/temml/Temml-Local.css">
-<link rel="stylesheet" href="/assets/site.css?v=20261017a">
+<link rel="stylesheet" href="/assets/site.css?v=20261018a">
 </head>
 <body class="theme-lisnoti">
 
@@ -187,7 +187,7 @@ try {
 		<h2>Equations</h2>
 		<p class="section-lede">
 			Lisnoti has a full OpenType <code>MATH</code> table, which means it can be used to
-			typeset equations properly in LaTeX (using LuaLaTeX) and in Word (choose Lisnoti as the equation font).
+			typeset equations properly in LaTeX (using LuaLaTeX or XeLaTeX) and in Word (choose Lisnoti as the equation font).
 		</p>
 		<div class="equations" id="equations"></div>
 
@@ -201,16 +201,28 @@ try {
 			The equations on this page are converted by <a href="https://temml.org/">Temml</a>, a
 			small open-source library, and set by the browser from Lisnoti’s <code>MATH</code> table.
 		</p>
-		<div class="latex-tip">
-			<h3>LuaLaTeX</h3>
-			<p class="small">With Lisnoti installed, use the following at the start of your LaTeX document to set the math font to Lisnoti. The last line ensures <code>\mathcal</code> produces the correct (chancery) capitals.</p>
+		<div class="latex-tip" id="latex-setup">
+			<h3>LuaLaTeX or XeLaTeX</h3>
+			<p class="small">With Lisnoti installed, use the following at the start of your LaTeX document to set the math font to Lisnoti.</p>
 			<pre class="snippet">
 <code>\usepackage{unicode-math}
 \setmainfont{Lisnoti}
+\setsansfont{Lisnoti}
 \setmathfont{Lisnoti}
+\setmathfont{Lisnoti Bold}[version=bold]
 \setmathfont{Lisnoti}[range=\mathcal, StylisticSet=1]</code>
 			</pre>
-			<p class="small">The second line of the snippet sets the main font to Lisnoti &ndash; delete the line if you don’t want that.</p>
+			<ul class="small">
+				<li>If you use <code>amsmath</code>, load it <em>before</em> these lines.</li>
+				<li>The <code>[version=bold]</code> line makes <code>\boldmath</code> and <code>\mathversion{bold}</code> work.</li>
+				<li>The <code>[range=\mathcal, StylisticSet=1]</code> line gives <code>\mathcal</code> its standard calligraphic capitals.</li>
+				<li>The order matters: the <code>\mathcal</code> line <em>must</em> come after the bold version line.</li>
+			</ul>
+			<p class="small">
+				The second and third lines set the main and sans serif fonts to Lisnoti &ndash; delete them
+				if you don’t want that. The package’s documentation,
+				<a href="https://mirrors.ctan.org/fonts/lisnoti/lisnoti.pdf">lisnoti.pdf</a>, has a specimen and more detail.
+			</p>
 		</div>
 	</div>
 </section>
@@ -238,9 +250,9 @@ try {
 <section id="get" class="band">
 	<div class="wrap">
 		<h2>Get Lisnoti</h2>
-		<p class="section-lede">There are three ways to use Lisnoti, all free.</p>
+		<p class="section-lede">There are four ways to use Lisnoti, all free.</p>
 		<div class="ways">
-			<article class="card">
+			<article class="card" id="install-it">
 				<h3>1. Install it</h3>
 				<p>Download the four fonts and install them in the usual way.</p>
 				<ul>
@@ -276,6 +288,23 @@ try {
 					and its <code>lisnoti-monolithic.css</code>.
 				</p>
 			</article>
+			<article class="card" id="using-lisnoti-with-latex">
+				<h3>4. LaTeX</h3>
+				<p>Lisnoti is on CTAN as the <a href="https://ctan.org/pkg/lisnoti">lisnoti package</a>.</p>
+				<ul>
+					<li>[<em>Pending addition to TeX Live.</em>] In TeX Live, run <code>tlmgr install lisnoti</code>.</li>
+					<li>
+						[<em>Pending addition to MiKTeX.</em>] In MiKTeX Console, go to <em>Packages</em>, search for
+						lisnoti, select it and click <em>+</em>. Or, at a command prompt, run
+						<code>miktex packages install lisnoti</code>.
+					</li>
+				</ul>
+				<p>Until then, you can install the fonts <a href="#install-it">locally as in 1</a> and the LaTeX commands will find them.</p>
+				<p class="small">
+					Lisnoti needs LuaLaTeX or XeLaTeX. The commands to put at the start of your document
+					are under <a href="#latex-setup">Equations</a>.
+				</p>
+			</article>
 		</div>
 	</div>
 </section>
@@ -296,6 +325,7 @@ try {
 		</p>
 		<p class="small">
 			<a href="https://github.com/Lisnoti/Lisnoti">Lisnoti on GitHub</a> ·
+			<a href="https://ctan.org/pkg/lisnoti">Lisnoti on CTAN</a> ·
 			<a href="/code/">Lisnoti Code</a> ·
 			<a href="https://timgord.com/2024-01/lisnoti-a-proportional-font-that-works-for-coding-too/">Why Lisnoti exists</a> ·
 			Fonts under the <a href="https://openfontlicense.org/">SIL Open Font Licence</a>
@@ -304,6 +334,6 @@ try {
 </footer>
 
 <script src="/vendor/temml/temml.min.js" defer></script>
-<script src="/assets/site.js?v=20261017a" defer></script>
+<script src="/assets/site.js?v=20261018a" defer></script>
 </body>
 </html>

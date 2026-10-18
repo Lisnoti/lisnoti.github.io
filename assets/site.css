@@ -613,6 +613,11 @@ button:focus-visible, a:focus-visible, textarea:focus-visible, input:focus-visib
 	margin-bottom: 1rem;
 }
 
+/* Four ways read better two by two than three and one: at most two columns, one on phones. */
+.ways:has(> .card:nth-child(4)) {
+	grid-template-columns: repeat(auto-fit, minmax(max(300px, calc((100% - 1rem) / 2)), 1fr));
+}
+
 .card {
 	background: var(--paper);
 	border: 1px solid var(--line);
