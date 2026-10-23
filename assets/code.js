@@ -366,20 +366,29 @@ function render(text, langName) {
 		return chars.filter(ch => draw(`40px ${family}, Lisnoti`, ch) !== draw(`40px ${family}, serif`, ch));
 	}
 
+	// The left-hand box is checked as the type tester is (see fontWatch in site.js), with its
+	// note above the two boxes.
+	const leftWatch = fontWatch('Lisnoti Code', $('.panes'));
+
 	async function measure() {
 		const run = ++latest;
 		const text = input.value;
 		const r = right[state.right];
 		// Comments are italic, so each font's italic has to be loaded too, or the first
 		// measurement after choosing a font sets the comments in a stand-in.
-		const faces = ["'Lisnoti Code'"].concat(state.right === 'system' ? [] : [r.family]);
-		try {
-			await Promise.all(faces.flatMap(f => [
-				document.fonts.load('14px ' + f, text),
-				document.fonts.load('italic 14px ' + f, text),
-			]));
-		} catch (e) { /* measure with whatever loaded */ }
+		const [leftOK] = await Promise.all([
+			leftWatch(textNeeds(leftHl)),
+			state.right === 'system' ? null : Promise.all([
+				document.fonts.load('14px ' + r.family, text),
+				document.fonts.load('italic 14px ' + r.family, text),
+			]).catch(() => { /* measure with whatever loaded */ }),
+		]);
 		if (run !== latest || rightHl.classList.contains('loading')) return;
+		// Measuring a stand-in would give a false comparison; the note says what went wrong.
+		if (!leftOK) {
+			$('#verdict').textContent = '';
+			return;
+		}
 		const a = widths(leftHl);
 		const b = widths(rightHl);
 		const verdict = $('#verdict');

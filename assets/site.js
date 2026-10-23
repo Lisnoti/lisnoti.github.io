@@ -53,6 +53,140 @@ $$('.chips[data-menu]').forEach(group => {
 	if ($$('.chip', group).length) addMenu(group);
 });
 
+// ---- Checking that the font arrived ----
+
+// Lisnoti and Lisnoti Code come in pieces (subsets), each fetched when text first needs it. A
+// piece whose download failed stays failed until the page is reloaded, and the browser shows
+// a stand-in font instead, which could be taken for the real thing. So each box that shows
+// the font off checks, after each change, that every piece its text needs has arrived. A
+// failed piece is fetched again from a fresh copy of its @font-face rule, up to three tries
+// in all; if it still fails, a note above the box says so.
+
+const bare = family => family.replace(/['"]/g, '');
+
+// A unicode-range as a list of [first, last] code points, written out the same way whatever
+// form it came in, so that a face and its @font-face rule can be matched.
+function parseRanges(text) {
+	return (text || 'U+0-10FFFF').split(',').map(part => {
+		const [a, b] = part.trim().replace(/^U\+/i, '').split('-');
+		const lo = parseInt(a.replace(/\?/g, '0'), 16);
+		const hi = parseInt((b || a).replace(/\?/g, 'F'), 16);
+		return [lo, hi];
+	});
+}
+const rangeKey = text => parseRanges(text).map(r => r.join('-')).join(',');
+
+let fontRules = null;
+function ruleSource(family, style, weight, range) {
+	if (!fontRules) {
+		fontRules = new Map();
+		for (const sheet of document.styleSheets) {
+			let rules;
+			try { rules = sheet.cssRules; } catch (e) { continue; }
+			for (const rule of rules) {
+				if (!(rule instanceof CSSFontFaceRule)) continue;
+				const s = rule.style;
+				const key = [bare(s.getPropertyValue('font-family')), s.getPropertyValue('font-style') || 'normal',
+					s.getPropertyValue('font-weight') || '400', rangeKey(s.getPropertyValue('unicode-range'))].join('|');
+				// Relative URLs are resolved against the stylesheet, as the browser does.
+				fontRules.set(key, s.getPropertyValue('src').replace(/url\((['"]?)([^'")]+)\1\)/g,
+					(m, q, u) => `url("${new URL(u, sheet.href || location.href)}")`));
+			}
+		}
+	}
+	return fontRules.get([family, style, weight, rangeKey(range)].join('|'));
+}
+
+// The pieces of a family that some text needs: the faces of its style and weight whose
+// unicode-range covers one of its characters, grouped so that a failed face and the fresh
+// copies made of it count as one piece.
+function piecesFor(family, needs) {
+	const pieces = new Map();
+	for (const face of document.fonts) {
+		if (bare(face.family) !== family) continue;
+		const ranges = parseRanges(face.unicodeRange);
+		for (const { style, weight, text } of needs) {
+			if (face.style !== style || face.weight !== weight) continue;
+			if (![...text].some(ch => {
+				const cp = ch.codePointAt(0);
+				return ranges.some(([lo, hi]) => cp >= lo && cp <= hi);
+			})) continue;
+			const key = [style, weight, rangeKey(face.unicodeRange)].join('|');
+			if (!pieces.has(key)) pieces.set(key, { style, weight, range: face.unicodeRange, faces: [] });
+			pieces.get(key).faces.push(face);
+		}
+	}
+	return [...pieces.values()];
+}
+
+// Make sure the pieces some text needs have arrived. needs is a list of { style, weight, text }.
+async function ensureFont(family, needs) {
+	for (let tries = 1; ; tries++) {
+		await Promise.allSettled(needs.map(n => document.fonts.load(`${n.style} ${n.weight} 16px "${family}"`, n.text)));
+		// Once one copy of a piece has failed, fonts.load gives up without waiting for the
+		// others, so wait for any still on their way.
+		let pieces = piecesFor(family, needs);
+		await Promise.allSettled(pieces.flatMap(p => p.faces.filter(f => f.status === 'loading').map(f => f.loaded)));
+		pieces = piecesFor(family, needs);
+		const failed = pieces.filter(p => !p.faces.some(f => f.status === 'loaded'));
+		if (!failed.length) return true;
+		if (tries === 3) return false;
+		await Promise.allSettled(failed.map(p => {
+			const src = ruleSource(family, p.style, p.weight, p.range);
+			if (!src) return null;
+			const face = new FontFace(family, src, { style: p.style, weight: p.weight, unicodeRange: p.range });
+			document.fonts.add(face);
+			return face.load();
+		}));
+	}
+}
+
+// The text in an element, with the style and weight each part is set in.
+function textNeeds(el) {
+	const groups = new Map();
+	const add = (node, text) => {
+		const cs = getComputedStyle(node);
+		const key = cs.fontStyle + '|' + cs.fontWeight;
+		if (!groups.has(key)) groups.set(key, { style: cs.fontStyle === 'italic' ? 'italic' : 'normal', weight: String(cs.fontWeight), text: '' });
+		// In equations a single letter is drawn as its math italic (x as 𝑥), which comes from
+		// the math-alphanumerics piece, so stand one in for it.
+		groups.get(key).text += text + (cs.textTransform === 'math-auto' ? '\u{1D465}' : '');
+	};
+	if (el.tagName === 'TEXTAREA') add(el, el.value);
+	else {
+		const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+		while (walker.nextNode()) add(walker.currentNode.parentElement, walker.currentNode.data);
+	}
+	return [...groups.values()].filter(g => g.text.trim());
+}
+
+// A note above a box, and a check that keeps it up to date. check(needs) resolves to whether
+// every piece arrived; a later check supersedes an earlier one.
+function fontWatch(family, before) {
+	const note = document.createElement('p');
+	note.className = 'font-note';
+	note.hidden = true;
+	note.setAttribute('aria-live', 'polite');
+	before.before(note);
+	let run = 0;
+	const show = state => {
+		note.hidden = !state;
+		note.classList.toggle('failed', state === 'failed');
+		note.textContent = state === 'failed'
+			? `Not all of ${family} could be downloaded, so some of this text is in a stand-in font. Reload the page to try again.`
+			: state === 'loading' ? `Loading ${family}…` : '';
+	};
+	return async function check(needs) {
+		const mine = ++run;
+		// Say it is loading only if it takes a moment, so the note does not flicker.
+		const timer = setTimeout(() => { if (mine === run) show('loading'); }, 300);
+		const ok = await ensureFont(family, needs);
+		clearTimeout(timer);
+		if (mine === run) show(ok ? null : 'failed');
+		return ok;
+	};
+}
+
 // ---- Top bar: highlight the section in view ----
 
 (function topbar() {
@@ -189,6 +323,10 @@ $$('.chips[data-menu]').forEach(group => {
 
 	area.value = samples.text;
 
+	const watch = fontWatch('Lisnoti', area);
+	let typing = 0;
+	const check = () => watch(textNeeds(area));
+
 	const styleChips = $$('[data-tester-style]');
 	styleChips.forEach(c => c.addEventListener('click', () => {
 		press(styleChips, c);
@@ -196,6 +334,7 @@ $$('.chips[data-menu]').forEach(group => {
 		area.style.fontStyle = style;
 		area.style.fontWeight = weight;
 		fit();
+		check();
 	}));
 
 	// Choosing a different sample replaces the text; choosing the one already chosen does
@@ -206,8 +345,14 @@ $$('.chips[data-menu]').forEach(group => {
 		press(sampleChips, c);
 		area.value = samples[c.dataset.testerSample];
 		fit();
+		check();
 	}));
-	area.addEventListener('input', fit);
+	area.addEventListener('input', () => {
+		fit();
+		clearTimeout(typing);
+		typing = setTimeout(check, 400);
+	});
+	check();
 
 	size.addEventListener('input', () => {
 		area.style.fontSize = size.value + 'px';
@@ -273,10 +418,20 @@ window.addEventListener('DOMContentLoaded', function equations() {
 		input.style.height = 'auto';
 		input.style.height = input.scrollHeight + input.offsetHeight - input.clientHeight + 'px';
 	};
-	input.addEventListener('input', () => { update(); fit(); });
+	// The equations are set in Lisnoti too, so they are checked like the type tester.
+	const watch = fontWatch('Lisnoti', grid);
+	let typing = 0;
+	const check = () => watch([...textNeeds(grid), ...textNeeds(output)]);
+	input.addEventListener('input', () => {
+		update();
+		fit();
+		clearTimeout(typing);
+		typing = setTimeout(check, 400);
+	});
 	window.addEventListener('resize', fit);
 	update();
 	fit();
+	check();
 	// Measured again once Lisnoti Code has loaded, since it wraps differently from the fallback.
 	document.fonts.ready.then(fit);
 });
@@ -309,19 +464,19 @@ window.addEventListener('DOMContentLoaded', function equations() {
 
 	// The grid is drawn only once the pieces of the font its characters need have arrived.
 	// WebKit sometimes fails to redraw text when a piece arrives late, which left the grid
-	// blank on iPhones. A slow connection gets three seconds, then the grid is drawn anyway.
-	const faces = fontName === 'Lisnoti Code' ? ["16px 'Lisnoti Code'", '16px Lisnoti'] : ['16px Lisnoti'];
+	// blank on iPhones. A slow connection gets three seconds, then the grid is drawn anyway,
+	// and the note above it says if a piece never arrives.
+	const watch = fontWatch(fontName, $('.explorer-body', section));
 	let opening = 0;
 
 	async function openGroup(index) {
 		const run = ++opening;
 		const group = data.groups[index];
 		press($$('.chip', groupsEl), groupsEl.children[index]);
-		if (!grid.children.length) grid.innerHTML = '<p class="glyph-loading">Loading…</p>';
 		grid.setAttribute('aria-busy', 'true');
 		const text = group.chars.map(([cp]) => String.fromCodePoint(cp)).join('');
 		await Promise.race([
-			Promise.all(faces.map(f => document.fonts.load(f, text))).catch(() => {}),
+			watch([{ style: 'normal', weight: '400', text }]),
 			new Promise(r => setTimeout(r, 3000)),
 		]);
 		if (run !== opening) return;

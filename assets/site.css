@@ -555,6 +555,12 @@ button:focus-visible, a:focus-visible, textarea:focus-visible, input:focus-visib
 
 .tester-text:focus-visible { outline: none; box-shadow: inset 0 0 0 2px var(--accent); }
 
+/* The note above a box set in Lisnoti or Lisnoti Code, shown while a piece of the font is still
+   downloading, or if one could not be downloaded (fontWatch in site.js). */
+.font-note { margin: 0 0 .75rem; font-size: var(--fs-small); color: var(--muted); }
+.font-note.failed { color: var(--warn); font-weight: 600; }
+.tester .font-note { margin: 0; padding: .75rem 1.5rem 0; }
+
 /* ---- Feature tiles ---- */
 
 .tiles {
@@ -978,14 +984,6 @@ math .mathscr, mo.tml-prime { font-family: inherit; }
 	color: var(--ink);
 	cursor: pointer;
 	padding: 0;
-}
-
-.glyph-loading {
-	grid-column: 1 / -1;
-	margin: 0;
-	padding: .5rem;
-	font-size: var(--fs-small);
-	color: var(--muted);
 }
 
 .glyph-grid button[aria-current="true"] {
