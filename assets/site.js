@@ -538,6 +538,22 @@ window.addEventListener('DOMContentLoaded', function equations() {
 	observer.observe(section);
 })();
 
+// ---- Links to FAQ answers ----
+
+// A link to a question opens its answer: browsers scroll to a closed <details> but do not all
+// open it. This covers links on the page and an address arriving with the question's #id.
+function openAnswer(id) {
+	const target = id && document.getElementById(id);
+	const answer = target && target.closest('details');
+	if (answer) answer.open = true;
+}
+document.addEventListener('click', e => {
+	const link = e.target.closest('a[href^="#"]');
+	if (link) openAnswer(decodeURIComponent(link.hash.slice(1)));
+});
+window.addEventListener('hashchange', () => openAnswer(decodeURIComponent(location.hash.slice(1))));
+openAnswer(decodeURIComponent(location.hash.slice(1)));
+
 // ---- Copy buttons ----
 
 for (const button of $$('.copy')) {

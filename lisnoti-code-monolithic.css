@@ -1,4 +1,4 @@
-/* Lisnoti Code Version 0.902, one file per style.
+/* Lisnoti Code Version 0.903, one file per style.
  * SIL Open Font License 1.1 -- https://openfontlicense.org
  *
  * The whole font in each style. lisnoti-code.css on this site serves the same
@@ -16,7 +16,7 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url(/fonts/code-0.902/LisnotiCode-Regular.woff2) format('woff2');
+  src: url(/fonts/code-0.903/LisnotiCode-Regular.woff2) format('woff2');
 }
 
 @font-face {
@@ -24,7 +24,7 @@
   font-style: italic;
   font-weight: 400;
   font-display: swap;
-  src: url(/fonts/code-0.902/LisnotiCode-Italic.woff2) format('woff2');
+  src: url(/fonts/code-0.903/LisnotiCode-Italic.woff2) format('woff2');
 }
 
 @font-face {
@@ -32,7 +32,7 @@
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url(/fonts/code-0.902/LisnotiCode-Bold.woff2) format('woff2');
+  src: url(/fonts/code-0.903/LisnotiCode-Bold.woff2) format('woff2');
 }
 
 @font-face {
@@ -40,7 +40,7 @@
   font-style: italic;
   font-weight: 700;
   font-display: swap;
-  src: url(/fonts/code-0.902/LisnotiCode-BoldItalic.woff2) format('woff2');
+  src: url(/fonts/code-0.903/LisnotiCode-BoldItalic.woff2) format('woff2');
 }
 
 @supports (hanging-punctuation: first) {
@@ -50,7 +50,7 @@
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url(/fonts/code-0.902/LisnotiCode-Regular.woff2) format('woff2');
+    src: url(/fonts/code-0.903/LisnotiCode-Regular.woff2) format('woff2');
     font-feature-settings: "calt" 0;
   }
 
@@ -59,7 +59,7 @@
     font-style: italic;
     font-weight: 400;
     font-display: swap;
-    src: url(/fonts/code-0.902/LisnotiCode-Italic.woff2) format('woff2');
+    src: url(/fonts/code-0.903/LisnotiCode-Italic.woff2) format('woff2');
     font-feature-settings: "calt" 0;
   }
 
@@ -68,7 +68,7 @@
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: url(/fonts/code-0.902/LisnotiCode-Bold.woff2) format('woff2');
+    src: url(/fonts/code-0.903/LisnotiCode-Bold.woff2) format('woff2');
     font-feature-settings: "calt" 0;
   }
 
@@ -77,7 +77,7 @@
     font-style: italic;
     font-weight: 700;
     font-display: swap;
-    src: url(/fonts/code-0.902/LisnotiCode-BoldItalic.woff2) format('woff2');
+    src: url(/fonts/code-0.903/LisnotiCode-BoldItalic.woff2) format('woff2');
     font-feature-settings: "calt" 0;
   }
 
