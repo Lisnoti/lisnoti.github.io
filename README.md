@@ -39,9 +39,9 @@ The site serves two purposes.
 | `lisnoti-monolithic.css` | *Lisnoti* stylesheet &ndash; one monolithic font file per style |
 | `lisnoti-code.css` | *Lisnoti Code* stylesheet &ndash; served in subsets |
 | `lisnoti-code-monolithic.css` | *Lisnoti Code* stylesheet &ndash; one monolithic font file per style |
-| `fonts/<version>/`<br/> `fonts/code-<version>/` | The WOFF2 files referenced by the stylesheets |
+| `fonts/<version>/`<br/> `fonts/code-<version>/` | The WOFF2 files referenced by the stylesheets, and the one TTF (`Lisnoti-Regular.ttf`) from which the website’s equations are typeset |
 | `fonts/compare/` | Monospaced fonts used for comparison on the Lisnoti Code page (including licences) |
-| `vendor/temml/` | [Temml](https://temml.org), used to convert LaTeX to equations |
+| `vendor/formel/` | [formel](https://github.com/manuel-rhdt/formel), used to typeset the equations from LaTeX |
 | `images/` | Type cards for *Lisnoti* and *Lisnoti Code* (`lisnoti-card.svg`, `lisnoti-code-card.svg`), the webpages’ icons (`lisnoti-logo.svg`, `lisnoti-code-logo.svg`) and their link-preview images for social media and chat apps |
 | `sitemap.xml` | The list of pages for search engines |
 | `lisnoti-full.css` (deprecated) | Older name for `lisnoti-monolithic.css` &ndash; will be removed in due course |
@@ -56,7 +56,7 @@ The version names are included in the font paths, which means that
 
 Old version folders will be retained for the lifetime of this repo.
 
-The site serves only WOFF2 files on the basis that they are compatible with all modern browsers.
+As web fonts, the site serves only WOFF2 files on the basis that they are compatible with all modern browsers.
 
 ## Licences
 
@@ -66,7 +66,7 @@ Lisnoti and Lisnoti Code, in `fonts/`, are under the
 The comparison fonts in
 `fonts/compare/` are under the same licence, with each font’s copyright notice in its folder.
 
-[Temml](https://temml.org) is under the MIT licence in `vendor/temml/LICENSE`.
+[formel](https://github.com/manuel-rhdt/formel) is under the MIT licence in `vendor/formel/LICENSE`.
 
 Everything else here is under the MIT
 licence in [`LICENSE`](LICENSE).

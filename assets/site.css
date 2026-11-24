@@ -197,7 +197,7 @@
    given in px as well, to avoid rem (16 px here) producing near-misses such as 18.4 px.
    The headings (title and h2) scale with the window; the type tester and the big glyph in
    the explorer are set on their own; inline code takes the size of the text around it; and
-   the equations' sub- and superscripts are sized by Temml. */
+   the equations' sub- and superscripts are sized by formel. */
 :root {
 	--fs-specimen: 25.6px;  /* specimens, ligatures, glyph grid */
 	--fs-large: 20.8px;     /* equations */
@@ -853,12 +853,15 @@ button:focus-visible, a:focus-visible, textarea:focus-visible, input:focus-visib
 
 /* ---- Equations ---- */
 
-/* From 2.003, Lisnoti's latin subset carries the MATH data for the large operators and
-   stretchy brackets, so equations work straight from lisnoti.css. */
-math { font-family: Lisnoti, math; }
-
-/* Temml sets \mathscr and the prime in its own small font; Lisnoti has both. */
-math .mathscr, mo.tml-prime { font-family: inherit; }
+/* Each equation is a drawing made by formel from Lisnoti's MATH table, sized in em by the
+   script. It sits in the middle of its box, and at the left of one it is too wide for, so
+   that scrolling sideways reaches all of it. */
+.equation .out svg, .tex-output svg {
+	display: block;
+	flex: none;
+	margin: 0 auto;
+	overflow: visible;
+}
 
 .equations {
 	display: grid;
@@ -913,7 +916,7 @@ math .mathscr, mo.tml-prime { font-family: inherit; }
 }
 
 /* The LuaLaTeX set-up under the LaTeX box: its heading matches 'Try your own LaTeX', and its
-   text the small note on Temml below it. */
+   text the small note on formel below it. */
 .latex-tip { margin: 2rem 0 1.5rem; }   /* 32 px above (it overlaps the note's spacing): a new topic */
 .latex-tip h3 { font-size: var(--fs-body); margin: 0 0 .5rem; }
 .latex-tip .small { margin-bottom: .75rem; }

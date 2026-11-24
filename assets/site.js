@@ -378,37 +378,81 @@ window.addEventListener('DOMContentLoaded', function equations() {
 		['Limit', String.raw`\lim_{n \to \infty} \left( 1 + \frac{1}{n} \right)^{n} = e`],
 		['Matrix', String.raw`\det \begin{pmatrix} a & b \\ c & d \end{pmatrix} = ad - bc`],
 	];
-	const hasTemml = typeof temml !== 'undefined';
+	// The equations are laid out by formel, which reads the MATH table of the font file
+	// itself and returns each equation as a drawing. So the result is the same in every
+	// browser, and no browser's own math layout is involved.
+	const ENGINE = '/vendor/formel/formel_wasm.js';
+
+	const cards = [];
 	for (const [title, tex] of list) {
 		const card = document.createElement('div');
 		card.className = 'equation';
 		card.innerHTML = '<h3></h3><div class="out"></div><pre class="src"></pre>';
 		$('h3', card).textContent = title;
 		$('.src', card).textContent = tex;
-		if (hasTemml) {
-			try {
-				temml.render(tex, $('.out', card), { displayMode: true });
-			} catch (e) {
-				$('.out', card).textContent = e.message;
-			}
-		}
+		cards.push([tex, $('.out', card)]);
 		grid.appendChild(card);
 	}
 
 	const input = $('#tex-input');
 	const output = $('#tex-output');
+	const note = document.createElement('p');
+	note.className = 'font-note';
+	note.hidden = true;
+	note.setAttribute('aria-live', 'polite');
+	grid.before(note);
+
+	// formel needs the whole font as a TTF, which sits beside the WOFF2 files. The folder is
+	// read from lisnoti.css so that it follows the font version by itself.
+	const fontFile = () => {
+		for (const sheet of document.styleSheets) {
+			if (!/\/lisnoti\.css/.test(sheet.href || '')) continue;
+			for (const rule of sheet.cssRules) {
+				const found = /url\(["']?(\/fonts\/[^/]+\/)Lisnoti-Regular/.exec(rule.cssText);
+				if (found) return found[1] + 'Lisnoti-Regular.ttf';
+			}
+		}
+		throw new Error('no font folder in lisnoti.css');
+	};
+
+	let draw = null;   // set once the engine and the font have arrived
+	const load = async () => {
+		const formel = await import(ENGINE);
+		const [, font] = await Promise.all([
+			formel.default(),
+			fetch(fontFile()).then(reply => {
+				if (!reply.ok) throw new Error('font ' + reply.status);
+				return reply.arrayBuffer();
+			}),
+		]);
+		const renderer = new formel.MathRenderer(new Uint8Array(font));
+		const unitsPerEm = renderer.units_per_em();
+		// The drawing comes back in font units and in black. It is sized in em, so that it
+		// follows the type size of its box, and inked in the text colour, so that it follows
+		// the light and dark themes. An error is thrown before the box is touched.
+		draw = (tex, box) => {
+			const drawn = renderer.render(formel.latex_to_mathml(tex, true), false);
+			const size = `width="${(drawn.width / unitsPerEm).toFixed(4)}em" height="${(drawn.height / unitsPerEm).toFixed(4)}em"`;
+			const svg = drawn.svg.replaceAll('"black"', '"currentColor"').replace('<svg ', `<svg ${size} role="img" `);
+			const spoken = drawn.alt;
+			drawn.free();
+			box.innerHTML = svg;
+			if (spoken) box.firstElementChild.setAttribute('aria-label', spoken);
+		};
+	};
+
 	// A LaTeX error replaces the equation in the output box, so no space is kept for it. The
 	// box keeps the height it had, so the page does not jump while an equation is half typed.
 	const update = () => {
-		if (!hasTemml) return;
-		const height = output.offsetHeight;   // measured first: Temml empties the box before it fails
+		if (!draw) return;
+		const height = output.offsetHeight;
 		try {
-			temml.render(input.value, output, { displayMode: true, throwOnError: true });
+			draw(input.value, output);
 			output.classList.remove('has-error');
 			output.style.minHeight = '';
 		} catch (e) {
 			if (!output.classList.contains('has-error')) output.style.minHeight = height + 'px';
-			output.textContent = e.message;
+			output.textContent = String(e.message || e).replace(/^Error: /, '');
 			output.classList.add('has-error');
 		}
 	};
@@ -418,20 +462,39 @@ window.addEventListener('DOMContentLoaded', function equations() {
 		input.style.height = 'auto';
 		input.style.height = input.scrollHeight + input.offsetHeight - input.clientHeight + 'px';
 	};
-	// The equations are set in Lisnoti too, so they are checked like the type tester.
-	const watch = fontWatch('Lisnoti', grid);
-	let typing = 0;
-	const check = () => watch([...textNeeds(grid), ...textNeeds(output)]);
+
+	// The engine and the font are about 1 MB between them, so they are fetched only when the
+	// reader gets near the equations.
+	const start = async () => {
+		// Say it is loading only if it takes a moment, so the note does not flicker.
+		const timer = setTimeout(() => { note.textContent = 'Loading the equation engine…'; note.hidden = false; }, 300);
+		try {
+			await load();
+			note.hidden = true;
+			for (const [tex, box] of cards) {
+				try { draw(tex, box); } catch (e) { box.textContent = String(e.message || e); }
+			}
+			update();
+		} catch (e) {
+			note.textContent = 'The equations could not be loaded. Reload the page to try again.';
+			note.classList.add('failed');
+			note.hidden = false;
+		}
+		clearTimeout(timer);
+	};
+	const nearby = new IntersectionObserver(entries => {
+		if (!entries.some(e => e.isIntersecting)) return;
+		nearby.disconnect();
+		start();
+	}, { rootMargin: '800px 0px' });
+	nearby.observe(grid.closest('section') || grid);
+
 	input.addEventListener('input', () => {
 		update();
 		fit();
-		clearTimeout(typing);
-		typing = setTimeout(check, 400);
 	});
 	window.addEventListener('resize', fit);
-	update();
 	fit();
-	check();
 	// Measured again once Lisnoti Code has loaded, since it wraps differently from the fallback.
 	document.fonts.ready.then(fit);
 });
