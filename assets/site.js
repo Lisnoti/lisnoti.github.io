@@ -381,7 +381,11 @@ window.addEventListener('DOMContentLoaded', function equations() {
 	// The equations are laid out by formel, which reads the MATH table of the font file
 	// itself and returns each equation as a drawing. So the result is the same in every
 	// browser, and no browser's own math layout is involved.
-	const ENGINE = '/vendor/formel/formel_wasm.js';
+	// The engine is two files that must match each other and this script. Change the stamp
+	// whenever the files in vendor/formel change, so that no browser pairs a new file with
+	// an old one from its cache.
+	const ENGINE = '/vendor/formel/formel_wasm';
+	const ENGINE_STAMP = '?v=20261126';
 
 	const cards = [];
 	for (const [title, tex] of list) {
@@ -417,9 +421,9 @@ window.addEventListener('DOMContentLoaded', function equations() {
 
 	let draw = null;   // set once the engine and the font have arrived
 	const load = async () => {
-		const formel = await import(ENGINE);
+		const formel = await import(ENGINE + '.js' + ENGINE_STAMP);
 		const [, font] = await Promise.all([
-			formel.default(),
+			formel.default({ module_or_path: ENGINE + '_bg.wasm' + ENGINE_STAMP }),
 			fetch(fontFile()).then(reply => {
 				if (!reply.ok) throw new Error('font ' + reply.status);
 				return reply.arrayBuffer();
