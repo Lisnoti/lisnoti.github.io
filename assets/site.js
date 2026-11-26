@@ -426,14 +426,12 @@ window.addEventListener('DOMContentLoaded', function equations() {
 			}),
 		]);
 		const renderer = new formel.MathRenderer(new Uint8Array(font));
-		const unitsPerEm = renderer.units_per_em();
-		// The drawing comes back in font units and in black. It is sized in em, so that it
-		// follows the type size of its box, and inked in the text colour, so that it follows
-		// the light and dark themes. An error is thrown before the box is touched.
+		// The drawing comes back sized in em, so that it follows the type size of its box, and
+		// in black. It is inked in the text colour, so that it follows the light and dark
+		// themes. An error is thrown before the box is touched.
 		draw = (tex, box) => {
 			const drawn = renderer.render(formel.latex_to_mathml(tex, true), false);
-			const size = `width="${(drawn.width / unitsPerEm).toFixed(4)}em" height="${(drawn.height / unitsPerEm).toFixed(4)}em"`;
-			const svg = drawn.svg.replaceAll('"black"', '"currentColor"').replace('<svg ', `<svg ${size} role="img" `);
+			const svg = drawn.svg.replaceAll('"black"', '"currentColor"');
 			const spoken = drawn.alt;
 			drawn.free();
 			box.innerHTML = svg;

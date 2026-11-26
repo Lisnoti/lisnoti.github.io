@@ -246,6 +246,32 @@ export class MathRenderer {
         }
     }
     /**
+     * Converts LaTeX (without surrounding `$`) and renders it, in one call.
+     *
+     * The usual path into a page: `renderer.render_latex(tex, false)`, then
+     * `inlineHtml(rendering, { size: "1.2em" })` from `@manuel-rhdt/formel-wasm/dom`.
+     * @param {string} latex
+     * @param {boolean} display
+     * @returns {Rendering}
+     */
+    render_latex(latex, display) {
+        try {
+            const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
+            const ptr0 = passStringToWasm0(latex, wasm.__wbindgen_export_0, wasm.__wbindgen_export_1);
+            const len0 = WASM_VECTOR_LEN;
+            wasm.mathrenderer_render_latex(retptr, this.__wbg_ptr, ptr0, len0, display);
+            var r0 = getDataViewMemory0().getInt32(retptr + 4 * 0, true);
+            var r1 = getDataViewMemory0().getInt32(retptr + 4 * 1, true);
+            var r2 = getDataViewMemory0().getInt32(retptr + 4 * 2, true);
+            if (r2) {
+                throw takeObject(r1);
+            }
+            return Rendering.__wrap(r0);
+        } finally {
+            wasm.__wbindgen_add_to_stack_pointer(16);
+        }
+    }
+    /**
      * The font's design units per em. The SVG is sized in these units.
      * @returns {number}
      */
@@ -282,6 +308,28 @@ export class MathRenderer {
         } finally {
             wasm.__wbindgen_add_to_stack_pointer(16);
             wasm.__wbindgen_export_2(deferred3_0, deferred3_1, 1);
+        }
+    }
+    /**
+     * Sets OpenType features for all following renders, as a CSS `font-feature-settings`
+     * value, for example `"ss03"` (stylistic set 3: the New Computer Modern doublestruck
+     * letters) or `"ss01" 1, "cv02" 2`. An empty string or `normal` turns them off. Elements
+     * can still override it with `style="font-feature-settings: ..."`.
+     * @param {string} settings
+     */
+    set_font_features(settings) {
+        try {
+            const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
+            const ptr0 = passStringToWasm0(settings, wasm.__wbindgen_export_0, wasm.__wbindgen_export_1);
+            const len0 = WASM_VECTOR_LEN;
+            wasm.mathrenderer_set_font_features(retptr, this.__wbg_ptr, ptr0, len0);
+            var r0 = getDataViewMemory0().getInt32(retptr + 4 * 0, true);
+            var r1 = getDataViewMemory0().getInt32(retptr + 4 * 1, true);
+            if (r1) {
+                throw takeObject(r0);
+            }
+        } finally {
+            wasm.__wbindgen_add_to_stack_pointer(16);
         }
     }
     /**
@@ -365,6 +413,15 @@ export class Rendering {
     free() {
         const ptr = this.__destroy_into_raw();
         wasm.__wbg_rendering_free(ptr, 0);
+    }
+    /**
+     * The font's design units per em. Dividing `width`, `height` or `baseline` by it gives em of
+     * the font, which is what CSS wants (`inlineHtml` does this for you).
+     * @returns {number}
+     */
+    get units_per_em() {
+        const ret = wasm.rendering_units_per_em(this.__wbg_ptr);
+        return ret >>> 0;
     }
     /**
      * The formula's accessible name: the author's own text when the MathML carries one, otherwise
